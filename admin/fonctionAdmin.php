@@ -2,7 +2,7 @@
 session_start();
 $_SESSION['admin']='connecte';
 $user = 'root';
-$pass = 'LinuxMate2019:D';
+$pass = '';
 $bdd = new PDO('mysql:host=localhost;dbname=dmc', $user, $pass);
 
 
@@ -137,24 +137,71 @@ $stmt->execute();
 
 
 function ajoutProduit(){
-// id_prod	nom_prod	date_prod	prix_detail	prix_gros	qnt_detail	qnt_gros	TVA_prod	id_marq	id_fami	caracteristiques_prod	description_prod	etat_prod	id_admin	position_prod
+// id_prod	nom_prod	date_prod	prix_detail	prix_gros	qnt_detail	qnt_gros   id_marq	id_fami	caracteristiques_prod	description_prod	etat_prod	id_admin	position_prod
+
+ 
+global $bdd; 
+
+$nom_prod   	         = strip_tags($_POST['nom_prod']);
+$prix_detail  	         = strip_tags($_POST['prix_detail']);	
+$prix_gros  	         = strip_tags($_POST['prix_gros']);	
+$qnt_detail  	         = strip_tags($_POST['qnt_detail']);	
+$qnt_gros	  	         = strip_tags($_POST['qnt_gros']);
+$id_marque	  	         = strip_tags($_POST['marque']);
+$id_famille	  	         = strip_tags($_POST['famille']);
+$caracteristiques_prod	 = strip_tags($_POST['caracteristiques_prod']);
+$description_prod   	 = strip_tags($_POST['description_prod']);
+$etat_prod	  	         = 1;
+$id_admin	  	         = 1;
+$position_prod  	     = 1;
+
+ 
+ 
+$sql = "INSERT INTO produit(
+            nom_prod,
+            prix_detail, 
+            prix_gros,   
+            qnt_detail,  
+            qnt_gros,   
+            caracteristiques_prod,  
+            description_prod,    
+            etat_prod
+    
+            ) VALUES (
+            :nom_prod,    
+            :prix_detail, 
+            :prix_gros,   
+            :qnt_detail,  
+            :qnt_gros,  
+            :caracteristiques_prod,  
+            :description_prod,    
+            :etat_prod
+            )";
+                                          
+$stmt = $bdd->prepare($sql);
+                                              
+$stmt->bindParam(':nom_prod', $nom_prod, PDO::PARAM_STR);    
+$stmt->bindParam(':prix_detail', $prix_detail, PDO::PARAM_STR); 
+$stmt->bindParam(':prix_gros', $prix_gros, PDO::PARAM_STR);   
+$stmt->bindParam(':qnt_detail', $qnt_detail, PDO::PARAM_INT);  
+$stmt->bindParam(':qnt_gros', $qnt_gros, PDO::PARAM_INT);   
+$stmt->bindParam(':caracteristiques_prod', $caracteristiques_prod, PDO::PARAM_STR);  
+$stmt->bindParam(':description_prod', $description_prod, PDO::PARAM_STR);    
+$stmt->bindParam(':etat_prod', $etat_prod, PDO::PARAM_INT);   
 
 
-$id_prod  	             = strip_tags($_POST['id_admin']);	
-$nom_prod   	       = strip_tags($_POST['id_admin']);
-$date_prod  	       = strip_tags($_POST['id_admin']);	
-$prix_detail  	       = strip_tags($_POST['id_admin']);	
-$prix_gros  	       = strip_tags($_POST['id_admin']);	
-$qnt_detail  	       = strip_tags($_POST['id_admin']);	
-$qnt_gros	  	       = strip_tags($_POST['id_admin']);
-$TVA_prod	  	       = strip_tags($_POST['id_admin']);
-$id_marq	  	       = strip_tags($_POST['id_admin']);
-$id_fami	  	       = strip_tags($_POST['id_admin']);
-$caracteristiques_prod	 = strip_tags($_POST['id_admin']);
-$description_prod   	 = strip_tags($_POST['id_admin']);
-$etat_prod	  	       = strip_tags($_POST['id_admin']);
-$id_admin	  	       = strip_tags($_POST['id_admin']);
-$position_prod  	       = strip_tags($_POST['id_admin']);
+$stmt->execute();
+
+//$stmt->bindParam(':id_marque', $id_marque, PDO::PARAM_INT);  
+//$stmt->bindParam(':id_famille', $id_famille, PDO::PARAM_INT); 
+//$stmt->bindParam(':id_admin', $id_admin, PDO::PARAM_INT); 
+
+//id_marque,  
+//id_famille, 
+//id_admin,   
+//:id_marque,  
+//:id_famille, 
+//:id_admin, 
 
 }
 //fin fonction ajout Produit
@@ -211,7 +258,6 @@ $stmt->execute();
 
 
 
-
 //debut controleur
 if(isset($_POST['action'])){
   if($_POST['action'] == 'ajoutFamille'){ajoutfamille();}   
@@ -226,6 +272,8 @@ if(isset($_POST['action'])){
   if($_POST['action'] == 'modifRoleAdmin'){modifRoleAdmin();} 
   if($_POST['action'] == 'modifPassAdmin'){modifPassAdmin();} 
   if($_POST['action'] == 'supAdmin'){supAdmin();} 
+  if($_POST['action'] == 'ajoutProduit'){ajoutProduit();} 
+
 
 
 }
