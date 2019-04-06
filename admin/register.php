@@ -17,6 +17,23 @@
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
 
+
+
+<style type="text/css">
+  #nomsociete{display: none;} /*rend l'element invisibleavec le css */
+</style>
+<script type="text/javascript">
+  function affichepro(){
+     document.getElementById('nomsociete').style.display = 'block';  /*change display: none; par display: block; */
+  }
+
+  function masquepro(){
+     document.getElementById('nomsociete').style.display = 'none';  /*change display: block; par display:none ; */
+  }
+</script>
+
+
+
 </head>
 
 <body class="bg-dark">
@@ -73,20 +90,22 @@
           </div>
           <div class="form-group">
           <div class="form-check">
-  <input class="form-check-input" type="radio" name="catego_client" id="exampleRadios1" value="professionnel" checked>
+  <input class="form-check-input" type="radio" name="catego_client" id="exampleRadios1" value="professionnel"
+  onclick="affichepro()" >
   <label class="form-check-label" for="exampleRadios1">
     professionnel
   </label>
 </div>
 <div class="form-check">
-  <input class="form-check-input" type="radio" name="catego_client" id="exampleRadios2" value="particulier">
+  <input class="form-check-input" type="radio" name="catego_client" id="exampleRadios2" value="particulier" checked
+   onclick="masquepro()">
   <label class="form-check-label" for="exampleRadios2">
     particulier
   </label>
 </div>
 
           </div>
-          <div class="form-group">
+          <div id="nomsociete" class="form-group">
             <div class="form-label-group">
               <input type="text" id="raison_social_client" class="form-control" placeholder="nom de la société" name="raison_social_client" >
               <label for="raison_social_client">nom de la société</label>

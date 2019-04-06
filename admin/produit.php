@@ -40,12 +40,12 @@
                     <th>prix détail</th>
                     <th>prix gros</th>
                     <th>quantité</th>
-                  <th>marque</th>
-                  <th>famille</th>
-                  <th></th>
-                  <th></th>
-                 
+                    <th>marque</th>
+                    <th>famille</th>
+                    <th></th>
+                    <th></th>
                 </tr>
+
             </thead>
                     <tr>
                         <td>1</td>
@@ -82,36 +82,61 @@
         </div>
         <div class="modal-body">
            
-            <form>
+            <form action="produit.php" method="post" enctype="multipart/form-data">
                 
                  
                 <div class="form-group">
                     <div class="form-label-group">
-                      <input type="text" id="nom_prod" name="nom_prod" class="form-control" placeholder="Prix en détail" required="required" autofocus="autofocus">
+                      <input type="text" id="nom_prod" name="nom_prod" class="form-control" placeholder="Nom du produit" required="required" autofocus="autofocus">
                       <label for="nom_prod">Nom du produit</label>
                     </div>
                   </div>
-                    
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="file" id="Image" name="imageprincipale" class="form-control" placeholder="Image" required="required" autofocus="autofocus">
+                      <label for="Image">Image Principale</label>
+                    </div>
+                  </div>
+
                       <div class="form-group">
                           <div class="form-label-group">
                             <input type="text" id="prix_detail" name="prix_detail" class="form-control" placeholder="Prix en détail" required="required" autofocus="autofocus">
                             <label for="prix_detail">Prix en détail</label>
                           </div>
                         </div>
+
                         <div class="form-group">
                             <div class="form-label-group">
                               <input type="text" id="prix_gros" name="prix_gros" class="form-control" placeholder="Prix en gros" required="required" autofocus="autofocus">
                               <label for="prix_gros">Prix en gros</label>
                             </div>
                           </div>
+
                     <div class="form-group">
                       <div class="form-label-group">
-                        <input type="text" id="qnt_detail" name="qnt_detail" class="form-control" placeholder="Prénom" required="required">
-                        <label for="qnt_detail">qunaité en détail</label>
+                        <input type="number" id="qnt_detail" name="qnt_detail" class="form-control" placeholder="qnt_detail" required="required">
+                        <label for="qnt_detail">quantité en détail</label>
                       </div>
                     </div>
-                  
-              
+
+  
+
+                    <div class="form-group">
+                      <div class="form-label-group">
+                        <input type="number" id="qnt_gros" name="qnt_gros" class="form-control" placeholder="qnt_gros" required="required">
+                        <label for="qnt_gros">quantité en gros</label>
+                      </div>
+                    </div>
+
+ 
+                    <div class="form-group">
+                        <textarea id="caracteristiques_prod" name="caracteristiques_prod" class="form-control" required="required">Caracteristiques</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea id="description_prod" name="description_prod" class="form-control" required="required">Description</textarea>
+                    </div>
                
                 <div class="form-group">
                     <label for="marque">Marque</label>
@@ -122,7 +147,6 @@
                           <option>4</option>
                           <option>5</option>
                         </select>
-                   
                  </div>
               
                 <div class="form-group">
@@ -138,6 +162,29 @@
                           </select>
                 
                 </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="file" id="Image1" name="image1" class="form-control" placeholder="Image1" autofocus="autofocus">
+                      <label for="Image1">Image 1</label>
+                    </div>
+                  </div>
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="file" id="Image2" name="image2" class="form-control" placeholder="Image2" autofocus="autofocus">
+                      <label for="Image2">Image 2</label>
+                    </div>
+                  </div> 
+
+                <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="file" id="Image3" name="image3" class="form-control" placeholder="Image3" autofocus="autofocus">
+                      <label for="Image3">Image 3</label>
+                    </div>
+                  </div>
+                 
+                <input type="hidden" name="action" value="ajoutProduit">
                 <input type="submit" class="btn btn-primary btn-block" value="Ajouter">
               </form>
         </div>
