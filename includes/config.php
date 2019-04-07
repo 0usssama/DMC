@@ -2,7 +2,7 @@
 //MySQL connection details.
 $host = 'localhost';
 $user = 'root';
-$pass = '';
+$pass = 'LinuxMate2019:D';
 $database = 'dmc';
 
  

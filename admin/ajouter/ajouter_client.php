@@ -23,7 +23,7 @@ $statement = $pdo->prepare($sql);
    $categoryClient = $_POST['catego_client'];
    $motpasseClient = password_hash($_POST['motpass_client'], PASSWORD_BCRYPT);
    $raisonsocialClient = $_POST['raison_social_client'] ?? '/';
-   $id_admin = 1;
+   $id_admin = 3;
    
 
    

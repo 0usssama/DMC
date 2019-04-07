@@ -27,6 +27,11 @@
         <!-- Page Content -->
         <h1>Produits ta3 amine</h1>
         <hr>
+        <?php
+        // join mazal cause the foreign keys are not ready
+        $sql = "SELECT * FROM produit";
+       
+        ?>
         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalScrollable">Ajouter un produit</button>
 
 
@@ -39,7 +44,9 @@
                     <th>ajouté le</th>
                     <th>prix détail</th>
                     <th>prix gros</th>
-                    <th>quantité</th>
+                    <th>quantité détail</th>
+                    <th>quantité gros</th>
+
                     <th>marque</th>
                     <th>famille</th>
                     <th></th>
@@ -47,26 +54,50 @@
                 </tr>
 
             </thead>
-                    <tr>
-                        <td>1</td>
-                        <td>Air max</td>
-                        <td>23/02/2019</td>
-                        <td>9000 DA</td>
-                        <td>7000 DA</td>
-                        <td>42</td>
-                        <td>Nike</td>
-                        <td>Chaussure</td>
-                        <td>
-        <a  class="btn btn-danger btn-block " href="#">Supprimer</a>
+            <?php 
+            if($pdo->query($sql)){
+            foreach  ($pdo->query($sql) as $row) { ?>
 
-                        </td>
-                        <td>
-        <a  class="btn btn-warning btn-block  " href="#">Modifier</a>
+            <tr>
+                <td><?php echo $row['id_prod'] ;?></td>
+                <td><?php echo $row['nom_prod'] ;?></td>
+                <td><?php echo $row['date_prod'] ;?></td>
+                <td><?php echo $row['prix_detail'] ;?></td>
+                <td><?php echo $row['prix_gros'] ;?></td>
+                <td><?php echo $row['qnt_detail'] ;?></td>
+                <td><?php echo $row['qnt_gros'] ;?></td>
+                <td><?php echo 'marque';?></td>
+                <td><?php echo 'famille';?></td>
 
-                        </td>
 
-                       
-                    </tr>
+                <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#m<?php echo $row['id_prod'] ;?>">Supprimer</button></td>
+            </tr>
+
+            <div class="modal fade" id="m<?php echo $row['id_prod'] ;?>" tabindex="-1" role="dialog"
+                aria-labelledby="m<?php echo $row['id_prod'] ;?>" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="supprimer/supprimer_produit.php?id_prod=<?php echo $row['id_prod'] ;?> " method="post">
+                                <h1 class="mb-5">voulez-vous supprimer client n°<?php echo $row['id_prod'] ;?> </h1>
+                                <input type="submit" name="supprimer" class="btn btn-block btn-danger"
+                                    value="supprimer">
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <?php }
+            }; ?>
                    
                    
             </table>
@@ -82,7 +113,7 @@
         </div>
         <div class="modal-body">
            
-            <form action="produit.php" method="post" enctype="multipart/form-data">
+            <form action="ajouter/ajouter_produit.php" method="post" enctype="multipart/form-data">
                 
                  
                 <div class="form-group">
@@ -185,7 +216,7 @@
                   </div>
                  
                 <input type="hidden" name="action" value="ajoutProduit">
-                <input type="submit" class="btn btn-primary btn-block" value="Ajouter">
+                <input type="submit" class="btn btn-primary btn-block" value="Ajouter" name="ajouter">
               </form>
         </div>
               
@@ -200,4 +231,6 @@
 
     </div>
     <!-- /.content-wrapper -->
+
+
     <?php include 'foot.php' ;?>

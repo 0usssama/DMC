@@ -27,6 +27,11 @@
         <!-- Page Content -->
         <h1>Familles</h1>
         <hr>
+         <?php
+      
+        $sql = "SELECT * FROM famille";
+       
+        ?>
         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalScrollable">Ajouter une famille</button>
           <div class="container">
             <div class="row d-flex justify-content-center">
@@ -37,39 +42,57 @@
                           <tr>
                               <th>ID</th>
                               <th>Nom famille</th>
-                              <th></th>
+                              <th>état famille</th>
+                              <th>image famille</th>
+                              
                             
                              
                            
                           </tr>
                       </thead>
-                              <tr>
-                                  <td>1</td>
-                                  <td>Imprimante laser</td>
-                                
-                               
-                                  <td>
-                  <a  class="btn btn-danger" href="#">Supprimer</a>
-          
-                                  </td>
-                                 
+                      <?php 
+            if($pdo->query($sql)){
+            foreach  ($pdo->query($sql) as $row) { ?>
+
+            <tr>
+                <td><?php echo $row['id_famille'] ;?></td>
+                <td><?php echo $row['titre_famille'] ;?></td>
+                <td><?php echo $row['etat_famille'] ;?></td>
+                <td><img src="" alt=""></td>
+
+                <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#m<?php echo $row['id_famille'] ;?>">Supprimer</button></td>
+            </tr>
+
+            <div class="modal fade" id="m<?php echo $row['id_famille'] ;?>" tabindex="-1" role="dialog"
+                aria-labelledby="m<?php echo $row['id_famille'] ;?>" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="supprimer/supprimer_famille.php?id_famille=<?php echo $row['id_famille'] ;?> " method="post">
+                                <h1 class="mb-5">voulez-vous supprimer client n°<?php echo $row['id_famille'] ;?> </h1>
+                                <input type="submit" name="supprimer" class="btn btn-block btn-danger"
+                                    value="supprimer">
+                            </form>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <?php }
+            }; ?>
           
                                  
                               </tr>
                              
-                              <tr>
-                                  <td>2</td>
-                                  <td>Imprimante sans fil</td>
-                                
-                               
-                                  <td>
-                  <a  class="btn btn-danger" href="#">Supprimer</a>
-          
-                                  </td>
-                                  
-          
-                                 
-                              </tr>
+                            
                              
                       </table>
               </div>
@@ -89,7 +112,7 @@
         </div>
         <div class="modal-body">
            
-            <form>
+            <form action="ajouter/ajouter_famille.php" method="post">
                 
                  
                 <div class="form-group">
@@ -98,12 +121,30 @@
                       <label for="titre_fami">Nom  famille</label>
                     </div>
                   </div>
+
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <select name="etat_fami" id="etat_fami" class="form-control">
+                      <option value="">disponibilité</option>  
+                      <option value="disponible">disponible</option>
+                        <option value="non_disponible">non disponible</option>
+
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="file" id="image_famille" name="image_famille" class="form-control" placeholder="famille" required="required" autofocus="autofocus">
+                      <label for="image_famille">image  famille</label>
+                    </div>
+                  </div>
                     
                  
               
                
                
-                <input type="submit" class="btn btn-primary btn-block" value="Ajouter">
+                <input type="submit" class="btn btn-primary btn-block" value="Ajouter" name="ajouter">
               </form>
         </div>
               

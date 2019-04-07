@@ -2,7 +2,13 @@
 session_start();
 $_SESSION['admin']='connecte';
 $user = 'root';
-$pass = '';
+
+if(PHP_OS == 'WINNT'){//working on different OS
+  $pass = '';//dynamically
+}else{
+  $pass = 'LinuxMate2019:D';//well this one 
+
+}
 $bdd = new PDO('mysql:host=localhost;dbname=dmc', $user, $pass);
 
 
@@ -139,6 +145,9 @@ $stmt->execute();
 function ajoutProduit(){
 // id_prod	nom_prod	date_prod	prix_detail	prix_gros	qnt_detail	qnt_gros   id_marq	id_fami	caracteristiques_prod	description_prod	etat_prod	id_admin	position_prod
 
+
+var_dump($_POST);
+
  
 global $bdd; 
 
@@ -190,7 +199,16 @@ $stmt->bindParam(':description_prod', $description_prod, PDO::PARAM_STR);
 $stmt->bindParam(':etat_prod', $etat_prod, PDO::PARAM_INT);   
 
 
-$stmt->execute();
+$inserted = $stmt->execute();
+
+
+//verifier si on a des résultats (true or false)
+if($inserted){
+  header('location: ../admin.php');
+}else{
+  echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
+}
+
 
 //$stmt->bindParam(':id_marque', $id_marque, PDO::PARAM_INT);  
 //$stmt->bindParam(':id_famille', $id_famille, PDO::PARAM_INT); 
@@ -228,19 +246,18 @@ function ajoutfamille(){
 global $bdd;  
 $titre_fami   = strip_tags($_POST['titre_fami']);
 $etat_fami    = strip_tags($_POST['etat_fami']); 
-$image_fami   = '/'; 
-$ordre_fami   = strip_tags($_POST['ordre_fami']);      
+$image_fami   = '/'; // need upload script
+//$ordre_fami   = strip_tags($_POST['ordre_fami']);      
 
 $sql = "INSERT INTO famille(
-titre_fami,
-etat_fami,
-image_fami,
-ordre_fami
+titre_famille,
+etat_famille,
+image_famille
+
             ) VALUES (
 :titre_fami,
 :etat_fami,
-:image_fami,
-:ordre_fami
+:image_fami
             )";
                                           
 $stmt = $bdd->prepare($sql);
@@ -248,18 +265,71 @@ $stmt = $bdd->prepare($sql);
 $stmt->bindParam(':titre_fami', $titre_fami, PDO::PARAM_STR);
 $stmt->bindParam(':etat_fami', $etat_fami, PDO::PARAM_STR);
 $stmt->bindParam(':image_fami', $image_fami, PDO::PARAM_STR);
-$stmt->bindParam(':ordre_fami', $ordre_fami, PDO::PARAM_INT);  
+//$stmt->bindParam(':ordre_fami', $ordre_fami, PDO::PARAM_INT);  
 
-$stmt->execute();
+
+
+$inserted = $stmt->execute();
+
+
+//verifier si on a des résultats (true or false)
+if($inserted){
+  header('location: ../famille.php');
+}else{
+  echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
+}
 
 }
 //fin fonction ajout famille
+
+function ajoutermarque(){
+ 
+  global $bdd;  
+  $titre_marque   = strip_tags($_POST['titre_marque']);
+  $etat_marque   = strip_tags($_POST['etat_marque']); 
+  $image_marque  = '/'; // need upload script
+  //$ordre_marque  = strip_tags($_POST['ordre_fami']);      
+  
+  $sql = "INSERT INTO marque(
+  titre_marque,
+  etat_marque,
+  image_marque
+  
+              ) VALUES (
+  :titre_marque,
+  :etat_marque,
+  :image_marque
+              )";
+                                            
+  $stmt = $bdd->prepare($sql);
+  
+  $stmt->bindParam(':titre_marque', $titre_marque, PDO::PARAM_STR);
+  $stmt->bindParam(':etat_marque', $etat_marque, PDO::PARAM_STR);
+  $stmt->bindParam(':image_marque', $image_marque, PDO::PARAM_STR);
+  //$stmt->bindParam(':ordre_marque', $ordre_marque, PDO::PARAM_INT);  
+  
+  
+  
+  $inserted = $stmt->execute();
+  
+  
+  //verifier si on a des résultats (true or false)
+  if($inserted){
+    header('location: ../famille.php');
+  }else{
+    echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
+  }
+  
+  }
+  //fin fonction ajout marque
+  
+  
 
 
 
 
 //debut controleur
-if(isset($_POST['action'])){
+if(isset($_POST['action'])){/*
   if($_POST['action'] == 'ajoutFamille'){ajoutfamille();}   
 
 
@@ -275,7 +345,7 @@ if(isset($_POST['action'])){
   if($_POST['action'] == 'ajoutProduit'){ajoutProduit();} 
 
 
-
+*/
 }
 
  
