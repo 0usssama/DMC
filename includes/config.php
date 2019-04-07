@@ -2,7 +2,13 @@
 //MySQL connection details.
 $host = 'localhost';
 $user = 'root';
-$pass = '';
+
+if(PHP_OS == 'WINNT'){//working on different OS
+    $pass = '';//dynamically
+  }else{
+    $pass = 'LinuxMate2019:D';//well this one 
+  
+  }
 $database = 'dmc';
 
  
