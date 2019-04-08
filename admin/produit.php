@@ -25,11 +25,11 @@
           </div>
 
         <!-- Page Content -->
-        <h1>Produits ta3 amine</h1>
+        <h1>Produits ta3 Zaki</h1>
         <hr>
         <?php
         // join mazal cause the foreign keys are not ready
-        $sql = "SELECT * FROM produit";
+        $sql = "SELECT * FROM produit ORDER BY id_prod DESC";
        
         ?>
         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalScrollable">Ajouter un produit</button>
@@ -43,13 +43,11 @@
                     <th>Nom produit</th>
                     <th>ajouté le</th>
                     <th>prix détail</th>
-                    <th>prix gros</th>
-                    <th>quantité détail</th>
-                    <th>quantité gros</th>
 
                     <th>marque</th>
                     <th>famille</th>
-                    <th></th>
+                    <th>image p</th>
+                    <th>images secondaires</th>
                     <th></th>
                 </tr>
 
@@ -59,19 +57,53 @@
             foreach  ($pdo->query($sql) as $row) { ?>
 
             <tr>
-                <td><?php echo $row['id_prod'] ;?></td>
+                <td><?php echo $id_prod = $row['id_prod'] ;?></td>
                 <td><?php echo $row['nom_prod'] ;?></td>
                 <td><?php echo $row['date_prod'] ;?></td>
-                <td><?php echo $row['prix_detail'] ;?></td>
-                <td><?php echo $row['prix_gros'] ;?></td>
-                <td><?php echo $row['qnt_detail'] ;?></td>
-                <td><?php echo $row['qnt_gros'] ;?></td>
+                <td>
+
+                    <h6>detail: <?php echo $row['prix_detail'] ;?>DA</h6>
+                    <h6>qte: <?php echo $row['qnt_detail'] ;?></h6>
+ 
+                    <h6>gros: <?php echo $row['prix_gros'] ;?>DA</h6>
+                    <h6>qte: <?php echo $row['qnt_gros'] ;?></h6>
+                      
+                </td>
                 <td><?php echo 'marque';?></td>
                 <td><?php echo 'famille';?></td>
+                
 
+                <?php $sqlimage = "SELECT * FROM image WHERE id_prod LIKE '$id_prod'"; ?>
+                <?php 
+                if($pdo->query($sqlimage)){
+                foreach  ($pdo->query($sqlimage) as $rowimage) { ?>
+
+                <?php  
+                if($rowimage['url_imag']!=''){$imageprincipale = '../'.$rowimage['url_imag'];}
+                if($rowimage['image1']!=''){$image1 = '../'.$rowimage['image1'];}
+                if($rowimage['image2']!=''){$image2 ='../'.$rowimage['image2'];}
+                if($rowimage['image3']!=''){$image3 = '../'.$rowimage['image3'];}
+                ?>
+                
+                <?php } //foreach
+                      }  //if ?>
+
+
+
+                <td><img width="80" src="<?php echo $imageprincipale ;?>"></td>
+                <td><img width="30" src="<?php echo $image1; ?>">
+                    <img width="30" src="<?php echo $image2; ?>">
+                    <img width="30" src="<?php echo $image3; ?>"></td>
 
                 <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
                         data-target="#m<?php echo $row['id_prod'] ;?>">Supprimer</button></td>
+
+                <?php  
+                $imageprincipale = '';
+                $image1 = '';
+                $image2 = '';
+                $image3 = '';
+                ?>
             </tr>
 
             <div class="modal fade" id="m<?php echo $row['id_prod'] ;?>" tabindex="-1" role="dialog"
@@ -79,16 +111,17 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Ajout</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="supprimer/supprimer_produit.php?id_prod=<?php echo $row['id_prod'] ;?> " method="post">
+                            <form action="admin/produit.php?id_prod=<?php echo $row['id_prod'] ;?> " method="post">
                                 <h1 class="mb-5">voulez-vous supprimer client n°<?php echo $row['id_prod'] ;?> </h1>
                                 <input type="submit" name="supprimer" class="btn btn-block btn-danger"
                                     value="supprimer">
+                                <input type="hidden" name="action" value="supProduit">
                             </form>
 
                         </div>
@@ -113,7 +146,7 @@
         </div>
         <div class="modal-body">
            
-            <form action="ajouter/ajouter_produit.php" method="post" enctype="multipart/form-data">
+            <form action="admin/produit.php" method="post" enctype="multipart/form-data">
                 
                  
                 <div class="form-group">
@@ -130,7 +163,6 @@
                     </div>
                   </div>
 
-                      <div class="form-group">
                           <div class="form-label-group">
                             <input type="text" id="prix_detail" name="prix_detail" class="form-control" placeholder="Prix en détail" required="required" autofocus="autofocus">
                             <label for="prix_detail">Prix en détail</label>
@@ -143,6 +175,7 @@
                               <label for="prix_gros">Prix en gros</label>
                             </div>
                           </div>
+                      <div class="form-group">
 
                     <div class="form-group">
                       <div class="form-label-group">

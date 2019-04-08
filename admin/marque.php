@@ -56,7 +56,7 @@
                 <td><?php echo $row['id_marque'] ;?></td>
                 <td><?php echo $row['titre_marque'] ;?></td>
                 <td><?php echo $row['etat_marque'] ;?></td>
-                <td><img src="" alt=""></td>
+                <td><img width="50" src="../<?php echo $row['image_marque'] ;?>"></td>
 
                 <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
                         data-target="#m<?php echo $row['id_marque'] ;?>">Supprimer</button></td>
@@ -102,7 +102,7 @@
         </div>
         <div class="modal-body">
            
-            <form action="ajouter/ajouter_marque.php" method="post">
+            <form action="admin/marque.php" method="post" enctype="multipart/form-data">
                 
                  
                 <div class="form-group">
@@ -132,7 +132,7 @@
                     
                  
               
-               
+                <input type="hidden" name="action" value="ajoutermarque">
                
                 <input type="submit" class="btn btn-primary btn-block" value="Ajouter" name="ajouter">
               </form>

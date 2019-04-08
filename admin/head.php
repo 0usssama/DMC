@@ -1,7 +1,7 @@
 
 
-<?php require_once('../includes/config.php') ;?>
-<?php require_once('fonctionAdmin.php') ;?>
+<?php include('../includes/config.php') ;?>
+<?php include('fonctionAdmin.php') ;?>
 
 
 

@@ -164,7 +164,68 @@ $etat_prod	  	         = 1;
 $id_admin	  	         = 1;
 $position_prod  	     = 1;
 
- 
+if(isset($_FILES['imageprincipale']))
+{ 
+     $dossier = '../upload/';
+     $fichier = basename($_FILES['imageprincipale']['name']);
+     $url_imag = $dossier . $fichier;
+     if(move_uploaded_file($_FILES['imageprincipale']['tmp_name'], $url_imag)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+     {
+          echo 'Upload effectué avec succès !';
+     }
+     else //Sinon (la fonction renvoie FALSE).
+     {
+          echo 'Echec de l\'upload !';
+     }
+}
+
+if(isset($_FILES['image1']))
+{ 
+     $dossier = '../upload/';
+     $fichier = basename($_FILES['image1']['name']);
+     $image1 = $dossier . $fichier;
+     if(move_uploaded_file($_FILES['image1']['tmp_name'], $image1)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+     {
+          echo 'Upload effectué avec succès !';
+     }
+     else //Sinon (la fonction renvoie FALSE).
+     {
+          echo 'Echec de l\'upload !';
+     }
+}
+
+if(isset($_FILES['image2']))
+{ 
+     $dossier = '../upload/';
+     $fichier = basename($_FILES['image2']['name']);
+     $image2 = $dossier . $fichier;
+     if(move_uploaded_file($_FILES['image2']['tmp_name'], $image2)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+     {
+          echo 'Upload effectué avec succès !';
+     }
+     else //Sinon (la fonction renvoie FALSE).
+     {
+          echo 'Echec de l\'upload !';
+     }
+}
+
+
+if(isset($_FILES['image3']))
+{ 
+     $dossier = '../upload/';
+     $fichier = basename($_FILES['image3']['name']);
+     $image3 = $dossier . $fichier;
+     if(move_uploaded_file($_FILES['image3']['tmp_name'], $image3)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+     {
+          echo 'Upload effectué avec succès !';
+     }
+     else //Sinon (la fonction renvoie FALSE).
+     {
+          echo 'Echec de l\'upload !';
+     }
+}
+
+
  
 $sql = "INSERT INTO produit(
             nom_prod,
@@ -198,8 +259,51 @@ $stmt->bindParam(':caracteristiques_prod', $caracteristiques_prod, PDO::PARAM_ST
 $stmt->bindParam(':description_prod', $description_prod, PDO::PARAM_STR);    
 $stmt->bindParam(':etat_prod', $etat_prod, PDO::PARAM_INT);   
 
+$inserted = $stmt->execute();
+
+
+
+            $sql = "SELECT id_prod FROM produit WHERE nom_prod LIKE '$nom_prod' AND prix_detail LIKE '$prix_detail' AND 
+            prix_gros LIKE '$prix_gros' AND qnt_detail LIKE '$qnt_detail' AND qnt_gros LIKE '$qnt_gros' AND caracteristiques_prod LIKE '$caracteristiques_prod' AND description_prod LIKE '$description_prod' AND
+            etat_prod LIKE '$etat_prod' 
+            ORDER BY id_prod DESC LIMIT 1";
+ 
+            if($bdd->query($sql)){
+            foreach  ($bdd->query($sql) as $row) {
+            	echo $id_prod = $row['id_prod'] ; }
+            } 
+
+$url_imag = str_replace('../', '', $url_imag);
+$image1 = str_replace('../', '', $image1); 
+$image2 = str_replace('../', '', $image2); 
+$image3 = str_replace('../', '', $image3); 
+
+
+//surpesseion des ../ du lien image pour eviter une erreure de l'emplacement de l image
+$sql = "INSERT INTO image(
+url_imag,
+image1,
+image2,
+image3,
+id_prod
+            ) VALUES (
+:url_imag,
+:image1,
+:image2,
+:image3,
+:id_prod
+            )";
+                                          
+$stmt = $bdd->prepare($sql);
+                                              
+$stmt->bindParam(':url_imag', $url_imag, PDO::PARAM_STR); 
+$stmt->bindParam(':image1', $image1, PDO::PARAM_STR); 
+$stmt->bindParam(':image2', $image2, PDO::PARAM_STR); 
+$stmt->bindParam(':image3', $image3, PDO::PARAM_STR);    
+$stmt->bindParam(':id_prod', $id_prod, PDO::PARAM_STR);    
 
 $inserted = $stmt->execute();
+
 
 
 //verifier si on a des résultats (true or false)
@@ -235,7 +339,22 @@ function modifProduit(){
 
 
 function supProduit(){
+global $bdd;  
 
+$id_produit = $_GET['id_prod'] ?? NULL ;
+
+    if(!is_null($id_produit)){
+        $sql = "DELETE FROM produit WHERE id_prod= " . $id_produit;
+
+       $resultat=  $bdd->query($sql);
+
+       if($resultat){
+           header('location: ../produit.php');
+       }else{
+      echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+
+       }
+    }
 }
 //fin fonction supprime Produit
 
@@ -283,13 +402,30 @@ if($inserted){
 //fin fonction ajout famille
 
 function ajoutermarque(){
+
  
   global $bdd;  
   $titre_marque   = strip_tags($_POST['titre_marque']);
   $etat_marque   = strip_tags($_POST['etat_marque']); 
-  $image_marque  = '/'; // need upload script
-  //$ordre_marque  = strip_tags($_POST['ordre_fami']);      
-  
+   //$ordre_marque  = strip_tags($_POST['ordre_fami']);      
+ 
+if(isset($_FILES['image_marque']))
+{ 
+     $dossier = '../upload/';
+     $fichier = basename($_FILES['image_marque']['name']);
+     $image_marque = $dossier . $fichier;
+     if(move_uploaded_file($_FILES['image_marque']['tmp_name'], $image_marque)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+     {
+          echo 'Upload effectué avec succès !';
+     }
+     else //Sinon (la fonction renvoie FALSE).
+     {
+          echo 'Echec de l\'upload !';
+     }
+}
+
+$image_marque = str_replace('../', '', $image_marque);
+
   $sql = "INSERT INTO marque(
   titre_marque,
   etat_marque,
@@ -329,23 +465,18 @@ function ajoutermarque(){
 
 
 //debut controleur
-if(isset($_POST['action'])){/*
-  if($_POST['action'] == 'ajoutFamille'){ajoutfamille();}   
-
-
-
-
-
-
+if(isset($_POST['action'])){ 
+ 
+  if($_POST['action'] == 'ajoutFamille'){ajoutfamille();}  
+  if($_POST['action'] == 'ajoutermarque'){ajoutermarque();}  
   if($_POST['action'] == 'ajoutAdmin'){ajoutAdmin();} 
   if($_POST['action'] == 'modifAdmin'){modifAdmin();} 
   if($_POST['action'] == 'modifRoleAdmin'){modifRoleAdmin();} 
   if($_POST['action'] == 'modifPassAdmin'){modifPassAdmin();} 
   if($_POST['action'] == 'supAdmin'){supAdmin();} 
   if($_POST['action'] == 'ajoutProduit'){ajoutProduit();} 
-
-
-*/
+  if($_POST['action'] == 'supProduit'){supProduit();} 
+ 
 }
 
  
