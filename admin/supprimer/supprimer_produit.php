@@ -13,7 +13,7 @@ if(isset($_POST['supprimer'])){
        if($resultat){
            header('location: ../produit.php');
        }else{
-echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+      echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
 
        }
     }

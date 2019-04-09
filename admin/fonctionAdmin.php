@@ -156,13 +156,23 @@ $prix_detail  	         = strip_tags($_POST['prix_detail']);
 $prix_gros  	         = strip_tags($_POST['prix_gros']);	
 $qnt_detail  	         = strip_tags($_POST['qnt_detail']);	
 $qnt_gros	  	         = strip_tags($_POST['qnt_gros']);
-$id_marque	  	         = strip_tags($_POST['marque']);
-$id_famille	  	         = strip_tags($_POST['famille']);
+
+$pos_tire_six_marque= strpos(strip_tags($_POST['marque']), '-');
+$id_marque	  	         =  substr(strip_tags($_POST['marque']), 0, $pos_tire_six_marque);
+
+
+$pos_tire_six_famille= strpos(strip_tags($_POST['famille']), '-');
+$id_famille	  	         =  substr(strip_tags($_POST['famille']), 0, $pos_tire_six_famille);
+
+
+
+
 $caracteristiques_prod	 = strip_tags($_POST['caracteristiques_prod']);
 $description_prod   	 = strip_tags($_POST['description_prod']);
-$etat_prod	  	         = 1;
+$etat_prod	  	         = strip_tags($_POST['etat_prod']);
 $id_admin	  	         = 1;
-$position_prod  	     = 1;
+//$position_prod  	     = 1;
+
 
 if(isset($_FILES['imageprincipale']))
 { 
@@ -235,7 +245,9 @@ $sql = "INSERT INTO produit(
             qnt_gros,   
             caracteristiques_prod,  
             description_prod,    
-            etat_prod
+            etat_prod, 
+            id_famille, 
+            id_marque
     
             ) VALUES (
             :nom_prod,    
@@ -245,7 +257,9 @@ $sql = "INSERT INTO produit(
             :qnt_gros,  
             :caracteristiques_prod,  
             :description_prod,    
-            :etat_prod
+            :etat_prod, 
+            :id_famille, 
+            :id_marque
             )";
                                           
 $stmt = $bdd->prepare($sql);
@@ -258,9 +272,16 @@ $stmt->bindParam(':qnt_gros', $qnt_gros, PDO::PARAM_INT);
 $stmt->bindParam(':caracteristiques_prod', $caracteristiques_prod, PDO::PARAM_STR);  
 $stmt->bindParam(':description_prod', $description_prod, PDO::PARAM_STR);    
 $stmt->bindParam(':etat_prod', $etat_prod, PDO::PARAM_INT);   
+$stmt->bindParam(':id_famille', $id_famille, PDO::PARAM_INT);   
+$stmt->bindParam(':id_marque', $id_marque, PDO::PARAM_INT);   
 
 $inserted = $stmt->execute();
 
+//verifier si on a des résultats (true or false)
+if(!$inserted){
+     echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
+    
+   };
 
 
             $sql = "SELECT id_prod FROM produit WHERE nom_prod LIKE '$nom_prod' AND prix_detail LIKE '$prix_detail' AND 
@@ -308,7 +329,7 @@ $inserted = $stmt->execute();
 
 //verifier si on a des résultats (true or false)
 if($inserted){
-  header('location: ../admin.php');
+  header('location: ../produit.php');
 }else{
   echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
 }
@@ -336,8 +357,84 @@ function modifProduit(){
 
 }
 //fin fonction modif Produit
+//debut fonction supprimer client
+
+function suppClient(){
+     global $bdd;
+
+// need to sanitize
+$idadmin = $_GET['id_client'] ?? NULL ;
+
+if(!is_null($idadmin)){
+    $sql = "DELETE FROM client WHERE id_client= " . $idadmin;
+
+   $resultat=  $bdd->query($sql);
+
+   if($resultat){
+       header('location: ../client.php');
+   }else{
+echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+
+   }
+}
+}
+//debut fonction ajout client
+function ajoutClient(){
+     global $bdd;  
 
 
+//var_dump($_POST);
+
+$sql = "INSERT INTO `client` ( `nom_client`, `prenom_client`,`email_client`,`adresse_client`,`catego_client`,`motpass_client`,`raison_social_client`, `id_admin`)
+VALUES (:nomclient, :prenomclient, :emailclient, :adresseclient, :categoryclient, :motpasseclient, :raisonsocialclient, :idadmin)";
+
+
+//Prepare our statement.
+$statement = $bdd->prepare($sql);
+
+
+//validation mazal makhssossa aprés ndirha 
+$nomClient = $_POST['nom_client'];
+$prenomClient = $_POST['prenom_client'];
+$emailClient = $_POST['email_client'];
+
+$adresseClient = $_POST['adresse_client'];
+$categoryClient = $_POST['catego_client'];
+$motpasseClient = password_hash($_POST['motpass_client'], PASSWORD_BCRYPT);
+$raisonsocialClient = $_POST['raison_social_client'] ?? '/';
+$id_admin = 1;
+
+
+
+
+//Bind our values to our parameters 
+$statement->bindValue(':nomclient', $nomClient);
+$statement->bindValue(':prenomclient', $prenomClient);
+$statement->bindValue(':emailclient', $emailClient);
+$statement->bindValue(':adresseclient', $adresseClient);
+$statement->bindValue(':categoryclient', $categoryClient);
+$statement->bindValue(':motpasseclient', $motpasseClient);
+$statement->bindValue(':raisonsocialclient', $raisonsocialClient);
+$statement->bindValue(':idadmin', $id_admin);
+
+
+//Execute the statement and insert our values.
+$inserted = $statement->execute();
+
+
+//verifier si on a des résultats (true or false)
+if($inserted){
+echo ' Youpiiiiiii<br>';
+header('location: ../login.php');
+}else{
+echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+}
+
+
+
+};
+
+//fin fonction ajout client
 function supProduit(){
 global $bdd;  
 
@@ -362,11 +459,29 @@ $id_produit = $_GET['id_prod'] ?? NULL ;
 
 function ajoutfamille(){
  
+     $start_ajout = 0;
 global $bdd;  
 $titre_fami   = strip_tags($_POST['titre_fami']);
 $etat_fami    = strip_tags($_POST['etat_fami']); 
-$image_fami   = '/'; // need upload script
-//$ordre_fami   = strip_tags($_POST['ordre_fami']);      
+//$image_fami   = '/'; // need upload script
+//$ordre_fami   = strip_tags($_POST['ordre_fami']);   
+
+
+if(isset($_FILES['image_famille']))
+{ 
+     $dossier = '../upload/';
+     $fichier = basename($_FILES['image_famille']['name']);
+     $image_famille = $dossier . $fichier;
+     if(move_uploaded_file($_FILES['image_famille']['tmp_name'], $image_famille)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+     {
+          echo 'Upload effectué avec succès !';
+          $start_ajout = 1;
+     }
+     else //Sinon (la fonction renvoie FALSE).
+     {
+          echo 'Echec de l\'upload !';
+     }
+}
 
 $sql = "INSERT INTO famille(
 titre_famille,
@@ -383,12 +498,16 @@ $stmt = $bdd->prepare($sql);
 
 $stmt->bindParam(':titre_fami', $titre_fami, PDO::PARAM_STR);
 $stmt->bindParam(':etat_fami', $etat_fami, PDO::PARAM_STR);
-$stmt->bindParam(':image_fami', $image_fami, PDO::PARAM_STR);
+$stmt->bindParam(':image_fami', $image_famille, PDO::PARAM_STR);
 //$stmt->bindParam(':ordre_fami', $ordre_fami, PDO::PARAM_INT);  
 
 
-
-$inserted = $stmt->execute();
+if ($start_ajout = 1) {
+  
+$inserted = $stmt->execute();   # code...
+}else{
+     echo 'image upload error';
+}
 
 
 //verifier si on a des résultats (true or false)
@@ -403,63 +522,184 @@ if($inserted){
 
 function ajoutermarque(){
 
- 
-  global $bdd;  
-  $titre_marque   = strip_tags($_POST['titre_marque']);
-  $etat_marque   = strip_tags($_POST['etat_marque']); 
-   //$ordre_marque  = strip_tags($_POST['ordre_fami']);      
- 
-if(isset($_FILES['image_marque']))
-{ 
-     $dossier = '../upload/';
-     $fichier = basename($_FILES['image_marque']['name']);
-     $image_marque = $dossier . $fichier;
-     if(move_uploaded_file($_FILES['image_marque']['tmp_name'], $image_marque)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-     {
-          echo 'Upload effectué avec succès !';
-     }
-     else //Sinon (la fonction renvoie FALSE).
-     {
-          echo 'Echec de l\'upload !';
-     }
-}
+          
+          global $bdd;  
+          $titre_marque   = strip_tags($_POST['titre_marque']);
+          $etat_marque   = strip_tags($_POST['etat_marque']); 
+          //$ordre_marque  = strip_tags($_POST['ordre_fami']);      
+          
+          if(isset($_FILES['image_marque']))
+          { 
+               $dossier = '../upload/';
+               $fichier = basename($_FILES['image_marque']['name']);
+               $image_marque = $dossier . $fichier;
+               if(move_uploaded_file($_FILES['image_marque']['tmp_name'], $image_marque)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+               {
+                    echo 'Upload effectué avec succès !';
+               }
+               else //Sinon (la fonction renvoie FALSE).
+               {
+                    echo 'Echec de l\'upload !';
+               }
+          }
 
-$image_marque = str_replace('../', '', $image_marque);
+          $image_marque = str_replace('../', '', $image_marque);
 
-  $sql = "INSERT INTO marque(
-  titre_marque,
-  etat_marque,
-  image_marque
-  
-              ) VALUES (
-  :titre_marque,
-  :etat_marque,
-  :image_marque
-              )";
-                                            
-  $stmt = $bdd->prepare($sql);
-  
-  $stmt->bindParam(':titre_marque', $titre_marque, PDO::PARAM_STR);
-  $stmt->bindParam(':etat_marque', $etat_marque, PDO::PARAM_STR);
-  $stmt->bindParam(':image_marque', $image_marque, PDO::PARAM_STR);
-  //$stmt->bindParam(':ordre_marque', $ordre_marque, PDO::PARAM_INT);  
-  
-  
-  
-  $inserted = $stmt->execute();
-  
-  
-  //verifier si on a des résultats (true or false)
-  if($inserted){
-    header('location: ../famille.php');
-  }else{
-    echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
-  }
-  
+          $sql = "INSERT INTO marque(
+          titre_marque,
+          etat_marque,
+          image_marque
+          
+                    ) VALUES (
+          :titre_marque,
+          :etat_marque,
+          :image_marque
+                    )";
+                                                  
+          $stmt = $bdd->prepare($sql);
+          
+          $stmt->bindParam(':titre_marque', $titre_marque, PDO::PARAM_STR);
+          $stmt->bindParam(':etat_marque', $etat_marque, PDO::PARAM_STR);
+          $stmt->bindParam(':image_marque', $image_marque, PDO::PARAM_STR);
+          //$stmt->bindParam(':ordre_marque', $ordre_marque, PDO::PARAM_INT);  
+          
+          
+          
+          $inserted = $stmt->execute();
+          
+          
+          //verifier si on a des résultats (true or false)
+          if($inserted){
+          header('location: ../marque.php');
+          }else{
+          echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
+          }
+          
   }
   //fin fonction ajout marque
-  
-  
+  function suppfamille(){
+       global $bdd;
+       // need to sanitize
+    $id_famille = $_GET['id_famille'] ?? NULL ;
+
+    if(!is_null($id_famille)){
+                         $sql = "DELETE FROM famille WHERE id_famille= " . $id_famille;
+
+                         $resultat=  $bdd->query($sql);
+
+                         if($resultat){
+                              header('location: ../famille.php');
+                         }else{
+                    echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+
+       }
+    }
+  }
+  //fin supp famille
+
+
+  //debut ajout point de vente 
+
+  function ajoutPointdevente(){
+     global $bdd;  
+
+     $sql= "INSERT INTO point_de_vente(
+          `titre_point_vente`, 
+          `presentation_point_vente`,
+           `type_point_vente`, 
+           `info_point_vente`,
+            `etat_point_vente`,
+            `id_admin`
+            )
+     VALUES 
+     (:titre_point_vente,
+     :presentation_point_vente,
+     :type_point_vente,
+     :info_point_vente,
+     :etat_point_vente,
+     :id_admin);
+     ";
+
+//Prepare our statement.
+$statement = $bdd->prepare($sql);
+
+
+//validation mazal makhssossa aprés ndirha 
+$titre_point_vente = $_POST['titre_point_vente'];
+$presentation_point_vente = $_POST['presentation_point_vente'];
+$type_point_vente = $_POST['type_point_vente'];
+$info_point_vente = $_POST['info_point_vente'];
+$etat_point_vente = $_POST['etat_point_vente'];
+$id_admin = 1;
+
+//Bind our values to our parameters 
+$statement->bindValue(':titre_point_vente', $titre_point_vente);
+$statement->bindValue(':presentation_point_vente', $presentation_point_vente);
+$statement->bindValue(':type_point_vente', $type_point_vente);
+$statement->bindValue(':etat_point_vente', $etat_point_vente);
+$statement->bindValue(':info_point_vente', $info_point_vente);
+$statement->bindValue(':id_admin', $id_admin);
+
+
+//Execute the statement and insert our values.
+$inserted = $statement->execute();
+
+
+//verifier si on a des résultats (true or false)
+if($inserted){
+echo ' Youpiiiiiii<br>';
+header('location: ../point_de_ventes.php');
+}else{
+echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+}
+
+
+
+  }
+  //fin ajout point de vente
+
+  //debut supp marque
+  function suppmarque(){
+       global $bdd;
+       // need to sanitize
+    $id_marque = $_GET['id_marque'] ?? NULL ;
+
+    if(!is_null($id_marque)){
+        $sql = "DELETE FROM marque WHERE id_marque= " . $id_marque;
+
+       $resultat=  $bdd->query($sql);
+
+       if($resultat){
+           header('location: ../marque.php');
+       }else{
+echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+
+       }
+    }
+  }
+//fin supp marque
+
+//debut supp point de vente
+
+function suppPointdevente(){
+     global $bdd;
+     // need to sanitize
+  $id_point_vente = $_GET['id_point_vente'] ?? NULL ;
+
+  if(!is_null($id_point_vente)){
+      $sql = "DELETE FROM point_de_vente WHERE id_point_vente= " . $id_point_vente;
+
+     $resultat=  $bdd->query($sql);
+
+     if($resultat){
+         header('location: ../point_de_ventes.php');
+     }else{
+echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+
+     }
+  }
+}
+
 
 
 
@@ -467,8 +707,12 @@ $image_marque = str_replace('../', '', $image_marque);
 //debut controleur
 if(isset($_POST['action'])){ 
  
-  if($_POST['action'] == 'ajoutFamille'){ajoutfamille();}  
+  if($_POST['action'] == 'ajoutFamille'){ajoutfamille();} 
+  if($_POST['action'] == 'suppFamille'){suppfamille();} 
+
   if($_POST['action'] == 'ajoutermarque'){ajoutermarque();}  
+  if($_POST['action'] == 'suppmarque'){suppmarque();} 
+
   if($_POST['action'] == 'ajoutAdmin'){ajoutAdmin();} 
   if($_POST['action'] == 'modifAdmin'){modifAdmin();} 
   if($_POST['action'] == 'modifRoleAdmin'){modifRoleAdmin();} 
@@ -476,6 +720,12 @@ if(isset($_POST['action'])){
   if($_POST['action'] == 'supAdmin'){supAdmin();} 
   if($_POST['action'] == 'ajoutProduit'){ajoutProduit();} 
   if($_POST['action'] == 'supProduit'){supProduit();} 
+  if($_POST['action'] == 'ajoutClient'){ajoutClient();} 
+  if($_POST['action'] == 'suppClient'){suppClient();} 
+  if($_POST['action'] == 'ajoutPointdevente'){ajoutPointdevente();} 
+  if($_POST['action'] == 'suppPointdevente'){suppPointdevente();} 
+
+
  
 }
 

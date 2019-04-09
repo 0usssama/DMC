@@ -111,6 +111,7 @@
               <label for="raison_social_client">nom de la société</label>
             </div>
           </div>
+          <input type="hidden" name="action" value="ajoutClient">
 
          <input type="submit" value="s'inscrire" class="btn btn-primary btn-block" name="inscrire">
         </form>

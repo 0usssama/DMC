@@ -73,8 +73,10 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="supprimer/supprimer_marque.php?id_marque=<?php echo $row['id_marque'] ;?> " method="post">
+                            <form action="admin/marque.php?id_marque=<?php echo $row['id_marque'] ;?> " method="post">
                                 <h1 class="mb-5">voulez-vous supprimer client n°<?php echo $row['id_marque'] ;?> </h1>
+                                <input type="hidden" name="action" value="suppmarque">
+                              
                                 <input type="submit" name="supprimer" class="btn btn-block btn-danger"
                                     value="supprimer">
                             </form>

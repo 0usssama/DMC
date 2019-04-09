@@ -58,7 +58,7 @@
                 <td><?php echo $row['id_famille'] ;?></td>
                 <td><?php echo $row['titre_famille'] ;?></td>
                 <td><?php echo $row['etat_famille'] ;?></td>
-                <td><img src="" alt=""></td>
+                <td><img width="80" src="<?php echo $row['image_famille'] ;?>" alt=""></td>
 
                 <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
                         data-target="#m<?php echo $row['id_famille'] ;?>">Supprimer</button></td>
@@ -75,10 +75,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="supprimer/supprimer_famille.php?id_famille=<?php echo $row['id_famille'] ;?> " method="post">
+                            <form action="admin/famille.php?id_famille=<?php echo $row['id_famille'] ;?> " method="post">
                                 <h1 class="mb-5">voulez-vous supprimer client n°<?php echo $row['id_famille'] ;?> </h1>
                                 <input type="submit" name="supprimer" class="btn btn-block btn-danger"
                                     value="supprimer">
+                  <input type="hidden" name="action" value="suppFamille">
+
                             </form>
 
                         </div>
@@ -112,7 +114,7 @@
         </div>
         <div class="modal-body">
            
-            <form action="ajouter/ajouter_famille.php" method="post">
+            <form action="admin/ajouter_famille.php" method="post" enctype="multipart/form-data">
                 
                  
                 <div class="form-group">
@@ -143,6 +145,7 @@
                  
               
                
+                  <input type="hidden" name="action" value="ajoutFamille">
                
                 <input type="submit" class="btn btn-primary btn-block" value="Ajouter" name="ajouter">
               </form>

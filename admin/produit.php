@@ -29,7 +29,14 @@
         <hr>
         <?php
         // join mazal cause the foreign keys are not ready
-        $sql = "SELECT * FROM produit ORDER BY id_prod DESC";
+        $sql = "SELECT produit.id_prod, produit.nom_prod, produit.date_prod, produit.prix_detail, produit.prix_gros, produit.qnt_detail, produit.qnt_gros, marque.titre_marque, famille.titre_famille
+        FROM produit
+        JOIN marque 
+        ON marque.id_marque = produit.id_marque
+        JOIN famille
+        ON famille.id_famille = produit.id_famille 
+        
+        ORDER BY id_prod DESC";
        
         ?>
         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalScrollable">Ajouter un produit</button>
@@ -69,8 +76,8 @@
                     <h6>qte: <?php echo $row['qnt_gros'] ;?></h6>
                       
                 </td>
-                <td><?php echo 'marque';?></td>
-                <td><?php echo 'famille';?></td>
+                <td><?php echo $row['titre_marque'];?></td>
+                <td><?php echo $row['titre_famille'];?></td>
                 
 
                 <?php $sqlimage = "SELECT * FROM image WHERE id_prod LIKE '$id_prod'"; ?>
@@ -205,11 +212,16 @@
                 <div class="form-group">
                     <label for="marque">Marque</label>
                       <select class="form-control" id="marque" name="marque">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                          
+                          <?php
+                            $sql = "SELECT * FROM marque";
+                            if($pdo->query($sql)){
+                              foreach  ($pdo->query($sql) as $row) {
+                            ?>
+                            <option value="<?php echo $row['id_marque']. '-' .$row['titre_marque']; ?>"><?php echo $row['id_marque']. '-' .$row['titre_marque']; ?></option>
+                            <?php }
+            }; ?>
+                   
                         </select>
                  </div>
               
@@ -218,11 +230,14 @@
                      
                         <label for="famille">famille</label>
                         <select class="form-control" id="famille" name="famille">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <?php
+                            $sql = "SELECT * FROM famille";
+                            if($pdo->query($sql)){
+                              foreach  ($pdo->query($sql) as $row) {
+                            ?>
+                            <option value="<?php echo $row['id_famille']. '-' .$row['titre_famille']; ?>"><?php echo $row['id_famille']. '-' .$row['titre_famille']; ?></option>
+                            <?php }
+            }; ?>
                           </select>
                 
                 </div>
@@ -248,6 +263,16 @@
                     </div>
                   </div>
                  
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <select name="etat_prod" id="etat_prod" class="form-control">
+                      <option value="">disponibilité</option>  
+                      <option value="disponible">disponible</option>
+                        <option value="non_disponible">non disponible</option>
+
+                      </select>
+                    </div>
+                  </div>
                 <input type="hidden" name="action" value="ajoutProduit">
                 <input type="submit" class="btn btn-primary btn-block" value="Ajouter" name="ajouter">
               </form>
