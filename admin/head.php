@@ -8,7 +8,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -39,6 +39,25 @@
     box-shadow: none;
 }
 </style>
+
+<script type="text/javascript">
+
+  function produitAAaAne(id){
+     var envoi   = "admin/fonctionAdmin.php?id="+id+"&action=alaune"; 
+     $.get(envoi);
+     //alert(envoi);
+  }
+
+  function produitordre(id){
+     var ordre   = document.getElementById(id).value; 
+     var envoi   = "admin/fonctionAdmin.php?id="+id+"&ordre="+ordre+"&action=ordre";
+     $.get(envoi);
+     //alert(envoi); 
+  }
+
+</script>
+
+
 </head>
 
 <body id="page-top">

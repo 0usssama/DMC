@@ -702,9 +702,56 @@ echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
 
 
 
+function produitAAaAne(){
+//$id = strip_tags('alaune', '', str_replace($_GET['id']));
+$id_prod =  $_GET['id'] ;
+$id_prod =  str_replace('alaune', '', $id_prod);
+//si a la une resoit 0
+// sinon reçoi 1
+global $bdd;
+ 
+
+$alaune = "SELECT alaune_produit FROM produit WHERE id_prod LIKE '$id_prod'"; 
+                if($bdd->query($alaune)){
+                foreach  ($bdd->query($alaune) as $rowalaune) {
+                if($rowalaune['alaune_produit']==0){$alaune_produit = 1;}
+                if($rowalaune['alaune_produit']==1){$alaune_produit = 0;}
+                } //foreach
+                }  //if  
+
+//reçoi l'ordre
+$sql = "UPDATE produit SET   alaune_produit = :alaune_produit 
+            WHERE id_prod = :id_prod";
+$stmt = $bdd->prepare($sql);                                  
+
+$stmt->bindParam(':alaune_produit', $alaune_produit, PDO::PARAM_INT);   
+$stmt->bindParam(':id_prod', $id_prod, PDO::PARAM_INT);   
+$stmt->execute();
+
+}
 
 
-//debut controleur
+function produitordre(){ 
+global $bdd;
+//$id_prod = strip_tags('ordre', '', str_replace($_GET['id']));
+$id_prod =  $_GET['id'] ;
+$id_prod =  str_replace('ordre', '', $id_prod);
+$ordre_produit = (int)$_GET['ordre'];
+//reçoi l'ordre
+$sql = "UPDATE produit SET   ordre_produit = :ordre_produit 
+            WHERE id_prod = :id_prod";
+$stmt = $bdd->prepare($sql);                                  
+
+$stmt->bindParam(':ordre_produit', $ordre_produit, PDO::PARAM_INT);   
+$stmt->bindParam(':id_prod', $id_prod, PDO::PARAM_INT);   
+$stmt->execute(); 
+}
+ 
+ if(isset($_GET['action'])){ 
+  if($_GET['action'] == 'alaune'){produitAAaAne();} 
+  if($_GET['action'] == 'ordre'){produitordre();} 
+ }  
+ //debut controleur
 if(isset($_POST['action'])){ 
  
   if($_POST['action'] == 'ajoutFamille'){ajoutfamille();} 
@@ -724,6 +771,9 @@ if(isset($_POST['action'])){
   if($_POST['action'] == 'suppClient'){suppClient();} 
   if($_POST['action'] == 'ajoutPointdevente'){ajoutPointdevente();} 
   if($_POST['action'] == 'suppPointdevente'){suppPointdevente();} 
+
+
+ 
 
 
  

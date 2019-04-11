@@ -29,7 +29,7 @@
         <hr>
         <?php
         // join mazal cause the foreign keys are not ready
-        $sql = "SELECT produit.id_prod, produit.nom_prod, produit.date_prod, produit.prix_detail, produit.prix_gros, produit.qnt_detail, produit.qnt_gros, marque.titre_marque, famille.titre_famille
+        $sql = "SELECT produit.id_prod, produit.alaune_produit, produit.ordre_produit, produit.nom_prod, produit.date_prod, produit.prix_detail, produit.prix_gros, produit.qnt_detail, produit.qnt_gros, marque.titre_marque, famille.titre_famille
         FROM produit
         JOIN marque 
         ON marque.id_marque = produit.id_marque
@@ -48,6 +48,8 @@
                 <tr>
                     <th>ID</th>
                     <th>Nom produit</th>
+                    <th>a la une</th>
+                    <th>ordre</th>
                     <th>ajouté le</th>
                     <th>prix détail</th>
 
@@ -66,6 +68,13 @@
             <tr>
                 <td><?php echo $id_prod = $row['id_prod'] ;?></td>
                 <td><?php echo $row['nom_prod'] ;?></td>
+
+                <td><input type="checkbox" 
+                 <?php if($row['alaune_produit'] == 1){?> checked="checked" <?php } ?> 
+                  name="alaune" id="alaune<?php echo $id_prod;?>" onclick="produitAAaAne('alaune<?php echo $id_prod;?>')"></td>
+                
+                <td><input style=" width: 40px;" type="number" value="<?php echo $row['ordre_produit'] ;?>" name="ordre" id="ordre<?php echo $id_prod;?>" onmouseout="produitordre('ordre<?php echo $id_prod;?>')"></td>
+
                 <td><?php echo $row['date_prod'] ;?></td>
                 <td>
 
