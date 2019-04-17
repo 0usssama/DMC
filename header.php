@@ -24,29 +24,37 @@
                             <li class="nav-item">
                               <a class="nav-link" href="#">A propos</a>
                             </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="#">Pricing</a>
-                            </li>
-                            <li class="nav-item">
-                                    <a class="nav-link" href="#">Pricing</a>
-                                  </li>
+                           
+                          
                                   <li class="nav-item">
                                         <a class="nav-link" href="#">Contact</a>
                                       </li>
 
-                                      <li class="nav-item">
-                                            <a class="nav-link" href="#">Pricing</a>
-                                          </li>
+                                    
                                           <li class="nav-item ml-3">
-                                                <a  class="btn btn-block btn-danger" href="devis.html">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                        <span class="badge badge-light ml-2">4</span>
-                                                      </a>
+                                               
+                                                     
+                                              </li>
+                                              <li class="nav-item ml-3" id="qtepanier">
+                                                <?php include('qtepanier.php');?>
                                               </li>
                                               <li class="nav-item ml-3">
-                                                    <a class="btn btn-block btn-danger" href="admin/login.html">
-                                                            <i class="fa fa-1x fa-user mr-2"></i>Se connecter
-                                                          </a>
+                                                    <?php
+                                                             if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){
+                                                              echo '<a class="btn btn-block btn-danger" href="login.php">
+                                                              <i class="fa fa-1x fa-user mr-2"></i>'.  $_SESSION['nom_client'] .' ' . $_SESSION['prenom_client'] .'</a>'. ' <a class="btn btn-block btn-danger" href="logout.php">
+                                                              <i class="fa fa-1x  sign-out-alt mr-2"></i>Se déconnecter
+                                                            </a>';
+
+                                                             }else{
+                                                               echo '<a class="btn btn-block btn-danger" href="login.php">
+                                                               <i class="fa fa-1x fa-user mr-2"></i>Se connecter
+                                                             </a>
+                                                             
+                                                             ';
+                                                             }                                                       
+                                                    ?>
+                                                    
                                                   </li>
                                               
                           

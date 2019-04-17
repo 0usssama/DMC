@@ -95,15 +95,20 @@
                 foreach  ($pdo->query($sqlimage) as $rowimage) { ?>
 
                 <?php  
-                if($rowimage['url_imag']!=''){$imageprincipale = '../'.$rowimage['url_imag'];}
+                
+                
+                if(!empty($rowimage['url_imag'])){
+                  
+                  $imageprincipale = '../' . $rowimage['url_imag'];
+                }
                 if($rowimage['image1']!=''){$image1 = '../'.$rowimage['image1'];}
                 if($rowimage['image2']!=''){$image2 ='../'.$rowimage['image2'];}
                 if($rowimage['image3']!=''){$image3 = '../'.$rowimage['image3'];}
+                
                 ?>
                 
                 <?php } //foreach
                       }  //if ?>
-
 
 
                 <td><img width="80" src="<?php echo $imageprincipale ;?>"></td>

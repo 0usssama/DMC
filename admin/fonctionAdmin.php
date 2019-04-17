@@ -402,7 +402,7 @@ $adresseClient = $_POST['adresse_client'];
 $categoryClient = $_POST['catego_client'];
 $motpasseClient = password_hash($_POST['motpass_client'], PASSWORD_BCRYPT);
 $raisonsocialClient = $_POST['raison_social_client'] ?? '/';
-$id_admin = 1;
+$id_admin = 2;
 
 
 
@@ -441,6 +441,18 @@ global $bdd;
 $id_produit = $_GET['id_prod'] ?? NULL ;
 
     if(!is_null($id_produit)){
+     $sqlimage = "SELECT * FROM image WHERE id_prod LIKE '$id_produit'";
+     foreach  ($bdd->query($sqlimage) as $rowimage) {
+     
+          if($rowimage['url_imag']!=''){ unlink('../upload/'.$rowimage['url_imag']); }
+          if($rowimage['image1']!=''){ unlink('../upload/'.$rowimage['image1']); }
+          if($rowimage['image2']!=''){ unlink('../upload/'.$rowimage['image2']); }
+          if($rowimage['image3']!=''){ unlink('../upload/'.$rowimage['image3']); }
+
+     };
+
+
+     
         $sql = "DELETE FROM produit WHERE id_prod= " . $id_produit;
 
        $resultat=  $bdd->query($sql);

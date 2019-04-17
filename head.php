@@ -202,7 +202,31 @@ footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
 .dropdown-menu h6{
 color: black !important;
 }
+.qte{
+  width: 40px;
+    height: 55px;
+    margin-top: 16px;
+    color: #fff;
+    border: none;
+    background-color: #555;
+    text-align: center;
+    border-radius: 3px;
+    float: right;
+  }
 
   </style>
+ 
+
+
+  <script type="text/javascript">
+    function ajoutpannier(qteid){
+      var quantite   = document.getElementById(qteid).value; 
+      var envoi   = "fonctionSite.php?qteid="+qteid+"&quantite="+quantite;
+      $.get(envoi);
+      //alert(envoi); 
+    }
+  </script>
+
+
   <body>
     <!-- Image and text -->

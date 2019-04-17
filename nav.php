@@ -1,4 +1,9 @@
+    
+    
+               
 
+    
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,112 +19,45 @@
                 </a>
                 <div class="dropdown-menu w-100" aria-labelledby="navbarDropdown2">
                  <div class="container">
-                   <div class="row mt-4">
-                     <div class="col-md-4">
+
+                 <div class="row">
+                 <?php
+                $sql = "SELECT * FROM famille";
+
+              if($bdd->query($sql)){
+                
+                  
+                foreach ($bdd->query($sql) as $famille) {
+               
+             
+
+                ?>
+                
+                     <div class="col-3 mt-4">
                        <div  style="border-left:5px solid rgb(219,2,23)">
-                          <a href="" class="pt-4 pb-4">
-                              <h3 class="pl-2" > IMPRIMANTES CODE A BARRE</h3>
+                          <a href="famille/index.php?id=<?php echo $famille['id_famille']; ?>" class="pt-4 pb-4">
+                              <h3 class="pl-2" > <?php echo $famille['titre_famille']; ?></h3>
                               
                            </a>
                           
                        </div>
                         
                      </div>
-                     <div class="col-md-4">
-                       <div style="border-left:5px solid rgb(219,2,23)">
-                          <a href="" class="pt-4 pb-4">
-                              <h3 class="pl-2" >SCANNERS LECTEURS CODE A BARRE</h3>
-                           </a>
-                         
-                       </div>
-                        
-                        
-                     </div>
-                     <div class="col-md-4">
-                       <div style="border-left:5px solid rgb(219,2,23)">
+                     
+                  
 
-                          <a href="" class="pt-4 pb-4">
-                              <h3 class="pl-2"> TERMINAUX PORTABLES</h3>
-                           </a>
-                          
-                       </div>
-                       
-                        
-                     </div>
-                   </div>
-
-                   <div class="row mt-4">
-                      <div class="col-md-4">
-                        <div style="border-left:5px solid rgb(219,2,23)">
-                            <a href="" class="pt-4 pb-4">
-                                <h3 class="pl-2">CONSOMMABLES</h3>
-                             </a>
-                            
-                        </div>
-                         
-
-                          
-                         
-                      </div>
-                      <div class="col-md-4">
-                        <div style="border-left:5px solid rgb(219,2,23)">
-                            <a href="" class="pt-4 pb-4">
-                                <h3 class="pl-2"> TERMINAUX POINT DE VENTE</h3>
-                             </a>
-                            
-                        </div>
-                         
+<?php 
  
-                           
-                          
-                       </div>
+}
+};
 
-                       <div class="col-md-4">
-                         <div style="border-left:5px solid rgb(219,2,23)">
-                            <a href="" class="pt-4 pb-4">
-                                <h3 class="pl-2">ACCESSOIRES</h3>
-                             </a>
-                          
-                         </div>
-                         
  
-                           
-                          
-                       </div>
-                    </div>
+?>
 
-                    <div class="row mt-4">
-                        <div class="col-md-4">
-                          <div style="border-left:5px solid rgb(219,2,23)">
-                              <a href="" class="pt-4 pb-4">
-                                  <h3 class="pl-2">IMPRIMANTE A BADGE</h3>
-                               </a>
-                              
-                          </div>
-                         
-                           
-                        </div>
-                        <div class="col-md-4">
-                          <div style="border-left:5px solid rgb(219,2,23)">
-                              <a href="" class="pt-4 pb-4">
-                                  <h3 class="pl-2">IMPRIMANTE REÇUE</h3>
-                               </a>
-                              
-                          </div>
-                            
-                            
-                         </div>
-                         <div class="col-md-4">
-                           <div style="border-left:5px solid rgb(219,2,23)">
-                              <a href="" class="pt-4 pb-4">
-                                  <h3 class="pl-2">Caméra de surveillance</h3>
-                               </a>
-                           </div>
-                           
-                            
-                         </div>
-                      </div>
-                 </div>
+                   
+
+</div>
+                    
                 </div>
               </li>
                 <li class="nav-item dropdown" style="position: initial;">
@@ -128,65 +66,36 @@
                     </a>
                     <div class="dropdown-menu w-100" aria-labelledby="navbarDropdown3">
                      <div class="container">
-                       <div class="row mt-4">
-                         <div class="col-md-4">
-                            <a href="" class="pt-4 pb-4">
-                                <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">ZEBRA TECHNOLOGIES</h2>
+                      <div class="row">
+                     <?php
+                $sql = "SELECT * FROM marque";
+
+              if($bdd->query($sql)){
+                
+                  
+                foreach ($bdd->query($sql) as $marque) {
+               
+             
+
+                ?>
+
+                       <div class="mt-4">
+                         <div class="col ">
+                            <a href="marque/index.php?id=<?php echo $marque['id_marque'] ?>" class="pt-4 pb-4">
+                                <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)"><?php echo $marque['titre_marque']; ?></h2>
                              </a>
                             
                          </div>
-                         <div class="col-md-4">
-                            <a href="" class="pt-4 pb-4">
-                                <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)"> FARGO</h2>
-                             </a>
-                            
-                         </div>
-                         <div class="col-md-4">
-                            <a href="" class="pt-4 pb-4">
-                                <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">HONEYWELL</h2>
-                             </a>
-                            
-                         </div>
-                       </div>
-    
-                       <div class="row mt-4">
-                          <div class="col-md-4">
-                             <a href="" class="pt-4 pb-4">
-                                 <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)"> BIXOLON</h2>
-                              </a>
-    
-                              
-                             
-                          </div>
-                          <div class="col-md-4">
-                              <a href="" class="pt-4 pb-4">
-                                  <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">GODEX</h2>
-                               </a>
-     
-                               
-                              
-                           </div>
-    
-                           <div class="col-md-4">
-                              <a href="" class="pt-4 pb-4">
-                                  <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)"> TSC</h2>
-                               </a>
-     
-                               
-                              
-                           </div>
-                        </div>
-    
-                        <div class="row mt-4">
-                            <div class="col-md-4">
-                               <a href="" class="pt-4 pb-4">
-                                   <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">INTERMEC </h2>
-                                </a>
-                               
-                            </div>
                          
-                          </div>
                      </div>
+
+
+                     <?php 
+                }
+            }
+                     ?>
+
+</div>
                     </div>
                   </li>
 
@@ -276,73 +185,27 @@
                          <div class="container">
                            <div class="row mt-4">
                              <div class="col-md-4">
-                                <a href="" class="pt-4 pb-4">
-                                    <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
+                                <a href="services/installation.php" class="pt-4 pb-4">
+                                    <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Installation</h2>
                                  </a>
                                 
                              </div>
                              <div class="col-md-4">
-                                <a href="" class="pt-4 pb-4">
-                                    <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
+                                <a href="services/serv_apr_vente.php" class="pt-4 pb-4">
+                                    <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Service client</h2>
                                  </a>
                                 
                              </div>
                              <div class="col-md-4">
-                                <a href="" class="pt-4 pb-4">
-                                    <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
+                                <a href="services/prix_choc.php" class="pt-4 pb-4">
+                                    <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Prix choc</h2>
                                  </a>
                                 
                              </div>
-                           </div>
-        
-                           <div class="row mt-4">
-                              <div class="col-md-4">
-                                 <a href="" class="pt-4 pb-4">
-                                     <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
-                                  </a>
-        
-                                  
-                                 
-                              </div>
-                              <div class="col-md-4">
-                                  <a href="" class="pt-4 pb-4">
-                                      <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
-                                   </a>
-         
-                                   
-                                  
-                               </div>
-        
-                               <div class="col-md-4">
-                                  <a href="" class="pt-4 pb-4">
-                                      <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
-                                   </a>
-         
-                                   
-                                  
-                               </div>
+                             
                             </div>
         
-                            <div class="row mt-4">
-                                <div class="col-md-4">
-                                   <a href="" class="pt-4 pb-4">
-                                       <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
-                                    </a>
-                                   
-                                </div>
-                                <div class="col-md-4">
-                                    <a href="" class="pt-4 pb-4">
-                                        <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
-                                     </a>
-                                    
-                                 </div>
-                                 <div class="col-md-4">
-                                    <a href="" class="pt-4 pb-4">
-                                        <h2 class="pl-2" style="border-left:5px solid rgb(219,2,23)">Services</h2>
-                                     </a>
-                                    
-                                 </div>
-                              </div>
+                           
                          </div>
                         </div>
                       </li>

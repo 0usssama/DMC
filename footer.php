@@ -15,21 +15,19 @@
                   -->
                   <div class=" bg-white  d-flex  justify-content-center pt-3 pb-3" id="slider">
                       <div class="your-class col-md-10 mt-5 slider mb-5">
-                          
+                      <?php
+      
+      $sql = "SELECT * FROM marque";
+      if($bdd->query($sql)){
+        foreach  ($bdd->query($sql) as $marque) { 
+      ?>
                       
-                            <div><img src="images/marque/m1.png" alt="" class="img-responsive"></div>
-                            <div><img src="images/marque/m2.png" alt="" class="img-responsive"></div>
-              
-                            <div><img src="images/marque/m7.png" alt="" class="img-responsive"></div>
-              
-                            <div><img src="images/marque/m4.png" alt="" class="img-responsive"></div>
-              
-                            <div><img src="images/marque/m5.png" alt="" class="img-responsive"></div>
-              
-                            <div><img src="images/marque/m6.png" alt="" class="img-responsive"></div>
+                            <div><img src="<?php echo $marque['image_marque']; ?>" alt="" class="img-responsive"></div>
+                          
             
                         
-            
+                            <?php }
+            }; ?>
             
                          
                         </div>
@@ -53,8 +51,7 @@
                                       <div class="col-sm-9">
                                     <i class="fas fa-2x fa-quote-left"></i>
             
-                                        <h4>DMC est le meilleure site que j'ai créé</h4>
-                                        <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde eligendi temporibus quia, consequatur error sunt adipisci mollitia expedita deleniti eum voluptatem animi. Vel veniam sapiente aliquid repellat esse officia aliquam.</h4>
+                                    <h4> Lorsqu’est venu le temps de choisir notre fournisseur, nous recherchions quelqu’un en qui nous aurions confiance. Lorsque nous avons rencontré DMC, nous avons tout de suite apprécié son approche. Que ce soit par ses critères de qualité ou par son écoute pour nos besoins.</h4>
                                     <small>Belhas Zakaria- fondateur DMC</small>
                                    
             
@@ -74,9 +71,7 @@
                                       </div>
                                       <div class="col-sm-9">
                                     <i class="fas fa-2x fa-quote-left"></i>
-                                        <h4>Khassouni 4 points, grib matla3tch</h4>
-                                        <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde eligendi temporibus quia, consequatur error sunt adipisci mollitia expedita deleniti eum voluptatem animi. Vel veniam sapiente aliquid repellat esse officia aliquam.</h4>
-            
+                                        <h4>Que dire du service que nous avons reçu! Les gars sont disponibles presque 24/24! Pendant la construction, nous étions toujours les bienvenus sur le chantier. Nous n’avons jamais eu l’impression d’être des numéros.</h4>
                                         <small>Adjroud Amine</small>
                                    
             
@@ -95,9 +90,9 @@
                                       </div>
                                       <div class="col-sm-9">
                                     <i class="fas fa-2x fa-quote-left"></i>
-                                        <h4>khlassat 3lia naktab el mémoire wa7di</h4>
-                                        <h4>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde eligendi temporibus quia, consequatur error sunt adipisci mollitia expedita deleniti eum voluptatem animi. Vel veniam sapiente aliquid repellat esse officia aliquam.</h4>
-            
+                                       <h4>
+                                       Service conseil très professionnel, un suivi dossier impeccable, une équipe qualifiée et disponible; voilà ce qui résume mon expérience avec DMC ! J'ai opté pour un produit avec une qualité .
+                                       </h4>
                                         <small>Chamouti el 7aj</small>
                                    
             
@@ -149,7 +144,9 @@
   <div class=" col-sm-4 col-md col-sm-4  col-12 col">
   <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
   <!--headin5_amrc-->
-  <p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+  <p class="mb10">
+  eurl DMC  est une entreprise de ventes des équipements ...., créée en 2019
+  </p>
   <p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
   <p><i class="fa fa-phone"></i>  +91-9999878398  </p>
   <p><i class="fa fa fa-envelope"></i> info@example.com  </p>
@@ -162,12 +159,12 @@
   <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
   <!--headin5_amrc-->
   <ul class="footer_ul_amrc">
-  <li><a href="http://webenlance.com">Image Rectoucing</a></li>
-  <li><a href="http://webenlance.com">Clipping Path</a></li>
-  <li><a href="http://webenlance.com">Hollow Man Montage</a></li>
-  <li><a href="http://webenlance.com">Ebay & Amazon</a></li>
-  <li><a href="http://webenlance.com">Hair Masking/Clipping</a></li>
-  <li><a href="http://webenlance.com">Image Cropping</a></li>
+  <li><a href="">Image Rectoucing</a></li>
+  <li><a href="">Clipping Path</a></li>
+  <li><a href="">Hollow Man Montage</a></li>
+  <li><a href="">Ebay & Amazon</a></li>
+  <li><a href="">Hair Masking/Clipping</a></li>
+  <li><a href="">Image Cropping</a></li>
   </ul>
   <!--footer_ul_amrc ends here-->
   </div>
@@ -177,12 +174,12 @@
   <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
   <!--headin5_amrc-->
   <ul class="footer_ul_amrc">
-  <li><a href="http://webenlance.com">Remove Background</a></li>
-  <li><a href="http://webenlance.com">Shadows & Mirror Reflection</a></li>
-  <li><a href="http://webenlance.com">Logo Design</a></li>
-  <li><a href="http://webenlance.com">Vectorization</a></li>
-  <li><a href="http://webenlance.com">Hair Masking/Clipping</a></li>
-  <li><a href="http://webenlance.com">Image Cropping</a></li>
+  <li><a href="">Remove Background</a></li>
+  <li><a href="">Shadows & Mirror Reflection</a></li>
+  <li><a href="">Logo Design</a></li>
+  <li><a href="">Vectorization</a></li>
+  <li><a href="">Hair Masking/Clipping</a></li>
+  <li><a href="">Image Cropping</a></li>
   </ul>
   <!--footer_ul_amrc ends here-->
   </div>
@@ -200,21 +197,20 @@
   
   <div class="container">
   <ul class="foote_bottom_ul_amrc">
-  <li><a href="http://webenlance.com">Home</a></li>
-  <li><a href="http://webenlance.com">About</a></li>
-  <li><a href="http://webenlance.com">Services</a></li>
-  <li><a href="http://webenlance.com">Pricing</a></li>
-  <li><a href="http://webenlance.com">Blog</a></li>
-  <li><a href="http://webenlance.com">Contact</a></li>
+  <li><a href="index.php">Acceuil</a></li>
+  <li><a href="#alaune">Produits à la une</a></li>
+  <li><a href="#alphaServices">Services</a></li>
+  <li><a href="">A propos</a></li>
+  <li><a href="">Contact</a></li>
   </ul>
   <!--foote_bottom_ul_amrc ends here-->
-  <p class="text-center">Copyright @2017 | Designed With by <a href="#">Your Company Name</a></p>
+  <p class="text-center">Copyright @2019 | Designed With by <a href="https://www.woujoud.net/">el woujoud</a></p>
   
   <ul class="social_footer_ul">
-  <li><a href="http://webenlance.com"><i class="fab fa-facebook-f"></i></a></li>
-  <li><a href="http://webenlance.com"><i class="fab fa-twitter"></i></a></li>
-  <li><a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a></li>
-  <li><a href="http://webenlance.com"><i class="fab fa-instagram"></i></a></li>
+  <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+  <li><a href=""><i class="fab fa-twitter"></i></a></li>
+  <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+  <li><a href=""><i class="fab fa-instagram"></i></a></li>
   </ul>
   <!--social_footer_ul ends here-->
   </div>
@@ -270,6 +266,18 @@
 
 
     </div>
-
+ <!-- rechargement du compteur de produit chaque 4 seconde  -->
+  <script>
+$(document).ready(function () {
+    $("#qtepanier").load("qtepanier.php");
+     var refreshId = setInterval(function () {
+        $("#qtepanier").load("qtepanier.php");
+     }, 4000);
+    $.ajaxSetup({
+        cache: false
+    });
+});
+</script>
+ <!-- fin  -->
   </body>
 </html>
