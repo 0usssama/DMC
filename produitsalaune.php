@@ -64,6 +64,7 @@ foreach  ($bdd->query($sql) as $row) {
                         <h5 class="mt-4"><?php echo $row['prix_detail']; ?></h5>
                       </div>
   
+                      
                       <input type="number" class="qte" name="qte" value="1" id="qte<?php echo $row['id_prod']; ?>">
                       <button onclick="ajoutpannier('qte<?php echo $row['id_prod']; ?>');" class="btn btn-danger btn-sm mt-3">
                         <i class="fas fa-shopping-cart"></i> Ajouter

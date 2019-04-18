@@ -104,8 +104,10 @@ foreach  ($bdd->query($sql) as $row) {
    
    if (strpos($_SESSION['listeIdProduit'], $idverif) === FALSE) {
    $_SESSION['listeIdProduit'] = $_SESSION['listeIdProduit'].$idproduit.'/'; // on rajoute le produit dans la liste des produits
+
    $_SESSION['qteProduit'.$idproduit] = $quantite;
    $_SESSION['prixProduitTotal'.$idproduit] = $prix *  $_SESSION['qteProduit'.$idproduit];
+  
    // si le produit n'existe pas, on créer la variable de la qte du produit plus le produit dans la liste
    } else {
    $_SESSION['qteProduit'.$idproduit] = $_SESSION['qteProduit'.$idproduit] + $quantite;

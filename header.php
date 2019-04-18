@@ -35,9 +35,17 @@
                                                
                                                      
                                               </li>
-                                              <li class="nav-item ml-3" id="qtepanier">
-                                                <?php include('qtepanier.php');?>
-                                              </li>
+                                              <?php 
+                                                if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){
+                                                  echo ' <li class="nav-item ml-3" id="qtepanier">';
+                                                  require_once('qtepanier.php');
+
+                                                  echo ' </li>';
+                                                }
+                                              ?>
+                                             
+                                               
+                                             
                                               <li class="nav-item ml-3">
                                                     <?php
                                                              if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){

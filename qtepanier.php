@@ -1,6 +1,9 @@
-<?php session_start(); ?>
+<?php 
+
+// ça existe deja dans functionSite, il envoie une erreur :) 
+session_start(); ?>
  
-<a  class="btn btn-block btn-danger" href="pannier.php">
+<a  class="btn btn-block btn-danger" href="devis.php">
 <i class="fa fa-shopping-cart"></i>
 <span class="badge badge-light ml-2"><?php if(isset($_SESSION['qteTotal'])){echo $_SESSION['qteTotal'];}  else {echo 0;} ?> U</span>
 <span class="badge badge-light ml-2"><?php if(isset($_SESSION['prixTotal'])){echo $_SESSION['prixTotal'];}  else {echo 0;} ?> DA</span>

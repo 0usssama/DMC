@@ -493,10 +493,15 @@ color: black !important;
       <div class="container">
         <?php 
           $id_famille = strip_tags($_GET['id']) ?? '';
+          $sql = 'SELECT titre_famille FROM famille WHERE id_famille = '. "'". $id_famille ."'";
+          if($bdd->query($sql)){
+            foreach ($bdd->query($sql) as $famille) {
         
         ?>
-          <h1 class="text-light pt-4 pb-4">Famille > Marque</h1>
-   
+          <h1 class="text-light pt-4 pb-4"><?php echo $famille['titre_famille']; ?></h1>
+ 
+            <?php };} ?>
+
           <div class="row d-flex justify-content-center">
 
           <?php 

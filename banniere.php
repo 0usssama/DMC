@@ -22,7 +22,7 @@
                             <div class="carousel-item " style="background-image: url('images/slider/4.jpg')">
                                 <div class="carousel-caption text-left ">
 
-                                    <h2 class="display-4 font-weight-bold">CONSOMMABLES</h2>
+                                    <h2 class="display-4 font-weight-bold"> CONSOMMABLES </h2>
                                     <p class="lead">
                                     Vente de consommable informatique, bobine de caisse, cartouche d'encre, toner, rubans.
                                     </p>
@@ -32,7 +32,7 @@
                             <div class="carousel-item " style="background-image: url('images/slider/7.jpg')">
                                 <div class="carousel-caption text-left ">
 
-                                    <h2 class="display-4 font-weight-bold">SCANNER</h2>
+                                    <h2 class="display-4 font-weight-bold"> SCANNER </h2>
                                     <p class="lead">
                                     Vente de consommable informatique, bobine de caisse, cartouche d'encre, toner, rubans.
                                     </p>
@@ -42,7 +42,7 @@
                             <div class="carousel-item " style="background-image: url('images/slider/5.jpg')">
                                 <div class="carousel-caption text-left ">
 
-                                    <h2 class="display-4 font-weight-bold">BANCAIRE</h2>
+                                    <h2 class="display-4 font-weight-bold"> BANCAIRE </h2>
                                     <p class="lead">
                                     DIGITALISATION ET SOLUTIONS DE PAIEMENTS MULTICANALES
                                     </p>
@@ -54,7 +54,7 @@
                             <div class="carousel-item " style="background-image: url('images/slider/8.jpg')">
                                 <div class="carousel-caption text-left ">
 
-                                    <h2 class="display-4 font-weight-bold">Mobilité</h2>
+                                    <h2 class="display-4 font-weight-bold"> Mobilité </h2>
                                     <p class="lead">
                                     IMMOBILISATIONS , INVENTAIRES PATRIMOINE , INVENTAIRES STOCK , WMS
                                     </p>
