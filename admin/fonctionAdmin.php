@@ -712,6 +712,20 @@ echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
   }
 }
 
+function suppCommande(){
+     global $bdd;
+     // need to sanitize
+  $id_client = $_GET['id_client'] ?? NULL ;
+  $sql = "DELETE FROM commander WHERE id_client= " . $id_client;
+  $resultat=  $bdd->query($sql);
+
+  if($resultat){
+     header('location: commandes.php');
+ }else{
+echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
+
+ }
+}
 
 
 function produitAAaAne(){
@@ -783,6 +797,8 @@ if(isset($_POST['action'])){
   if($_POST['action'] == 'suppClient'){suppClient();} 
   if($_POST['action'] == 'ajoutPointdevente'){ajoutPointdevente();} 
   if($_POST['action'] == 'suppPointdevente'){suppPointdevente();} 
+  if($_POST['action'] == 'suppCommande'){suppCommande();} 
+
 
 
  

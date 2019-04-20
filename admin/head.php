@@ -62,9 +62,9 @@
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+  <nav class="navbar navbar-expand navbar-dark   sticky-top" style="background-color: #dc3545;">
 
-    <a class="navbar-brand mr-1" href="index.html">Espace admin</a>
+    <a class="navbar-brand mr-1" href="client.php">DMC <small>Espace admin</small></a>
 
    
 
@@ -74,7 +74,7 @@
     </form>
 
     <!-- Navbar -->
-    <ul class="navbar-nav ml-auto ml-md-0">
+    <ul class="navbar-nav ml-auto ml-md-0" style="color: white">
       
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -94,74 +94,69 @@
 <ul class="sidebar navbar-nav">
 <li class="nav-item">
     <a class="nav-link" href="admin.php">
-      <i class="fas fa-fw fa-2x fa-user"></i>
+      <i class="fas fa-fw fa-1x mr-2 fa-user"></i>
       <span>Admins</span>
     </a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="client.php">
-      <i class="fas fa-fw fa-2x fa-users"></i>
+      <i class="fas fa-fw fa-1x mr-2 fa-users"></i>
       <span>Clients</span>
     </a>
   </li>
 
   <li class="nav-item">
     <a class="nav-link" href="produit.php">
-      <i class="fas fa-fw fa-2x fa-cubes"></i>
+      <i class="fas fa-fw fa-1x mr-2 fa-cubes"></i>
       <span>Produits</span></a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="famille.php">
-      <i class="fas fa-fw fa-2x fa-layer-group"></i>
+      <i class="fas fa-fw fa-1x mr-2 fa-layer-group"></i>
       <span>Famille</span></a>
   </li>
 
   <li class="nav-item">
       <a class="nav-link" href="marque.php">
-        <i class="fas fa-fw fa-2x fa-building"></i>
+        <i class="fas fa-fw fa-1x mr-2 fa-building"></i>
         <span>Marque</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="commandes.php">
-          <i class="fas fa-fw fa-2x fa-cart-arrow-down"></i>
+          <i class="fas fa-fw fa-1x mr-2 fa-cart-arrow-down"></i>
           <span>Commandes</span></a>
       </li>
 
       <li class="nav-item">
           <a class="nav-link" href="point_de_ventes.php">
-            <i class="fas fa-fw fa-2x fa-map-marker"></i>
+            <i class="fas fa-fw fa-1x mr-2 fa-map-marker"></i>
             <span>Points de ventes</span></a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link" href="images.php">
-              <i class="fas fa-fw fa-2x fa-th"></i>
+              <i class="fas fa-fw fa-1x mr-2 fa-th"></i>
               <span>Images</span></a>
           </li>
 
 
-          <li class="nav-item">
-              <a class="nav-link" href="publications.php">
-                <i class="fas fa-fw fa-2x fa-newspaper"></i>
-                <span>Publications</span></a>
-            </li>
 
            
               <li class="nav-item">
                   <a class="nav-link" href="promotions.php">
-                    <i class="fas fa-fw fa-2x fa-percentage"></i>
+                    <i class="fas fa-fw fa-1x mr-2 fa-percentage"></i>
                     <span>Promotions</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="votes.php">
-                      <i class="fas fa-fw fa-2x fa-star"></i>
+                      <i class="fas fa-fw fa-1x mr-2 fa-star"></i>
                       <span>Votes</span></a>
                   </li>
 
                   <li class="nav-item">
                       <a class="nav-link" href="factures.php">
-                        <i class="fas fa-fw fa-2x fa-file-alt"></i>
+                        <i class="fas fa-fw fa-1x mr-2 fa-file-alt"></i>
                         <span>Facture</span></a>
                     </li>
 </ul>

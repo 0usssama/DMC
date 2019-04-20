@@ -204,7 +204,7 @@ color: black !important;
 }
 .qte{
   width: 40px;
-    height: 55px;
+   /* height: 55px;*/
     margin-top: 16px;
     color: #fff;
     border: none;
@@ -213,6 +213,16 @@ color: black !important;
     border-radius: 3px;
     float: right;
   }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
 
   </style>
  

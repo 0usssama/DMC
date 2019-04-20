@@ -1,5 +1,45 @@
 
 <?php include 'includes/config.php'; ?>
+
+<?php 
+    session_start();
+
+
+    if(isset($_POST['valider'])){
+        $produitDevis = $_SESSION['produitDevis'];
+        var_dump($produitDevis);
+        if(!empty($produitDevis) && isset($produitDevis)){
+            $date = date('Y-m-d');
+           // var_dump($produitDevis);
+
+           foreach ($produitDevis as $id_produit => $quantite) {
+            $sql = '';
+            $sql = "INSERT INTO commander (date_comd, etat_comd,qte_p_comd, id_client, id_prod) VALUES ";
+
+            $sql .= "(";
+            $sql .= "'" . $date ."'," ;
+            $sql .= "'en cours'," ;
+            $sql .= "'" . $quantite ."'," ;
+            $sql .= "'" .  $_SESSION['id_client'] ."'," ;
+            $sql .= "'" . $id_produit ."'" ;
+            $sql .= ");"; 
+           // echo $sql . "<br>";
+
+          $resultat =  $pdo->query($sql);
+            if($resultat){
+               echo "it works" . "<br>";
+               $_SESSION['listeIdProduit'] = '';
+               unset($_SESSION['listeIdProduit']);
+               header('location: index.php');
+            }else{
+                echo "neh";
+            }
+
+
+           }
+        }
+    }
+?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -12,10 +52,10 @@
 </head>
 <body>
     
-
+<!-- 
 <section class="jumbotron bg-danger text-light text-center">
         <h1>Devis</h1>
-</section>
+</section> -->
 
 <div class="container mb-4">
   
@@ -35,7 +75,6 @@
                     </thead>
                     <tbody>
                     <?php 
-    session_start();
     $_SESSION['listeIdProduit'] = $_SESSION['listeIdProduit'] ?? '';
     $listeProduitPannier = explode('/', $_SESSION['listeIdProduit']);
     if(isset($_GET['action']) && $_GET['action']=='supprimer'){
@@ -65,6 +104,8 @@
 
 //echo 'count : '.$y;
 $prixtotaleDevis = 0;
+$qtetotaleDevis = 0;
+$produitDevis = [];
 
     for ($i=1; $i < $y-1; $i++)  
      {
@@ -110,7 +151,10 @@ $prixtotaleDevis = 0;
                 <?php };};?>
                             <td><?php echo $row['nom_prod']; ?></td>
                             <td>Disponible</td>
-                            <td><input class="form-control" type="text" value="<?php echo $_SESSION[$qteProduit] ; ?>" /></td>
+                            <td><input class="form-control" type="text" value="<?php echo $_SESSION[$qteProduit] ;
+                            $qtetotaleDevis +=$_SESSION[$qteProduit];
+                            $produitDevis[$idp] =   $_SESSION[$qteProduit];
+                            ?>" disabled/></td>
                             <td class="text-right"><?php echo $_SESSION[$prixProduit] ; ?></td>
                             <td class="text-right">
                                 <form method="post" action="devis.php?action=supprimer&id_prod=<?php echo $idp; ?>">
@@ -126,15 +170,25 @@ $prixtotaleDevis = 0;
                      //echo $prixtotaleDevis . '<br>';
                    
                     }; };};
-                    
+                   $_SESSION['produitDevis']= $produitDevis;
+                  
                     ?>  
                       
                         <tr>
                             <td></td>
+                            <td><strong>Total quantité:</strong></td>
+                            <td>
+                            <strong><?php   
+                            if(isset( $qtetotaleDevis)){
+                                echo  $qtetotaleDevis . ' produits';
+                            }else{
+                                echo '0 produits';
+                            }
+                            ?></strong>
+
+                            </td>
                             <td></td>
-                            <td></td>
-                            <td></td>
-                            <td><strong>Total</strong></td>
+                            <td><strong>Total prix: </strong></td>
                             <td class="text-right"><strong><?php   
                             if(isset($prixtotaleDevis)){
                                 echo $prixtotaleDevis . ' DA';
@@ -145,21 +199,24 @@ $prixtotaleDevis = 0;
                         </tr>
                     </tbody>
                 </table>
+
+              
             </div>
         </div>
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                    <a href ="index.php" class="btn btn-block btn-light">Continuer le shopping</a>
+                    <a href ="index.php" class="btn btn-lg btn-block btn-warning text-uppercase">Continuer le shopping</a>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                    <button class="btn btn-lg btn-block btn-success text-uppercase">Valider</button>
+                <form method="post" action="">
+                    <input type="submit" value="valider" name="valider" class="btn btn-lg btn-block btn-success text-uppercase">
+                        </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 </body>
 </html>

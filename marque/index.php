@@ -504,13 +504,13 @@ color: black !important;
    <div id="content">
       <div class="container">
         <?php 
-          $id_famille = strip_tags($_GET['id']) ?? '';
-          $sql = 'SELECT titre_famille FROM famille WHERE id_famille = '. "'". $id_famille ."'";
+          $id_marque = strip_tags($_GET['id']) ?? '';
+          $sql = 'SELECT titre_marque FROM marque WHERE id_marque = '. "'". $id_marque ."'";
           if($bdd->query($sql)){
-            foreach ($bdd->query($sql) as $famille) {
+            foreach ($bdd->query($sql) as $marque) {
         
         ?>
-          <h1 class="text-light pt-4 pb-4"><?php echo $famille['titre_famille']; ?></h1>
+          <h1 class="text-light pt-4 pb-4"><?php echo $marque['titre_marque']; ?></h1>
  
             <?php };} ?>
 
@@ -521,13 +521,13 @@ color: black !important;
             FROM produit
             JOIN image
             ON image.id_prod = produit.id_prod
-            JOIN famille
-            ON produit.id_famille = famille.id_famille
+            JOIN marque
+            ON produit.id_marque = marque.id_marque
             
             
             
-            WHERE produit.id_famille =";
-            $sql .= "'" . $id_famille . "'";
+            WHERE produit.id_marque =";
+            $sql .= "'" . $id_marque . "'";
 
            
             if($bdd->query($sql)){

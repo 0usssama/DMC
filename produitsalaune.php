@@ -53,7 +53,13 @@ foreach  ($bdd->query($sql) as $row) {
               <div class="card-body ml-2 mr-2">
               <h5 class="card-title"> 
                     <?php echo $row['nom_prod']; ?></h5>
-              <i class="fas fa-star"></i>  <i class="fas fa-star"></i>  <i class="fas fa-star-half-alt"></i>
+                   
+                    <button class="btn btn-danger  btn-sm mt-1"  data-toggle="modal" data-target="#exampleModal<?php echo $id_prod ; ?>"> 
+                    <span class="text-light">
+                    <span class="fa fa-star" ></span>
+                   
+                    </span>
+                    </button>
                </div>
               
                     <div
@@ -61,17 +67,41 @@ foreach  ($bdd->query($sql) as $row) {
                     >
 
                       <div class="price text-success">
-                        <h5 class="mt-4"><?php echo $row['prix_detail']; ?></h5>
+                        <h5 class="mt-4"><?php echo $row['prix_detail'] . ' DA'; ?></h5>
                       </div>
   
-                      
-                      <input type="number" class="qte" name="qte" value="1" id="qte<?php echo $row['id_prod']; ?>">
+                     
+                      <input type="number" class="qte" name="qte" min="0" value="1" id="qte<?php echo $row['id_prod']; ?>"> 
                       <button onclick="ajoutpannier('qte<?php echo $row['id_prod']; ?>');" class="btn btn-danger btn-sm mt-3">
                         <i class="fas fa-shopping-cart"></i> Ajouter
                       </button>
                   </div>
                 </div>   
            </div>
+
+
+
+           <!-- Modal -->
+<div class="modal fade" id="exampleModal<?php echo $id_prod ; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">evaluer le produit: 
+    <span class="text-warning"> <?php echo $row['nom_prod']; ?></span> 
+         </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="" method="post">
+      
+      </form>
+      </div>
+   
+    </div>
+  </div>
+</div>
  
 
 <?php } //foreach
