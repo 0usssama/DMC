@@ -3,7 +3,7 @@
         <div class="row align-items-center ">
           <div class="col-lg-3 col-md-12 col-sm-12">
               <nav class="navbar ">
-                  <a class="navbar-brand" href="#">
+                  <a class="navbar-brand" href="index.php">
                     <img src="images/marque/m5.png"  height="60" alt="">
                   </a>
                 </nav>
@@ -19,15 +19,15 @@
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                           <ul class="navbar-nav ">
                             <li class="nav-item active">
-                              <a class="nav-link" href="#">Acceuil <span class="sr-only">(current)</span></a>
+                              <a class="nav-link" href="index.php">Acceuil <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" href="#">A propos</a>
+                              <a class="nav-link" href="apropos.php">A propos</a>
                             </li>
                            
                           
                                   <li class="nav-item">
-                                        <a class="nav-link" href="#">Contact</a>
+                                        <a class="nav-link" href="contact.php">Contact</a>
                                       </li>
 
                                     

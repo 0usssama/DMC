@@ -7,6 +7,7 @@
 
     if(isset($_POST['valider'])){
         $produitDevis = $_SESSION['produitDevis'];
+        //1 [id prduit=> qnt]
         var_dump($produitDevis);
         if(!empty($produitDevis) && isset($produitDevis)){
             $date = date('Y-m-d');
@@ -116,13 +117,13 @@ $produitDevis = [];
     $prixProduit = 'prixProduitTotal'.$idp;  
    // echo 'prix = ' . . '<br>';
 
-    $_SESSION['prixTotal'] = $_SESSION['prixTotal'] + $_SESSION[$prixProduit];
+   // $_SESSION['prixTotal'] = $_SESSION['prixTotal'] + $_SESSION[$prixProduit];
     //echo 'prix totale= ' . $_SESSION['prixTotal']. '<br>';
  
     $qteProduit = 'qteProduit'.$idp ;
     //echo 'quantité = ' . . '<br>';
 
-    $_SESSION['qteTotal'] = $_SESSION['qteTotal'] + $_SESSION[$qteProduit];
+    //$_SESSION['qteTotal'] = $_SESSION['qteTotal'] + $_SESSION[$qteProduit];
  
     $sql = "SELECT *
         FROM produit
@@ -211,7 +212,7 @@ $produitDevis = [];
                 <div class="col-sm-12 col-md-6 text-right">
                 <form method="post" action="">
                     <input type="submit" value="valider" name="valider" class="btn btn-lg btn-block btn-success text-uppercase">
-                        </form>
+                  </form>
                 </div>
             </div>
         </div>

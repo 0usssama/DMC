@@ -5,8 +5,8 @@
 <?php include('banniere.php');?>  
 <?php include('produitsalaune.php');?>  
 <?php include('services.php');?>  
-<?php include('footer.php');?>  
 
+<?php include('footer.php');?>  
 
 
       
