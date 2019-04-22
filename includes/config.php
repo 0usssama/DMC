@@ -20,5 +20,6 @@ $options = array(
 
 //Connect to MySQL and instantiate our PDO object.
 $pdo = new PDO("mysql:host=$host;dbname=$database", $user, $pass, $options);
+$bdd = new PDO("mysql:host=$host;dbname=$database", $user, $pass, $options);
 
 ?>

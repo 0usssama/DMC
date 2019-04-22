@@ -615,56 +615,45 @@ function ajoutermarque(){
   function ajoutPointdevente(){
      global $bdd;  
 
-     $sql= "INSERT INTO point_de_vente(
-          `titre_point_vente`, 
-          `presentation_point_vente`,
-           `type_point_vente`, 
-           `info_point_vente`,
-            `etat_point_vente`,
-            `id_admin`
-            )
-     VALUES 
-     (:titre_point_vente,
-     :presentation_point_vente,
-     :type_point_vente,
-     :info_point_vente,
-     :etat_point_vente,
-     :id_admin);
-     ";
-
-//Prepare our statement.
-$statement = $bdd->prepare($sql);
 
 
-//validation mazal makhssossa aprés ndirha 
-$titre_point_vente = $_POST['titre_point_vente'];
-$presentation_point_vente = $_POST['presentation_point_vente'];
-$type_point_vente = $_POST['type_point_vente'];
-$info_point_vente = $_POST['info_point_vente'];
-$etat_point_vente = $_POST['etat_point_vente'];
-$id_admin = 1;
+$titre_point_vente = strip_tags($_POST['titre_point_vente']);
+$presentation_point_vente = strip_tags($_POST['presentation_point_vente']);
+$type_point_vente = strip_tags($_POST['type_point_vente']);
+$info_point_vente = strip_tags($_POST['info_point_vente']);
+$etat_point_vente = strip_tags($_POST['etat_point_vente']);
+$id_admin = 2;
+ 
+ 
 
-//Bind our values to our parameters 
-$statement->bindValue(':titre_point_vente', $titre_point_vente);
-$statement->bindValue(':presentation_point_vente', $presentation_point_vente);
-$statement->bindValue(':type_point_vente', $type_point_vente);
-$statement->bindValue(':etat_point_vente', $etat_point_vente);
-$statement->bindValue(':info_point_vente', $info_point_vente);
-$statement->bindValue(':id_admin', $id_admin);
+  $sql = "INSERT INTO point_de_vente( 
+            titre_point_vente,
+            presentation_point_vente,
+            type_point_vente,
+            info_point_vente,
+            etat_point_vente,
+            id_admin) VALUES (
+            :titre_point_vente,
+            :presentation_point_vente,
+            :type_point_vente,
+            :info_point_vente,
+            :etat_point_vente,
+            :id_admin)";
+                                          
+$stmt = $bdd->prepare($sql);
+                                              
+$stmt->bindParam(':titre_point_vente', $titre_point_vente, PDO::PARAM_STR);
+$stmt->bindParam(':presentation_point_vente', $presentation_point_vente, PDO::PARAM_STR);
+$stmt->bindParam(':type_point_vente', $type_point_vente, PDO::PARAM_STR);
+$stmt->bindParam(':info_point_vente', $info_point_vente, PDO::PARAM_STR);
+$stmt->bindParam(':etat_point_vente', $etat_point_vente, PDO::PARAM_STR);
+$stmt->bindParam(':id_admin', $id_admin, PDO::PARAM_INT);   
+                                      
+$stmt->execute(); 
 
 
-//Execute the statement and insert our values.
-$inserted = $statement->execute();
 
-
-//verifier si on a des résultats (true or false)
-if($inserted){
-echo ' Youpiiiiiii<br>';
-header('location: ../point_de_ventes.php');
-}else{
-echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
-}
-
+ 
 
 
   }

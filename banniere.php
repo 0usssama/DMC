@@ -29,7 +29,7 @@
                                 </div>
                             </div>
 
-                            <div class="carousel-item " style="background-image: url('images/slider/7.jpg')">
+                            <div class="carousel-item " style="background-image: url('images/slider/5.jpg')">
                                 <div class="carousel-caption text-left ">
 
                                     <h2 class="display-4 font-weight-bold"> SCANNER </h2>
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
 
-                            <div class="carousel-item " style="background-image: url('images/slider/5.jpg')">
+                            <div class="carousel-item " style="background-image: url('images/slider/2.jpg')">
                                 <div class="carousel-caption text-left ">
 
                                     <h2 class="display-4 font-weight-bold"> BANCAIRE </h2>
@@ -51,10 +51,10 @@
 
                           
 
-                            <div class="carousel-item " style="background-image: url('images/slider/8.jpg')">
+                            <div class="carousel-item " style="background-image: url('images/slider/7.jpg')">
                                 <div class="carousel-caption text-left ">
 
-                                    <h2 class="display-4 font-weight-bold"> Mobilité </h2>
+                                    <h2 class="display-4 font-weight-bold"> MOBILITE </h2>
                                     <p class="lead">
                                     IMMOBILISATIONS , INVENTAIRES PATRIMOINE , INVENTAIRES STOCK , WMS
                                     </p>

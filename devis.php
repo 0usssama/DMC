@@ -1,9 +1,8 @@
 
 <?php include 'includes/config.php'; ?>
-
-<?php 
-    session_start();
-
+<?php include 'fonctionSite.php'; ?>
+ <?php 
+ 
 
     if(isset($_POST['valider'])){
         $produitDevis = $_SESSION['produitDevis'];
@@ -70,7 +69,8 @@
                             <th scope="col">Produit</th>
                             <th scope="col">Disponibilité</th>
                             <th scope="col" class="text-center">Quantité</th>
-                            <th scope="col" class="text-right">Prix</th>
+                            <th scope="col" class="text-right">Prix U</th>
+                            <th scope="col" class="text-right">Prix T</th>
                             <th> </th>
                         </tr>
                     </thead>
@@ -152,11 +152,34 @@ $produitDevis = [];
                 <?php };};?>
                             <td><?php echo $row['nom_prod']; ?></td>
                             <td>Disponible</td>
-                            <td><input class="form-control" type="text" value="<?php echo $_SESSION[$qteProduit] ;
-                            $qtetotaleDevis +=$_SESSION[$qteProduit];
-                            $produitDevis[$idp] =   $_SESSION[$qteProduit];
-                            ?>" disabled/></td>
-                            <td class="text-right"><?php echo $_SESSION[$prixProduit] ; ?></td>
+                            <td>
+
+                            <input onchange="calcule('<?php echo $row['id_prod']; ?>')"  
+                                   id="qte<?php echo $row['id_prod']; ?>" 
+                                   name="qte<?php echo $row['id_prod']; ?>" 
+                                   class="form-control" type="number" style="width: 65px;"
+                                   value="<?php echo $_SESSION[$qteProduit] ; $qtetotaleDevis = $qtetotaleDevis + $_SESSION[$qteProduit]; ?>"
+
+                            />
+                            </td>
+                           
+                            <td class="text-right">
+                              <input id="prixunitaire<?php echo $row['id_prod']; ?>" 
+                                     name="prixunitaire<?php echo $row['id_prod']; ?>" 
+                                     class="form-control" type="text" style="width: 120px" 
+                                     value="<?php echo $_SESSION[$prixProduit] ; ?>"
+                            />
+                            </td>
+
+                            <td class="text-right">
+                              <input id="prixtotal<?php echo $row['id_prod']; ?>" 
+                                     name="prixtotal<?php echo $row['id_prod']; ?>" 
+                                     class="form-control" type="text" style="width: 120px" 
+                                     value="<?php echo $_SESSION[$qteProduit] * $_SESSION[$prixProduit] ; ?>"
+                            />
+                            </td>
+
+
                             <td class="text-right">
                                 <form method="post" action="devis.php?action=supprimer&id_prod=<?php echo $idp; ?>">
 
@@ -179,25 +202,58 @@ $produitDevis = [];
                             <td></td>
                             <td><strong>Total quantité:</strong></td>
                             <td>
-                            <strong><?php   
+                             totaleproduit
+                            
+
+ 
+                            </td>
+                            <td><input id="totaleproduit" 
+                                     name="totaleproduit" 
+                                     class="form-control" type="text" style="width: 65px" 
+                                     value="<?php   
                             if(isset( $qtetotaleDevis)){
-                                echo  $qtetotaleDevis . ' produits';
+                                echo  $qtetotaleDevis;
                             }else{
                                 echo '0 produits';
                             }
-                            ?></strong>
-
-                            </td>
+                            ?>"
+                            /></td>
                             <td></td>
                             <td><strong>Total prix: </strong></td>
-                            <td class="text-right"><strong><?php   
+                            <td class="text-right">
+                            <input id="totalepannier" 
+                                     name="totalepannier" 
+                                     class="form-control" type="text" style="width: 120px" 
+                                     value="<?php   
                             if(isset($prixtotaleDevis)){
                                 echo $prixtotaleDevis . ' DA';
                             }else{
                                 echo '0 DA';
                             }
-                            ?></strong></td>
+                            ?>"
+                            />
+                               </td>
                         </tr>
+                        <tr><td>Point de vente</td>
+                        
+                        <td><select class="browser-default custom-select">
+
+  <?php $sql = "SELECT * FROM point_de_vente";
+      if($bdd->query($sql)){
+      foreach  ($bdd->query($sql) as $point_de_vente) {   ?>
+         <option value="<?php echo $point_de_vente[' id_point_vente']; ?>">
+          <?php echo $point_de_vente['titre_point_vente']; ?>
+         </option>
+  <?php } }; ?> 
+
+
+</select></td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+<td> </td>
+</tr>
                     </tbody>
                 </table>
 
@@ -210,14 +266,56 @@ $produitDevis = [];
                     <a href ="index.php" class="btn btn-lg btn-block btn-warning text-uppercase">Continuer le shopping</a>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                <form method="post" action="">
+                <form method="post" action="devis.php">
+                    <input type="hidden" name="action" value="validerDevis">
                     <input type="submit" value="valider" name="valider" class="btn btn-lg btn-block btn-success text-uppercase">
-                  </form>
+                </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+function calcule (id){
+
+  
+  var idchanpqte = 'qte'+id;
+
+      var quantite  = document.getElementById(idchanpqte).value; 
+      var envoi     = "fonctionSite.php?plusqteid="+idchanpqte+"&quantite="+quantite;
+      $.get(envoi);
+ 
+  //alert(idchanpqte);
+  var idchanpprixunitaire = 'prixunitaire'+id;
+  var idchanpprixtotal = 'prixtotal'+id;
+  
+  var qte = document.getElementById(idchanpqte).value; 
+  var prixunitaire = document.getElementById(idchanpprixunitaire).value; 
+  document.getElementById(idchanpprixtotal).value = qte*prixunitaire;
+  
+  var totalepannier = 0;
+  var totaleproduit = 0;
+
+   <?php //realisation d'un boucle pour generer des ligne en javascripte et additioner les elements du pannier de maniere manuelle, ?>
+
+   <?php $listeProduitPannier = explode('/', $_SESSION['listeIdProduit']);?>
+   <?php $y = count($listeProduitPannier);?>
+   <?php for ($i=1; $i < $y-1; $i++){?>  
+    
+   <?php $idp = $listeProduitPannier[$i]; ?>
+
+   idchanpprixtotal = 'prixtotal'+<?php echo $idp; ?>; 
+   idchanpqte = 'qte'+<?php echo $idp; ?>;
+
+   totalepannier = parseFloat(totalepannier) + parseFloat(document.getElementById(idchanpprixtotal).value);
+   totaleproduit = parseFloat(totaleproduit) + parseFloat(document.getElementById(idchanpqte).value);
+   <?php } ?>
+   document.getElementById('totalepannier').value = parseFloat(totalepannier);
+   document.getElementById('totaleproduit').value = parseFloat(totaleproduit);
+
+}  
+</script>
 
 </body>
 </html>
