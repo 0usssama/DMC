@@ -22,7 +22,11 @@
         foreach  ($bdd->query($sql) as $marque) { 
       ?>
                       
-                            <div><img src="<?php echo $marque['image_marque']; ?>" alt="" class="img-responsive"></div>
+                            <div> 
+                              <a href="marque/index.php?id=<?php echo $marque['id_marque']; ?>">
+                              <img src="<?php echo $marque['image_marque']; ?>" alt="" class="img-responsive">
+                              </a>
+                            </div>
                           
             
                         

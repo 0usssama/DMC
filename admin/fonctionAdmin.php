@@ -649,9 +649,17 @@ $stmt->bindParam(':info_point_vente', $info_point_vente, PDO::PARAM_STR);
 $stmt->bindParam(':etat_point_vente', $etat_point_vente, PDO::PARAM_STR);
 $stmt->bindParam(':id_admin', $id_admin, PDO::PARAM_INT);   
                                       
-$stmt->execute(); 
+ 
 
-
+$inserted = $stmt->execute();
+          
+          
+//verifier si on a des résultats (true or false)
+if($inserted){
+header('location: ../point_de_ventes.php');
+}else{
+echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
+}
 
  
 

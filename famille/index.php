@@ -539,7 +539,7 @@ color: black !important;
           ?>
              <div class="col-md-3 mb-4 d-flex justify-content-center">
                 <div class="card" style="width:15rem;">
-                  <a href="">
+                  <a href="../produit/index.php?id=<?php echo $produit['id_prod']; ?>">
                     <img class="card-img-top img-responsive" src="../<?php echo $produit['url_imag']; ?>" alt="Card image top">
    
                   </a>                 

@@ -47,7 +47,7 @@ foreach  ($bdd->query($sql) as $row) {
         
            <div class="col-md-3 mb-4 d-flex justify-content-center">
               <div class="card" style="width:15rem;">
-                <a href="">
+                <a href="produit/index.php?id=<?php echo $id_prod; ?>">
                   <img class="card-img-top img-responsive" src="<?php echo $imageprincipale; ?>" alt="Card image top">
                 </a>                 
               <div class="card-body ml-2 mr-2">

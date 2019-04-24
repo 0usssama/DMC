@@ -49,7 +49,7 @@
                                               <li class="nav-item ml-3">
                                                     <?php
                                                              if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){
-                                                              echo '<a class="btn btn-block btn-danger" href="login.php">
+                                                              echo '<a class="btn btn-block btn-danger" href="client/commandes.php">
                                                               <i class="fa fa-1x fa-user mr-2"></i>'.  $_SESSION['nom_client'] .' ' . $_SESSION['prenom_client'] .'</a>'. ' <a class="btn btn-block btn-danger" href="logout.php">
                                                               <i class="fa fa-1x  sign-out-alt mr-2"></i>Se déconnecter
                                                             </a>';

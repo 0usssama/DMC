@@ -48,7 +48,7 @@
                  
                 </tr>
             </thead>
-<?php 
+<?php /* 
 $sql = "SELECT  client.id_client, client.nom_client, client.prenom_client, commander.date_comd, 
 commander.etat_comd, commander.qte_p_comd, commander.id_prod, commander.id_client
 FROM commander
@@ -56,6 +56,22 @@ JOIN client
 ON commander.id_client = client.id_client
 
 ";
+
+{
+
+"listeid":"/47/49/", 
+liste des id des produit
+on transforme la liste en tableau avec la fonction explode
+on cré une boucle for, allant de 1 ver la taille du tableau  count() soit equivalent de length en pascal
+aussi j ai les id des produits
+
+ "titreProduit47":"imprimante ticket", "qteProduit47":"4", "prixProduit47":"1500", "totalProduit47":"6000", "titreProduit49":"tablette samsung", "qteProduit49":"6", "prixProduit49":"2150", "totalProduit49":"12900", "qteGeneral":"10", "totalGeneral":"18900", "idClient":"10", "nom":"hafsi", "prenom":"karim", "email":"", "adresse":"", "telephone":"" }
+
+*/ ?>
+
+
+<?php 
+$sql = "SELECT  * FROM commander ";
 
 ?>
 
@@ -65,63 +81,37 @@ ON commander.id_client = client.id_client
            
             
 
-            foreach  ($pdo->query($sql) as $commande) {
-               
-              
-                if(!isset($clientactif)){
-
-                    $clientactif = $commande['id_client'];
-                }else{
-
-                    if( $clientactif ==  $commande['id_client']){
-                        continue;
-                    }else{
-                    $clientactif = $commande['id_client'];
-
-                    }
-                }
-
-
-                ?>
+            foreach  ($pdo->query($sql) as $commande) { ?>
  
-    
+  <?php 
+  $facture = json_decode($commande['elements_produit'], true);
+
+  ?>  
                     <tr>
-                        <td><?php echo $commande['id_client']; ?></td>
-                        <td><?php echo $commande['nom_client']. " " . $commande['prenom_client']; ?></td>
+                        <td><?php echo $facture['idClient']; ?></td>
+                        <td><?php echo $facture['nom'].' '. $facture['prenom'];?></td>
                         <td><?php echo $commande['date_comd']; ?></td>
                         <td><?php echo $commande['etat_comd']; ?></td>
                        
                          <td>
-                         <ul>
-                         <?php 
-                         $sql3 = "SELECT produit.nom_prod, commander.qte_p_comd
-                          FROM commander 
-                          JOIN produit
-                          ON commander.id_prod = produit.id_prod
-                         
-                         
-                         
-                         
-                         WHERE commander.id_client = " . $commande['id_client'];
-                               
-
-                             
-
-                         
-                            foreach  ($pdo->query($sql3) as $produit) {
-                            echo '<li>' . '<b>('. $produit['qte_p_comd'] . ') </b>' .$produit['nom_prod'] .   '</li>';
-                            }          
-                            
-                        
-                      ?>
-
-                         </ul>
+                         <?php // liste des produits ?>
+ 
+                         <?php $liste = $facture['listeid']; //recuperation de la liste des id des commande ?>
+                         <?php $listeProduitPannier = explode('/', $liste); 
+                               $y = count($listeProduitPannier); 
+                               for ($i=1; $i < $y-1; $i++)  
+                               {
+                               $idp = $listeProduitPannier[$i]; 
+                               echo '<p>'.$facture['titreProduit'.$idp].' ('.$facture['qteProduit'.$idp].')</p>';
+                               }
+                         ?>
                          </td>
                       
                        
                       
                         <td>
         <a  class="btn btn-success btn-block " href="#">transférer</a>
+        <a  class="btn btn-success btn-block " href="imprime_facture.php?id=<?php echo $commande['id_commande']; ?>">voir/imprimer</a>
 
                         </td>
                         <td>

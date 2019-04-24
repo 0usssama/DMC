@@ -212,7 +212,7 @@ $produitDevis = [];
                                      class="form-control" type="text" style="width: 65px" 
                                      value="<?php   
                             if(isset( $qtetotaleDevis)){
-                                echo  $qtetotaleDevis;
+                                echo  $qtetotaleDevis; $_SESSION['qteTotal'] = $qtetotaleDevis;
                             }else{
                                 echo '0 produits';
                             }
@@ -226,7 +226,7 @@ $produitDevis = [];
                                      class="form-control" type="text" style="width: 120px" 
                                      value="<?php   
                             if(isset($prixtotaleDevis)){
-                                echo $prixtotaleDevis . ' DA';
+                                echo $prixtotaleDevis . ' DA'; $_SESSION['prixTotal'] = $prixtotaleDevis;
                             }else{
                                 echo '0 DA';
                             }

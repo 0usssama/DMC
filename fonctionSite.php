@@ -101,6 +101,14 @@ $stmt->bindParam(':elements_produit', $elements_produit, PDO::PARAM_STR);
                                       
 $stmt->execute(); 
 
+$jsonclient = '"idClient":"'.$_SESSION['id_client'].'"';
+$sql = "SELECT  * FROM commander WHERE  elements_produit LIKE '%$jsonclient%' ORDER BY id_commande DESC LIMIT 1";
+if($pdo->query($sql)){
+ foreach  ($pdo->query($sql) as $commande) { $id_commande = $commande['id_commande'];
+ header('Location: client/imprime_facture.php?id='.$id_commande);
+ exit();
+ }
+ }
 
   }
 }
@@ -137,7 +145,7 @@ if(isset($_POST['connecter'])){
         $_SESSION['id_client']=$trouv['id_client'];
         $_SESSION['prenom_client']=$trouv['prenom_client'];
         $_SESSION['email_client']=$trouv['email_client'];
-        $_SESSION[' adresse_client']=$trouv['adresse_client'];
+        $_SESSION['adresse_client']=$trouv['adresse_client'];
         $_SESSION['tel_client']=$trouv['tel_client'];
 
         

@@ -27,11 +27,7 @@
         <!-- Page Content -->
         <h1>Point de vente</h1>
         <hr>
-         <?php
-      
-        $sql = "SELECT * FROM point_de_vente";
-       
-        ?>
+
         <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalScrollable">Ajouter un point de vente</button>
           <div class="container">
             <div class="row d-flex justify-content-center">
@@ -52,6 +48,12 @@
                            
                           </tr>
                       </thead>
+         <?php
+      
+        $sql = "SELECT * FROM point_de_vente";
+       
+        ?>
+                      
                       <?php 
             if($pdo->query($sql)){
             foreach  ($pdo->query($sql) as $row) { ?>

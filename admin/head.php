@@ -134,6 +134,43 @@
             <span>Points de ventes</span></a>
         </li>
 
+
+
+
+
+
+
+
+
+
+
+
+                 <?php
+      
+        $sql = "SELECT * FROM point_de_vente";
+       
+        ?>
+                      
+                      <?php 
+            if($pdo->query($sql)){
+            foreach  ($pdo->query($sql) as $row) { ?>
+
+             
+             
+
+        <li class="nav-item">
+          <a class="nav-link" href="un_point_de_ventes.php?id=<?php echo $row['id_point_vente'] ;?>">
+             
+            <span>PV: <?php echo $row['titre_point_vente'] ;?></span></a>
+        </li>
+
+            <?php }
+            }; ?>
+
+
+
+
+
         <li class="nav-item">
             <a class="nav-link" href="images.php">
               <i class="fas fa-fw fa-1x mr-2 fa-th"></i>
