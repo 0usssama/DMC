@@ -28,6 +28,17 @@
 
   <!-- Custom styles for this template-->
   <link href="css/sb-admin.css" rel="stylesheet">
+
+ 
+
+  <!-- CSS POUR L IMPRESSION //////////////////////////////////////////////////////////////////////////////--->
+  <link href="css/print.css" rel="stylesheet" media="print">
+
+
+
+
+
+
 <style>
 .form-control-borderless {
     border: none;
@@ -62,7 +73,7 @@
 
 <body id="page-top">
 
-  <nav class="navbar navbar-expand navbar-dark   sticky-top" style="background-color: #ccc;">
+  <nav class="navbar navbar-expand navbar-dark   sticky-top" style="background-color: #dc3545;">
 
     <a class="navbar-brand mr-1" href="client.php">DMC <small>Espace client</small></a>
 
@@ -109,9 +120,15 @@
       </li>
 
       <li class="nav-item">
+    <a class="nav-link" href="profile.php">
+      <i class="fas fa-fw fa-1x mr-2 fa-cog"></i>
+      <span>Réglages</span>
+    </a>
+  </li>
+      <li class="nav-item">
     <a class="nav-link" href="client.php">
-      <i class="fas fa-fw fa-1x mr-2 fa-users"></i>
-      <span>Clients</span>
+      <i class="fas fa-fw fa-1x mr-2 fa-file-invoice"></i>
+      <span>Factures</span>
     </a>
   </li>
  

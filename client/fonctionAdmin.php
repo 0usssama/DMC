@@ -713,7 +713,7 @@ function suppCommande(){
      global $bdd;
      // need to sanitize
   $id_client = $_GET['id_client'] ?? NULL ;
-  $sql = "DELETE FROM commander WHERE id_client= " . $id_client;
+  $sql = "DELETE FROM commande WHERE id_client= " . $id_client;
   $resultat=  $bdd->query($sql);
 
   if($resultat){
@@ -769,6 +769,66 @@ $stmt->bindParam(':ordre_produit', $ordre_produit, PDO::PARAM_INT);
 $stmt->bindParam(':id_prod', $id_prod, PDO::PARAM_INT);   
 $stmt->execute(); 
 }
+
+function updateClient(){
+     global $bdd;
+     $sql = "UPDATE client SET   
+     nom_client = :nom_client,
+     prenom_client = :prenom_client,
+     adresse_client = :adresse_client,
+     tel_client = :tel_client,
+     motpass_client= :motpass_client,
+     catego_client = :catego_client,
+     raison_social_client = :raison_social_client
+
+     WHERE id_client = :id_client;";
+
+$stmt = $bdd->prepare($sql);                                  
+
+
+$nom_client = strip_tags($_POST['nom_client']) ?? '/';
+$prenom_client = strip_tags($_POST['prenom_client']) ?? '/';
+$tel_client = strip_tags($_POST['tel_client']) ?? '/';
+$motpass_client =  password_hash($_POST['motpass_client'], PASSWORD_BCRYPT) ?? '/';
+
+$catego_client = strip_tags($_POST['catego_client']) ?? '/';
+if($_POST['catego_client'] == 'particulier'){
+$raison_social_client =  '/';
+     
+}else{
+$raison_social_client = strip_tags($_POST['raison_social_client']) ;
+     
+}
+$id_client = $_SESSION['id_client'];
+$adresse_client = strip_tags($_POST['adresse_client']) ?? '/' ;
+
+
+$stmt->bindParam(':nom_client', $nom_client);   
+$stmt->bindParam(':prenom_client', $prenom_client);   
+$stmt->bindParam(':adresse_client', $adresse_client);   
+$stmt->bindParam(':tel_client', $tel_client);   
+$stmt->bindParam(':motpass_client', $motpass_client);   
+$stmt->bindParam(':catego_client', $catego_client);   
+$stmt->bindParam(':raison_social_client', $raison_social_client);   
+$stmt->bindParam(':id_client', $id_client);   
+
+//Execute the statement and insert our values.
+//ar_dump($sql);
+$inserted = $stmt->execute();
+
+
+//verifier si on a des résultats (true or false)7
+
+if($inserted){
+echo ' Youpiiiiiii<br>';
+header('location: profile.php');
+}else{
+echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
+}
+
+
+}
+
  
  if(isset($_GET['action'])){ 
   if($_GET['action'] == 'alaune'){produitAAaAne();} 
@@ -792,6 +852,9 @@ if(isset($_POST['action'])){
   if($_POST['action'] == 'supProduit'){supProduit();} 
   if($_POST['action'] == 'ajoutClient'){ajoutClient();} 
   if($_POST['action'] == 'suppClient'){suppClient();} 
+  if($_POST['action'] == 'updateClient'){updateClient();} 
+
+
   if($_POST['action'] == 'ajoutPointdevente'){ajoutPointdevente();} 
   if($_POST['action'] == 'suppPointdevente'){suppPointdevente();} 
   if($_POST['action'] == 'suppCommande'){suppCommande();} 

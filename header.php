@@ -1,3 +1,12 @@
+    <style>
+   .second_hover:hover, .headerLink:hover{
+    transition: background 0.5s ease;
+      background: #dc3545;
+      color: white !important;
+    }
+    </style>
+    
+    
     <header class="bg-white border-bottom border-danger">
       <div class="container-fluid">
         <div class="row align-items-center ">
@@ -18,16 +27,16 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                           <ul class="navbar-nav ">
-                            <li class="nav-item active">
-                              <a class="nav-link" href="index.php">Acceuil <span class="sr-only">(current)</span></a>
+                            <li class="nav-item active ">
+                              <a class="nav-link headerLink" href="index.php">Acceuil <span class="sr-only">(current)</span></a>
                             </li>
-                            <li class="nav-item">
-                              <a class="nav-link" href="apropos.php">A propos</a>
+                            <li class="nav-item ">
+                              <a class="nav-link headerLink" href="apropos.php">A propos</a>
                             </li>
                            
                           
-                                  <li class="nav-item">
-                                        <a class="nav-link" href="contact.php">Contact</a>
+                                  <li class="nav-item ">
+                                        <a class="nav-link headerLink" href="contact.php">Contact</a>
                                       </li>
 
                                     
@@ -38,7 +47,7 @@
                                               <?php 
                                                 if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){
                                                   echo ' <li class="nav-item ml-3" id="qtepanier">';
-                                                  require_once('qtepanier.php');
+                                                  require_once('qtepaniersanserreure.php');
 
                                                   echo ' </li>';
                                                 }

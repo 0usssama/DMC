@@ -36,8 +36,8 @@
                 <tr>
                   
 
-                    <th>N° Client</th>
-                    <th>Client</th>
+                    <th>N° commande</th>
+                  
                     <th>date</th>
                     <th>etat</th>
                     <th>Produits</th>
@@ -48,84 +48,10 @@
                  
                 </tr>
             </thead>
-<?php /* 
-$sql = "SELECT  client.id_client, client.nom_client, client.prenom_client, commander.date_comd, 
-commander.etat_comd, commander.qte_p_comd, commander.id_prod, commander.id_client
-FROM commander
-JOIN client 
-ON commander.id_client = client.id_client
-
-";
-
-{
-
-"listeid":"/47/49/", 
-liste des id des produit
-on transforme la liste en tableau avec la fonction explode
-on cré une boucle for, allant de 1 ver la taille du tableau  count() soit equivalent de length en pascal
-aussi j ai les id des produits
-
- "titreProduit47":"imprimante ticket", "qteProduit47":"4", "prixProduit47":"1500", "totalProduit47":"6000", "titreProduit49":"tablette samsung", "qteProduit49":"6", "prixProduit49":"2150", "totalProduit49":"12900", "qteGeneral":"10", "totalGeneral":"18900", "idClient":"10", "nom":"hafsi", "prenom":"karim", "email":"", "adresse":"", "telephone":"" }
-
-
-"idClient":"10"  $jsonclient remplace le 10 ici par $_SESSION['id_client']
-*/ ?>
-
-
-<?php 
-$jsonclient = '"idClient":"'.$_SESSION['id_client'].'"';
-$sql = "SELECT  * FROM commander WHERE elements_produit LIKE '%$jsonclient%'";
-
-?>
-
-
-    <?php 
-        if($pdo->query($sql)){
-           
-            
-
-            foreach  ($pdo->query($sql) as $commande) { ?>
  
-  <?php 
-  $facture = json_decode($commande['elements_produit'], true);
 
-  ?>  
-                    <tr>
-                        <td><?php echo $facture['idClient']; ?></td>
-                        <td><?php echo $facture['nom'].' '. $facture['prenom'];?></td>
-                        <td><?php echo $commande['date_comd']; ?></td>
-                        <td><?php echo $commande['etat_comd']; ?></td>
-                       
-                         <td>
-                         <?php // liste des produits ?>
- 
-                         <?php $liste = $facture['listeid']; //recuperation de la liste des id des commande ?>
-                         <?php $listeProduitPannier = explode('/', $liste); 
-                               $y = count($listeProduitPannier); 
-                               for ($i=1; $i < $y-1; $i++)  
-                               {
-                               $idp = $listeProduitPannier[$i]; 
-                               echo '<p>'.$facture['titreProduit'.$idp].' ('.$facture['qteProduit'.$idp].')</p>';
-                               }
-                         ?>
-                         </td>
-                      
-                       
-                      
-                        <td>
-        <a  class="btn btn-success btn-block " href="#">transférer</a>
-        <a  class="btn btn-success btn-block " href="imprime_facture.php?id=<?php echo $commande['id_commande']; ?>">voir/imprimer</a>
 
-                        </td>
-                        <td>
-                           
-        <button type="button" class="btn btn-danger" data-toggle="modal"
-                        data-target="#m<?php echo $commande['id_client'] ;?>">Supprimer</button>
-                                            </td>
-                        
 
-                       
-                    </tr>
                     <div class="modal fade" id="m<?php echo $commande['id_client'] ;?>" tabindex="-1" role="dialog"
                 aria-labelledby="m<?php echo $commande['id_client'] ;?>" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -152,9 +78,9 @@ $sql = "SELECT  * FROM commander WHERE elements_produit LIKE '%$jsonclient%'";
             </div>
                    
               <?php 
-            }
+           // }
           
-             } ?>     
+           //  } ?>     
             </table>
 
       <!-- /.container-fluid -->

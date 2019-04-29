@@ -78,6 +78,12 @@
             </div>
           </div>
           <div class="form-group">
+            <div class="form-label-group">
+              <input type="text" name="tel_client" id="tel_client" class="form-control" placeholder=" rue..." required="required">
+              <label for="tel_client">teléphone</label>
+            </div>
+          </div>
+          <div class="form-group">
             <div class="form-row">
               <div class="col-md-12">
                 <div class="form-label-group">

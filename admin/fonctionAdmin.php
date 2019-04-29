@@ -656,7 +656,7 @@ $inserted = $stmt->execute();
           
 //verifier si on a des résultats (true or false)
 if($inserted){
-header('location: ../point_de_ventes.php');
+header('location: point_de_ventes.php');
 }else{
 echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
 }

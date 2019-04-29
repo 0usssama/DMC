@@ -14,7 +14,7 @@
              
             
               <li class="nav-item dropdown" style="position: initial;">
-                <a class="nav-link " href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link second_hover" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Produits
                 </a>
                 <div class="dropdown-menu w-100" aria-labelledby="navbarDropdown2">
@@ -61,7 +61,7 @@
                 </div>
               </li>
                 <li class="nav-item dropdown" style="position: initial;">
-                    <a class="nav-link " href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link second_hover" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Marques
                     </a>
                     <div class="dropdown-menu w-100" aria-labelledby="navbarDropdown3">
@@ -100,7 +100,7 @@
                   </li>
 
                   <li class="nav-item dropdown" style="position: initial;">
-                      <a class="nav-link " href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <a class="nav-link second_hover" href="#" id="navbarDropdown4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Promotions
                       </a>
                       <div class="dropdown-menu w-100" aria-labelledby="navbarDropdown4">
@@ -178,7 +178,7 @@
                       </div>
                     </li>
                     <li class="nav-item dropdown" style="position: initial;">
-                        <a class="nav-link " href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link second_hover" href="#" id="navbarDropdown5" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Services
                         </a>
                         <div class="dropdown-menu w-100" aria-labelledby="navbarDropdown5">

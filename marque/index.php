@@ -566,7 +566,13 @@ color: black !important;
                         </div>
     
                         <input type="number" class="qte" name="qte" min="0" value="1" id="qte<?php echo $produit['id_prod']; ?>"> 
-                      <button onclick="ajoutpannier('qte<?php echo $row['id_prod']; ?>');" class="btn btn-danger btn-sm mt-3">
+                      <button 
+                      <?php if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){ ?>
+                       onclick="ajoutpannier('qte<?php echo $row['id_prod']; ?>');" 
+                      <?php } else { ?>
+                       onclick="location.href='login.php'"; 
+                      <?php } ?>
+                       class="btn btn-danger btn-sm mt-3">
                         <i class="fas fa-shopping-cart"></i> Ajouter
                       </button>
                     </div>
@@ -687,6 +693,26 @@ color: black !important;
   
   </footer>
   
+<!-- Modal -->
+<div class="modal fade" id="mawdal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Produit ajouté</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Votre produit est ajouté au pannier
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">continuer</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
   
 
     <!-- Optional JavaScript -->
@@ -729,6 +755,11 @@ color: black !important;
     $('.service_top').hover(function(){
       $(this).toggleClass('black');
     })
+    $('button').click(function(){
+   
+   $('#mawdal').modal('show');
+ 
+ })
 
     
    

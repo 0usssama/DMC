@@ -196,6 +196,7 @@ footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
   padding: 0;
   border: none;
   border-radius: 0;
+  background-color: #212529;
   
   height: 90vh;
 }

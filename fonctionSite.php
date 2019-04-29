@@ -71,10 +71,11 @@ if(isset($_POST['action'])){
     $facture = $facture.'"adresse":"'.$_SESSION[' adresse_client'].'", ' ;
     $facture = $facture.'"telephone":"'.$_SESSION['tel_client'].'"' ;
 
+    /*
         $_SESSION['nom_client']=$trouv['nom_client'];
         $_SESSION['prenom_client']=$trouv['prenom_client'];
         $_SESSION['id_client']=$trouv['id_client'];
-
+*/
     $facture = $facture.' }';
 
     $qte_p_comd = $qtetotalProd;
@@ -83,29 +84,26 @@ if(isset($_POST['action'])){
   
   
   
-    $sql = "INSERT INTO commander( 
-            qte_p_comd,
+    $sql = "INSERT INTO commande( 
             id_client,
             elements_produit
             ) VALUES (
-            :qte_p_comd,
             :id_client,
             :elements_produit
            )";
                                           
 $stmt = $bdd->prepare($sql);
                                               
-$stmt->bindParam(':qte_p_comd', $qte_p_comd, PDO::PARAM_STR);
 $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
 $stmt->bindParam(':elements_produit', $elements_produit, PDO::PARAM_STR);
                                       
 $stmt->execute(); 
 
 $jsonclient = '"idClient":"'.$_SESSION['id_client'].'"';
-$sql = "SELECT  * FROM commander WHERE  elements_produit LIKE '%$jsonclient%' ORDER BY id_commande DESC LIMIT 1";
+$sql = "SELECT  * FROM commande WHERE  elements_produit LIKE '%$jsonclient%' ORDER BY id_comd DESC LIMIT 1";
 if($pdo->query($sql)){
- foreach  ($pdo->query($sql) as $commande) { $id_commande = $commande['id_commande'];
- header('Location: client/imprime_facture.php?id='.$id_commande);
+ foreach  ($pdo->query($sql) as $commande) { $id_comd = $commande['id_comd'];
+ header('Location: client/imprime_facture.php?id='.$id_comd);
  exit();
  }
  }
@@ -304,6 +302,81 @@ foreach  ($bdd->query($sql) as $row) {
    $_SESSION['qteTotal'] = $_SESSION['qteTotal'] + $_SESSION[$qteProduit];
 
    }
+
+
+if(isset($_GET['action'])){ 
+  if($_GET['action'] == 'vote'){ 
+
+$vote = $_GET['vote']; 
+
+if ($vote == 1){$vote1 = 1}else{$vote1=0; $nbr_etoils_ev = $vote1;}
+if ($vote == 2){$vote1 = 2}else{$vote2=0; $nbr_etoils_ev = $vote2;}
+if ($vote == 3){$vote1 = 3}else{$vote3=0; $nbr_etoils_ev = $vote3;}
+if ($vote == 4){$vote1 = 4}else{$vote4=0; $nbr_etoils_ev = $vote4;}
+if ($vote == 5){$vote1 = 5}else{$vote5=0; $nbr_etoils_ev = $vote5;}
+
+$id_prod= $_GET['id_prod']; 
+$id_client = $_SESSION['id_client'];
+$date_ev = date('m/d/Y h:i:s', time());
+
+            $sql = "SELECT vote1,vote2,vote3,vote4,vote5 FROM produit WHERE id_prod LIKE '$id_prod'";
+ 
+            if($bdd->query($sql)){
+            foreach  ($bdd->query($sql) as $row) {
+
+             $vote = $row['vote1'] + $vote1 ;
+             $vote = $row['vote2'] + $vote2 ;
+             $vote = $row['vote3'] + $vote3 ;
+             $vote = $row['vote4'] + $vote4 ;
+             $vote = $row['vote5'] + $vote5 ;
+
+              }
+            } 
+
+
+            $sql = "UPDATE produit SET vote1 =: vote1 ,vote2 =: vote2,vote3 =: vote3,vote4 =: vote4,vote5 =: vote5 
+            WHERE id_prod = :id_prod";
+            $stmt = $bdd->prepare($sql);                                  
+
+            $stmt->bindParam(':vote1', $vote1, PDO::PARAM_INT);   
+            $stmt->bindParam(':vote2', $vote2, PDO::PARAM_INT);   
+            $stmt->bindParam(':vote3', $vote3, PDO::PARAM_INT);   
+            $stmt->bindParam(':vote4', $vote4, PDO::PARAM_INT);   
+            $stmt->bindParam(':vote5', $vote5, PDO::PARAM_INT);
+
+            $stmt->bindParam(':id_prod', $id_prod, PDO::PARAM_INT);   
+            $stmt->execute();
+
+
+ 
+$sql = "INSERT INTO evaluer(
+            date_ev,
+            nbr_etoils_ev,
+            id_prod,
+            id_client) VALUES (
+            :date_ev,
+            :nbr_etoils_ev,
+            :id_prod,
+            :id_client
+            )";
+                                          
+$stmt = $bdd->prepare($sql);
+                        
+            $stmt->bindParam(':date_ev', $date_ev, PDO::PARAM_STR);
+            $stmt->bindParam(':nbr_etoils_ev', $nbr_etoils_ev, PDO::PARAM_STR);
+            $stmt->bindParam(':id_prod', $id_prod, PDO::PARAM_INT);
+            $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
+
+$stmt->execute();
+
+}
+
+    }
+
+
+}
+
+
 
 //$_SESSION['listeIdProduit'] = /idproduit101/idproduit5/idproduit120/idproduit15/;
 

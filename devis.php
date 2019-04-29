@@ -14,14 +14,12 @@
 
            foreach ($produitDevis as $id_produit => $quantite) {
             $sql = '';
-            $sql = "INSERT INTO commander (date_comd, etat_comd,qte_p_comd, id_client, id_prod) VALUES ";
+            $sql = "INSERT INTO commande (date_comd, etat_comd, id_client) VALUES ";
 
             $sql .= "(";
             $sql .= "'" . $date ."'," ;
             $sql .= "'en cours'," ;
-            $sql .= "'" . $quantite ."'," ;
             $sql .= "'" .  $_SESSION['id_client'] ."'," ;
-            $sql .= "'" . $id_produit ."'" ;
             $sql .= ");"; 
            // echo $sql . "<br>";
 
@@ -268,7 +266,7 @@ $produitDevis = [];
                 <div class="col-sm-12 col-md-6 text-right">
                 <form method="post" action="devis.php">
                     <input type="hidden" name="action" value="validerDevis">
-                    <input type="submit" value="valider" name="valider" class="btn btn-lg btn-block btn-success text-uppercase">
+                    <input type="submit" value="Finir le shopping" name="valider" class="btn btn-lg btn-block btn-success text-uppercase">
                 </form>
                 </div>
             </div>

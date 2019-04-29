@@ -44,4 +44,13 @@
 </script>
 </body>
 
+<script type="text/javascript">
+  function validerlacommande(id){
+      var envoi   = "fonctionClient.php?id="+id+"&action=validerFacture";
+
+      document.getElementById("btnvalide").style.display = "none"; 
+      $.get("fonctionClient.php?id="+id+"&action=validerFacture";);
+      alert('vous allez cloturer le pannier en cours'); 
+  }
+</script>
 </html>

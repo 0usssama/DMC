@@ -1,6 +1,6 @@
 <?php include '../fonctionSite.php'; ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <!-- Required meta tags -->
@@ -332,46 +332,67 @@ footer p {
 
 
                 <div class="col-lg-9 col-md-12  d-flex justify-content-end">
-                    <nav class="navbar navbar-expand-lg navbar-light  ">
-
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
+                <nav class="navbar navbar-expand-lg navbar-light  ">
+                       
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                            <ul class="navbar-nav ">
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="#">Acceuil <span class="sr-only">(current)</span></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">A propos</a>
-                                </li>
+                          <ul class="navbar-nav ">
+                            <li class="nav-item active ">
+                              <a class="nav-link headerLink" href="../index.php">Acceuil <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item ">
+                              <a class="nav-link headerLink" href="../apropos.php">A propos</a>
+                            </li>
+                           
+                          
+                                  <li class="nav-item ">
+                                        <a class="nav-link headerLink" href="../contact.php">Contact</a>
+                                      </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Contact</a>
-                                </li>
+                                    
+                                          <li class="nav-item ml-3">
+                                               
+                                                     
+                                              </li>
+                                              <?php 
+                                                if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){
+                                                  echo ' <li class="nav-item ml-3" id="qtepanier">';
+                                                  require_once('../qtepanier.php');
 
+                                                  echo ' </li>';
+                                                }
+                                              ?>
+                                             
+                                               
+                                             
+                                              <li class="nav-item ml-3">
+                                                    <?php
+                                                             if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){
+                                                              echo '<a class="btn btn-block btn-danger" href="client/commandes.php">
+                                                              <i class="fa fa-1x fa-user mr-2"></i>'.  $_SESSION['nom_client'] .' ' . $_SESSION['prenom_client'] .'</a>'. ' <a class="btn btn-block btn-danger" href="logout.php">
+                                                              <i class="fa fa-1x  sign-out-alt mr-2"></i>Se déconnecter
+                                                            </a>';
 
-                                <li class="nav-item ml-3">
-                                    <button type="button" class="btn btn-block btn-danger">
-                                        <i class="fa fa-shopping-cart"></i>
-                                        <span class="badge badge-light ml-2">4</span>
-                                    </button>
-                                </li>
-                                <li class="nav-item ml-3">
-                                    <button type="button" class="btn btn-block btn-danger">
-                                        <i class="fa fa-1x fa-user mr-2"></i>Se connecter
-                                    </button>
-                                </li>
-
-
-                            </ul>
+                                                             }else{
+                                                               echo '<a class="btn btn-block btn-danger" href="login.php">
+                                                               <i class="fa fa-1x fa-user mr-2"></i>Se connecter
+                                                             </a>
+                                                             
+                                                             ';
+                                                             }                                                       
+                                                    ?>
+                                                    
+                                                  </li>
+                                              
+                          
+                          </ul>
                         </div>
-                    </nav>
+                      </nav>
 
 
-                </div>
+            </div>    
 
 
             </div>
@@ -711,6 +732,11 @@ footer p {
                     <div class="col-md-6">
 
                         <h1 class="pb-3"><?php echo $row['nom_prod']; ?></h1>
+    <button onclick='$.get("../fonctionSite.php?id=<?php echo $row['id_prod'] ?>$idclient=<?php echo $_SESSION['id_client'] ?>&vote=1&action=vote");'>
+    <button onclick='$.get("../fonctionSite.php?id=<?php echo $row['id_prod'] ?>$idclient=<?php echo $_SESSION['id_client'] ?>&vote=2&action=vote");'>
+    <button onclick='$.get("../fonctionSite.php?id=<?php echo $row['id_prod'] ?>$idclient=<?php echo $_SESSION['id_client'] ?>&vote=3&action=vote");'>
+    <button onclick='$.get("../fonctionSite.php?id=<?php echo $row['id_prod'] ?>$idclient=<?php echo $_SESSION['id_client'] ?>&vote=4&action=vote");'>
+    <button onclick='$.get("../fonctionSite.php?id=<?php echo $row['id_prod'] ?>$idclient=<?php echo $_SESSION['id_client'] ?>&vote=5&action=vote");'>
                         <h3 class="mb-3" style="color:rgb(219,2,23);font-weight:bold; ">Caractéristiques</h3>
                         <div style="width:100%">
                             <span style="font-weight:bold; color:rgba(196,0,0,1)">Gamme de vitesse : &nbsp;</span>
@@ -883,6 +909,12 @@ footer p {
         });
     }); //closing our doc ready
     </script>
+
+
+
+
+
+  
 </body>
 
 </html>

@@ -71,7 +71,9 @@ aussi j ai les id des produits
 
 
 <?php 
-$sql = "SELECT  * FROM commander ";
+$sql = "SELECT  * FROM commande WHERE etat_comd LIKE 'en cours'";
+
+//$sqlpointdevent = "SELECT  * FROM commande WHERE etat_comd LIKE 'pointdevente' AND id_point_vente LIKE '$id_point_vente'";
 
 ?>
 

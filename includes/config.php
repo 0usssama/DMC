@@ -1,5 +1,7 @@
 <?php
 //MySQL connection details.
+date_default_timezone_set('Africa/Algiers');
+
 $host = 'localhost';
 $user = 'root';
 

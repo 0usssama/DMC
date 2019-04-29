@@ -72,7 +72,14 @@ foreach  ($bdd->query($sql) as $row) {
   
                      
                       <input type="number" class="qte" name="qte" min="0" value="1" id="qte<?php echo $row['id_prod']; ?>"> 
-                      <button onclick="ajoutpannier('qte<?php echo $row['id_prod']; ?>');" class="btn btn-danger btn-sm mt-3">
+                      <button
+                      
+                      <?php if(isset($_SESSION['id_client']) && !empty($_SESSION['id_client'])){ ?>
+                       onclick="ajoutpannier('qte<?php echo $row['id_prod']; ?>');" 
+                      <?php } else { ?>
+                       onclick="location.href='login.php'"; 
+                      <?php } ?>
+                       class="btn btn-danger btn-sm mt-3">
                         <i class="fas fa-shopping-cart"></i> Ajouter
                       </button>
                   </div>
