@@ -20,13 +20,13 @@ if(isset($_GET['action'])){
 
 		$sql = "UPDATE commande 
         SET 
-        date_comd=:date_comd
+        date_comd=:date_comd , etat_comd=:etat_comd
         WHERE  id_comd=:id_comd";
  
         $execution = $bdd->prepare($sql);    
-        $execution->bindParam(':date_comd', $date_comd, PDO::PARAM_STR);
         $execution->bindParam(':id_comd', $id_comd, PDO::PARAM_INT);       
-        $execution->bindParam(':date_comd', $date_comd, PDO::PARAM_STR); /////en attendan le mailling
+        $execution->bindParam(':date_comd', $date_comd, PDO::PARAM_STR);
+        $execution->bindParam(':etat_comd', $etat_comd, PDO::PARAM_STR); /////en attendan le mailling      
 
         $execution->execute();
 
@@ -62,8 +62,6 @@ mail('caffeinated@example.com', 'Mon Sujet', $message);
  
 
 }
-
-
  
 
 	if ($_GET['action'] == 'confirmercommande') {

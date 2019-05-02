@@ -7,13 +7,13 @@
     </style>
     
     
-    <header class="bg-white border-bottom border-danger">
+    <header class="bg-white border-bottom " style="border-bottom: 3px #dc3545 solid !important;">
       <div class="container-fluid">
         <div class="row align-items-center ">
           <div class="col-lg-3 col-md-12 col-sm-12">
               <nav class="navbar ">
                   <a class="navbar-brand" href="index.php">
-                    <img src="images/marque/m5.png"  height="60" alt="">
+                    <img src="images/marque/DMC_LOGO.png"  height="60"   width="130"  alt="">
                   </a>
                 </nav>
           </div>

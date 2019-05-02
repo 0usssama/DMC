@@ -2,7 +2,7 @@
         <div class="row">
             <div class="col-12">
                 <header class="">
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -10,8 +10,7 @@
                         </ol>
                         <div class="carousel-inner" role="listbox">
                             <!-- Slide One - Set the background image for this slide in the line below -->
-                            <a href="famille/index.php?id=19">
-                            
+                          
                             <div class="carousel-item active" style="background-image: url('images/slider/1.jpg')">
                                 <div class="carousel-caption text-left ">
                                     <h2 class="display-4 font-weight-bold">  IMPRESSION </h2>
@@ -20,9 +19,9 @@
                                     </p>
                                 </div>
                             </div>
-                           </a>
+                         
 
-                            <a href="famille/index.php?id=16">
+                        
                             <div class="carousel-item " style="background-image: url('images/slider/4.jpg')">
                                 <div class="carousel-caption text-left ">
 
@@ -32,9 +31,9 @@
                                     </p>
                                 </div>
                             </div>
-                            </a>
+                           
 
-                            <a href="famille/index.php?id=16">
+                           
 
                             <div class="carousel-item " style="background-image: url('images/slider/5.jpg')">
                                 <div class="carousel-caption text-left ">
@@ -45,9 +44,9 @@
                                     </p>
                                 </div>
                             </div>
-                                </a>
+                            
 
-                            <a href="famille/index.php?id=16">
+                          
 
                             <div class="carousel-item " style="background-image: url('images/slider/2.jpg')">
                                 <div class="carousel-caption text-left ">
@@ -58,10 +57,9 @@
                                     </p>
                                 </div>
                             </div>
-                            </a>
+                        
                           
 
-                            <a href="famille/index.php?id=16">
 
                             <div class="carousel-item " style="background-image: url('images/slider/7.jpg')">
                                 <div class="carousel-caption text-left ">
@@ -73,7 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        </a>
+
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
                             data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

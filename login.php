@@ -11,17 +11,30 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Login</title>
+  <title>Login client </title>
 
   <!-- Custom fonts for this template-->
   <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template-->
-  <link href="admin/css/sb-admin.css" rel="stylesheet">
+  <link href="admin/css/sb-admin.min.css" rel="stylesheet">
 
+<style type="text/css">
+
+
+.fond{
+background-color: red;
+}
+
+
+</style>
 </head>
 
-<body class="bg-dark">
+
+
+
+
+<body class="bg-dark" id="fond">
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">

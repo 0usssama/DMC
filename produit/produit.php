@@ -312,6 +312,9 @@ footer p {
     border-radius: 3px;
     float: right;
 }
+.nav-link{
+             color: white !important;
+           }
 </style>
 <link rel="stylesheet" type="text/css" href="../../Feature-rich-Product-Gallery-With-Image-Zoom-xZoom/dist/xzoom.css"
     media="all" />
@@ -325,8 +328,7 @@ footer p {
                 <div class="col-lg-3 col-md-12 col-sm-12">
                     <nav class="navbar ">
                         <a class="navbar-brand" href="../index.php">
-                    <img src="../images/marque/DMC_LOGO.png"  height="60" alt="">
-                            
+                            <img src="../images/marque/m5.png" height="60" alt="">
                         </a>
                     </nav>
                 </div>
@@ -407,7 +409,7 @@ footer p {
 
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
             aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -655,7 +657,7 @@ footer p {
 
 
             <div class="container" id="images">
-                <div class="row bg-white pt-4 d-flex lign-items-center mb-4 mt-3">
+                <div class="row bg-white pt-4 d-flex align-items-center mb-4">
 
                     <div class="col-md-5 text-danger d-flex justify-content-center">
                         <div class="">
@@ -895,8 +897,8 @@ footer p {
     </div>
     <script>
     $(document).ready(function() {
-        $('a').click(function() {
-             event.preventDefault(event);
+        $('a').click(function(event) {
+             event.preventDefault();
             var largeImage = $(this).attr('data-full');
             $('.selected').removeClass();
             $(this).addClass('selected');

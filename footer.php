@@ -23,7 +23,7 @@
       ?>
                       
                             <div> 
-                              <a href="marque/index.php?id=<?php echo $marque['id_marque']; ?>">
+                              <a href="marque.php?id=<?php echo $marque['id_marque']; ?>">
                               <img src="<?php echo $marque['image_marque']; ?>" alt="" class="img-responsive">
                               </a>
                             </div>
@@ -172,7 +172,9 @@
   <p class="mb10">
   eurl DMC  est une entreprise de ventes des équipements ...., créée en 2019
   </p>
-  <p><i class="fa fa-location-arrow"></i> 9878/25 sec 9 rohini 35 </p>
+  <p><i class="fa fa-location-arrow"></i> Applez nous 24/7
+023220341 0553682874</p>
+
   <p><i class="fa fa-phone"></i>  +91-9999878398  </p>
   <p><i class="fa fa fa-envelope"></i> info@example.com  </p>
   

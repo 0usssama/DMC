@@ -14,42 +14,13 @@
         <hr>
         <p>
         
-
-
-
-
-
-
-
-
-
-
-
- 
-<?php /* 
-$sql = "SELECT  client.id_client, client.nom_client, client.prenom_client, commander.date_comd, 
-commander.etat_comd, commander.qte_p_comd, commander.id_prod, commander.id_client
-FROM commander
-JOIN client 
-ON commander.id_client = client.id_client
-
-";
-
-{
-
-"listeid":"/47/49/", 
-liste des id des produit
-on transforme la liste en tableau avec la fonction explode
-on cré une boucle for, allant de 1 ver la taille du tableau  count() soit equivalent de length en pascal
-aussi j ai les id des produits
-
- "titreProduit47":"imprimante ticket", "qteProduit47":"4", "prixProduit47":"1500", "totalProduit47":"6000", "titreProduit49":"tablette samsung", "qteProduit49":"6", "prixProduit49":"2150", "totalProduit49":"12900", "qteGeneral":"10", "totalGeneral":"18900", "idClient":"10", "nom":"hafsi", "prenom":"karim", "email":"", "adresse":"", "telephone":"" }
-
-*/ ?>
-
-
+  
 <?php 
-$sql = "SELECT  * FROM commander WHERE id_commande LIKE '$idfacture' LIMIT 1";
+
+  
+$jsonclient = '"idClient":"'.$_SESSION['id_client'].'"';
+  
+$sql = "SELECT  * FROM commande WHERE  elements_produit LIKE '%$jsonclient%' AND  id_comd LIKE '$idfacture' LIMIT 1";
 
 ?>
 
@@ -68,8 +39,12 @@ $sql = "SELECT  * FROM commander WHERE id_commande LIKE '$idfacture' LIMIT 1";
   <table class="table table-striped custab">
                   
                     <tr>
-                        <td> <h3>Facture  N° <?php echo $commande['id_commande']; ?></h3> </td>
-
+                        <td> <h3>Facture  N° <?php echo $commande['id_comd']; ?></h3> </td>
+                        <td> <input class="pc" type="button" value="imprimer" onclick="window.print()">
+                             <?php if($commande['date_comd'] == '') { ?>
+                             <input id="btnvalide" class="pc" type="button" value="valider la commande" onclick="validerlacommande(<?php echo $commande['id_comd']; ?>)">
+                             <?php } ?>
+                        </td>
                     <tr>
                         <td style="border-right: 2px solid #000">
                           <p> Informations entreprise </p>

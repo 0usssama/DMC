@@ -112,8 +112,8 @@ $sql = "SELECT  * FROM commande WHERE etat_comd LIKE 'en cours'";
                        
                       
                         <td>
-        <a  class="btn btn-success btn-block " href="#">transférer</a>
-        <a  class="btn btn-success btn-block " href="imprime_facture.php?id=<?php echo $commande['id_commande']; ?>">voir/imprimer</a>
+        <a  class="btn btn-success btn-block " href="un_point_de_ventes.php?idpointdevente=<?php echo $commande['id_point_vente']; ?>&idcommende=<?php echo $commande['id_comd']; ?>">transférer</a>
+        <a  class="btn btn-success btn-block " href="imprime_facture.php?id=<?php echo $commande['id_comd']; ?>">voir/imprimer</a> 
 
                         </td>
                         <td>

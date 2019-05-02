@@ -15,7 +15,7 @@
   <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Custom styles for this template-->
-  <link href="admin/css/sb-admin.css" rel="stylesheet">
+  <link href="admin/css/sb-admin.min.css" rel="stylesheet">
 
 
 

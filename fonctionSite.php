@@ -25,8 +25,8 @@ include ('includes/config.php');
  
 if(isset($_POST['action'])){
   if($_POST['action'] == 'validerDevis'){
-  echo 'validerDevis';
-  //creation du fichier jason
+
+   //creation du fichier jason
     $facture = '{';
     $facture = $facture.'"listeid":"'.$_SESSION['listeIdProduit'].'", ' ;
    
@@ -304,16 +304,18 @@ foreach  ($bdd->query($sql) as $row) {
    }
 
 
+
+
 if(isset($_GET['action'])){ 
   if($_GET['action'] == 'vote'){ 
 
 $vote = $_GET['vote']; 
 
-if ($vote == 1){$vote1 = 1}else{$vote1=0; $nbr_etoils_ev = $vote1;}
-if ($vote == 2){$vote1 = 2}else{$vote2=0; $nbr_etoils_ev = $vote2;}
-if ($vote == 3){$vote1 = 3}else{$vote3=0; $nbr_etoils_ev = $vote3;}
-if ($vote == 4){$vote1 = 4}else{$vote4=0; $nbr_etoils_ev = $vote4;}
-if ($vote == 5){$vote1 = 5}else{$vote5=0; $nbr_etoils_ev = $vote5;}
+if ($vote == 1){$vote1 = 1;}else{$vote1=0; $nbr_etoils_ev = $vote1;}
+if ($vote == 2){$vote1 = 2;}else{$vote2=0; $nbr_etoils_ev = $vote2;}
+if ($vote == 3){$vote1 = 3;}else{$vote3=0; $nbr_etoils_ev = $vote3;}
+if ($vote == 4){$vote1 = 4;}else{$vote4=0; $nbr_etoils_ev = $vote4;}
+if ($vote == 5){$vote1 = 5;}else{$vote5=0; $nbr_etoils_ev = $vote5;}
 
 $id_prod= $_GET['id_prod']; 
 $id_client = $_SESSION['id_client'];
@@ -386,7 +388,7 @@ $stmt->execute();
 // $_SESSION['qteProduit101'] = 2;
 // $_SESSION['prixProduit101'] = 100000;
 
-}
+
  
 
 ?>

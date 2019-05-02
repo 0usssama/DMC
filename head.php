@@ -198,7 +198,7 @@ footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
   border-radius: 0;
   background-color: #212529;
   
-  height: 90vh;
+ 
 }
 .dropdown-menu h6{
 color: black !important;

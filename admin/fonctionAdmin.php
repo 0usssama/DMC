@@ -281,7 +281,13 @@ $inserted = $stmt->execute();
 if(!$inserted){
      echo 'ohhhh :(' . "<br>" . print_r($stmt->errorInfo());
     
-   };
+     return;
+    
+   }else{
+    
+   }
+   
+   ;
 
 
             $sql = "SELECT id_prod FROM produit WHERE nom_prod LIKE '$nom_prod' AND prix_detail LIKE '$prix_detail' AND 
@@ -712,16 +718,11 @@ echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
 function suppCommande(){
      global $bdd;
      // need to sanitize
+  $id_client = $_GET['id_client'];
   $id_client = $_GET['id_client'] ?? NULL ;
   $sql = "DELETE FROM commander WHERE id_client= " . $id_client;
   $resultat=  $bdd->query($sql);
 
-  if($resultat){
-     header('location: commandes.php');
- }else{
-echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());
-
- }
 }
 
 

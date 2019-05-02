@@ -199,24 +199,28 @@ footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
   border: none;
   border-radius: 0;
   background-color: #212529;
+  
   height: 90vh;
 }
 .dropdown-menu h6{
 color: black !important;
 }
-.second_hover:hover, .headerLink:hover{
+
+  </style>
+     <style>
+   .second_hover:hover, .headerLink:hover{
     transition: background 0.5s ease;
       background: #dc3545;
       color: white !important;
     }
-    .nav-link2 {
+    .nav-link2{
              color: white !important;
            }
            .nav-link3 {
              color: white !important;
              text-decoration: none;
            }
-  </style>
+    </style>
   <body>
     <!-- Image and text -->
     
@@ -241,7 +245,7 @@ color: black !important;
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNavDropdown">
                           <ul class="navbar-nav ">
-                            <li class="nav-item active">
+                            <li class="nav-item  active">
                               <a class="nav-link headerLink" href="#">Acceuil <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
@@ -278,8 +282,14 @@ color: black !important;
       </div>
 
     </header>
-  
-    <nav class="navbar navbar-expand-lg navbar-light  bg-secondary">
+
+       
+    
+               
+
+    
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-secondary">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -452,33 +462,54 @@ color: black !important;
       </div>
       
     </nav>
-       <!-- Content-->
+
+    <!-- Content-->
    <div id="content">
 
+    <?php 
+    
+    $id_point_vente = $_GET['id'] ?? NULL;
+      $sql = "SELECT * FROM point_de_vente WHERE id_point_vente='". $id_point_vente . "'";
+
+      if($bdd->query($sql)){
+        
+          
+        foreach ($bdd->query($sql) as $point_de_vente) {
+       
+     
+    ?>
+
   <div class="container">
-  <h1 class="mt-4 mb-2 text-light display-4 font-weight-bold">Prix choc</h1>
+  <h1 class="mt-4 mb-2 text-light display-4 font-weight-bold">DMC (<?php echo  $point_de_vente['titre_point_vente']; ?>) </h1>
 
   <div class="row mt-4 d-flex justify-content-center">
     <div class="col-md-6 text-light">
-    <img src="../images/slider/money.jpg" alt="" class="img-fluid">
+    <img src="../images/slider/install.jpg" alt="" class="img-fluid">
 
     </div>
 </div>
   <div class="row mt-5 text-light mb-5">
-        <div class="">
-  
-  <p> Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione ut sint aspernatur est ipsam labore ea praesentium atque soluta beatae eveniet, dolorum voluptas vitae sapiente sed ducimus, suscipit ullam deserunt!</p>
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione ut sint aspernatur est ipsam labore ea praesentium atque soluta beatae eveniet, dolorum voluptas vitae sapiente sed ducimus, suscipit ullam deserunt!</p>
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione ut sint aspernatur est ipsam labore ea praesentium atque soluta beatae eveniet, dolorum voluptas vitae sapiente sed ducimus, suscipit ullam deserunt!</p>
-  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione ut sint aspernatur est ipsam labore ea praesentium atque soluta beatae eveniet, dolorum voluptas vitae sapiente sed ducimus, suscipit ullam deserunt!</p>
-      </div>
-  
+        <div class="col-md-6">
+      <p>
+      <?php echo  $point_de_vente['presentation_point_vente']; ?>
+      </p>
+        </div>
+  <div class="col-md-6">
+    <p>
+    <?php echo  $point_de_vente['info_point_vente']; ?>
+    </p>
+        </div>
   </div>
   
   
 
   </div>
-
+  <?php 
+  }
+}
+      
+    
+    ?>
 
 
    </div>

@@ -1,5 +1,5 @@
 <?php 
-session_start();  
+/*session_start();*/  
 ?>
 <a  class="btn btn-block btn-danger" href="devis.php">
 <i class="fa fa-shopping-cart"></i>

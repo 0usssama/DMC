@@ -50,10 +50,10 @@
 </head>
 <body>
     
-<!-- 
+
 <section class="jumbotron bg-danger text-light text-center">
         <h1>Devis</h1>
-</section> -->
+</section> 
 
 <div class="container mb-4">
   

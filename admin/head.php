@@ -27,7 +27,7 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin.css" rel="stylesheet">
+  <link href="css/sb-admin.min.css" rel="stylesheet">
 <style>
 .form-control-borderless {
     border: none;
@@ -159,7 +159,7 @@
              
 
         <li class="nav-item">
-          <a class="nav-link" href="un_point_de_ventes.php?id=<?php echo $row['id_point_vente'] ;?>">
+          <a class="nav-link" href="un_point_de_ventes.php?idpointdevente=<?php echo $row['id_point_vente'] ;?>">
              
             <span>PV: <?php echo $row['titre_point_vente'] ;?></span></a>
         </li>
