@@ -1,38 +1,34 @@
 
-<?php include 'head.php' ;?>
+<?php include 'head.php' ;
+
+?>
+
+
+<style>
+.form-control:focus {
+  border-color: rgba(220, 53, 69, 1) ;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+}
+</style>
     <div id="content-wrapper">
 
       <div class="container-fluid">
 
-          <div class="row justify-content-center">
-              <div class="col-12 col-md-10 col-lg-8">
-                  <form class="card card-sm">
-                      <div class="card-body row no-gutters align-items-center">
-                         
-                          <!--end of col-->
-                          <div class="col">
-                              <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Rechercher une famille">
-                          </div>
-                          <!--end of col-->
-                          <div class="col-auto">
-                              <button class="btn btn-lg btn-success" type="submit">rechercher</button>
-                          </div>
-                          <!--end of col-->
-                      </div>
-                  </form>
-              </div>
-              <!--end of col-->
-          </div>
+       
 
         <!-- Page Content -->
-        <h1>Familles</h1>
+        <h1>
+      <i class="fas fa-fw fa-1x mr-2 fa-layer-group"></i>
+        Familles</h1>
         <hr>
          <?php
       
         $sql = "SELECT * FROM famille";
        
         ?>
-        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalScrollable">Ajouter une famille</button>
+        <button type="button" class="btn btn-danger mb-3" data-toggle="modal" data-target="#exampleModalScrollable"><i class="far fa-plus-square"></i>&nbsp;Ajouter une famille</button>
           <div class="container">
             <div class="row d-flex justify-content-center">
               <div class="col-md-10">
@@ -60,8 +56,17 @@
                 <td><?php echo $row['etat_famille'] ;?></td>
                 <td><img width="80" src="<?php echo $row['image_famille'] ;?>" alt=""></td>
 
-                <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
-                        data-target="#m<?php echo $row['id_famille'] ;?>">Supprimer</button></td>
+
+
+
+
+                <td class="text-center">
+                  <button type="button" class="btn btn-success" data-toggle="modal"
+                        data-target="#modif<?php echo $row['id_famille'] ;?>"><i class="fas fa-edit"></i></button>
+                        
+                        
+                        <button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#m<?php echo $row['id_famille'] ;?>"><i class="fas fa-trash"></i></button></td>
             </tr>
 
             <div class="modal fade" id="m<?php echo $row['id_famille'] ;?>" tabindex="-1" role="dialog"
@@ -88,6 +93,61 @@
                     </div>
                 </div>
             </div>
+
+
+
+
+<div class="modal fade" id="modif<?php echo $row['id_famille'] ;?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">modifier</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+           
+            <form action="famille.php" method="post" enctype="multipart/form-data">
+                
+                 
+                <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="text" id="titre_famille" name="titre_famille" class="form-control" placeholder="" required="required" autofocus="autofocus" value="<?php echo $row['titre_famille'] ;?>">
+                      <label for="titre_famille">Nom  famille</label>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <select name="etat_famille" id="etat_famille" class="form-control">
+                      <option value="<?php echo $row['etat_famille'] ;?>"><?php echo $row['etat_famille'] ;?></option>  
+                      <option value="disponible">disponible</option>
+                      <option value="non_disponible">non disponible</option>
+
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="file" id="image_famille" name="image_famille" class="form-control" placeholder="famille" autofocus="autofocus">
+                      <label for="image_famille">image  famille</label>
+                    </div>
+                  </div>
+                    
+                 
+                <input type="hidden" name="id_famille" value="<?php echo $row['id_famille'] ;?>">
+                <input type="hidden" name="action" value="modiffamille">
+               
+                <input type="submit" class="btn btn-danger btn-block" value="Modifier" name="ajouter">
+              </form>
+        </div>
+              
+       
+    </div>
+  </div>
+      </div>
             <?php }
             }; ?>
           
@@ -147,7 +207,7 @@
                
                   <input type="hidden" name="action" value="ajoutFamille">
                
-                <input type="submit" class="btn btn-primary btn-block" value="Ajouter" name="ajouter">
+                <input type="submit" class="btn btn-danger btn-block" value="Ajouter" name="ajouter">
               </form>
         </div>
               

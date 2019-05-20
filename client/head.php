@@ -18,7 +18,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Blank Page</title>
+  <title>espace client</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -75,7 +75,10 @@
 
   <nav class="navbar navbar-expand navbar-dark   sticky-top" style="background-color: #dc3545;">
 
-    <a class="navbar-brand mr-1" href="client.php">DMC <small>Espace client</small></a>
+                   
+    <a class="navbar-brand mr-1" href="client.php">
+    <img src="../images/DMC_blanc.png"  height="30"   width="60"  alt="">
+    <small>Espace client</small></a>
 
    
 
@@ -87,14 +90,25 @@
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0" style="color: white">
       
+      <li>
+      <h5><?php echo $_SESSION['nom_client']. ' '. $_SESSION['prenom_client'] . ' '; ?></h5>
+      </li>
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-circle fa-fw"></i>
+          <i class="fas fa-2x  fa-user-circle fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
          
-          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Se déconnecter</a>
+          <a class="dropdown-item text-dark" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt"></i>&nbsp;Se déconnecter</a>
         </div>
+      </li>
+
+      
+            <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="../index.php" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-2x fa-arrow-circle-left"></i>
+        </a>
+         
       </li>
     </ul>
 
@@ -126,7 +140,7 @@
     </a>
   </li>
       <li class="nav-item">
-    <a class="nav-link" href="client.php">
+    <a class="nav-link" href="facture.php">
       <i class="fas fa-fw fa-1x mr-2 fa-file-invoice"></i>
       <span>Factures</span>
     </a>

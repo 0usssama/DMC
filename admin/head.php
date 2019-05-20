@@ -1,7 +1,11 @@
 
 
 <?php include('../includes/config.php') ;?>
-<?php include('fonctionAdmin.php') ;?>
+<?php include('fonctionAdmin.php') ;
+
+
+?>
+
 
 
 
@@ -27,7 +31,10 @@
   <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin.min.css" rel="stylesheet">
+  <link href="css/sb-admin.css" rel="stylesheet">
+
+  <link href="css/print.css" rel="stylesheet" media="print">
+
 <style>
 .form-control-borderless {
     border: none;
@@ -57,14 +64,21 @@
 
 </script>
 
+<link rel="stylesheet" href="../toast/toast.css">
 
+<script src="../admin/vendor/jquery/jquery.js"></script>
+    <script src="../toast/toast.js"></script>
 </head>
+
 
 <body id="page-top">
 
   <nav class="navbar navbar-expand navbar-dark   sticky-top" style="background-color: #dc3545;">
 
-    <a class="navbar-brand mr-1" href="client.php">DMC <small>Espace admin</small></a>
+    <a class="navbar-brand mr-1" href="client.php">
+    <img src="../images/DMC_blanc.png"  height="50"   width="80"  alt="">
+    
+     <small>Espace admin</small></a>
 
    
 
@@ -78,13 +92,22 @@
       
       <li class="nav-item dropdown no-arrow">
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user-circle fa-fw"></i>
+          <i class="fas fa-2x  fa-user-circle fa-fw"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
          
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Se déconnecter</a>
         </div>
       </li>
+
+
+            <li class="nav-item dropdown no-arrow">
+        <a class="nav-link dropdown-toggle" href="logout.php" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-2x  fa-arrow-circle-left"></i>
+        </a>
+         
+      </li>
+
     </ul>
 
   </nav>
@@ -93,10 +116,20 @@
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav">
 <li class="nav-item">
+
+
+<?php
+/*
+if( $_SESSION['id_admin'] == 1){
+
+  echo '';
+}*/
+
+?>
     <a class="nav-link" href="admin.php">
-      <i class="fas fa-fw fa-1x mr-2 fa-user"></i>
-      <span>Admins</span>
-    </a>
+  <i class="fas fa-fw fa-1x mr-2 fa-user"></i>
+  <span>Admins</span>
+</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="client.php">
@@ -107,7 +140,7 @@
 
   <li class="nav-item">
     <a class="nav-link" href="produit.php">
-      <i class="fas fa-fw fa-1x mr-2 fa-cubes"></i>
+    <i class="fas fa-1x fa-box-open"></i>
       <span>Produits</span></a>
   </li>
   <li class="nav-item">
@@ -171,29 +204,50 @@
 
 
 
-        <li class="nav-item">
-            <a class="nav-link" href="images.php">
-              <i class="fas fa-fw fa-1x mr-2 fa-th"></i>
-              <span>Images</span></a>
-          </li>
-
-
-
            
-              <li class="nav-item">
-                  <a class="nav-link" href="promotions.php">
-                    <i class="fas fa-fw fa-1x mr-2 fa-percentage"></i>
-                    <span>Promotions</span></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="votes.php">
                       <i class="fas fa-fw fa-1x mr-2 fa-star"></i>
                       <span>Votes</span></a>
                   </li>
 
-                  <li class="nav-item">
-                      <a class="nav-link" href="factures.php">
-                        <i class="fas fa-fw fa-1x mr-2 fa-file-alt"></i>
-                        <span>Facture</span></a>
-                    </li>
+                
 </ul>
+
+ 
+
+
+<script>
+<?php 
+/*********************** */
+//var_dump($_SESSION);
+ //$_SESSION['toast'] = 'Marque supprimé  avec succés';
+if(isset(  $_SESSION['toast']) &&   $_SESSION['toast']){
+  echo " toastr.options = {
+   'closeButton': false,
+   'debug': false,
+   'newestOnTop': false,
+   'progressBar': false,
+   'positionClass':'toast-bottom-right',
+   'preventDuplicates': false,
+   'onclick': null,
+   'showDuration':'2000',
+   'hideDuration':'100',
+   'timeOut':'2000',
+   'extendedTimeOut':'100',
+   'showEasing':'swing',
+   'hideEasing':'linear',
+   'showMethod':'fadeIn',
+   'hideMethod':'fadeOut'
+  }
+  toastr.success('{$_SESSION['toast']}');
+  ";
+
+}
+
+
+
+ 
+/************************************ */
+?>
+</script>

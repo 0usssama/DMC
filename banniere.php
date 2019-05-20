@@ -1,6 +1,6 @@
     <div class="fluid-container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" >
                 <header class="">
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="2000">
                         <ol class="carousel-indicators">
@@ -61,7 +61,7 @@
                           
 
 
-                            <div class="carousel-item " style="background-image: url('images/slider/7.jpg')">
+                            <div class="carousel-item " style="background-image: url('images/slider/terminaux mobile.jpg')">
                                 <div class="carousel-caption text-left ">
 
                                     <h2 class="display-4 font-weight-bold"> MOBILITE </h2>

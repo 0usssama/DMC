@@ -5,26 +5,7 @@
 
       <div class="container-fluid">
 
-          <div class="row justify-content-center">
-              <div class="col-6 col-md-6 col-lg-6">
-                  <form class="card card-sm">
-                      <div class="card-body row no-gutters align-items-center">
-                         
-                          <!--end of col-->
-                          <div class="col">
-                              <input class="form-control form-control-borderless" type="search" placeholder="Rechercher une marque">
-                          </div>
-                          <!--end of col-->
-                          <div class="col-auto">
-                              <button class="btn  btn-success" type="submit">rechercher</button>
-                          </div>
-                          <!--end of col-->
-                      </div>
-                  </form>
-              </div>
-              <!--end of col-->
-          </div>
-
+          
         <!-- Page Content -->
         <h1>Commandes</h1>
         <hr>
@@ -36,8 +17,8 @@
                 <tr>
                   
 
-                    <th>N° commande</th>
-                  
+                    <th>N° Client</th>
+                    <th>Client</th>
                     <th>date</th>
                     <th>etat</th>
                     <th>Produits</th>
@@ -48,10 +29,79 @@
                  
                 </tr>
             </thead>
+<?php /* 
+$sql = "SELECT  client.id_client, client.nom_client, client.prenom_client, commander.date_comd, 
+commander.etat_comd, commander.qte_p_comd, commander.id_prod, commander.id_client
+FROM commander
+JOIN client 
+ON commander.id_client = client.id_client
+
+";
+
+{
+
+"listeid":"/47/49/", 
+liste des id des produit
+on transforme la liste en tableau avec la fonction explode
+on cré une boucle for, allant de 1 ver la taille du tableau  count() soit equivalent de length en pascal
+aussi j ai les id des produits
+
+ "titreProduit47":"imprimante ticket", "qteProduit47":"4", "prixProduit47":"1500", "totalProduit47":"6000", "titreProduit49":"tablette samsung", "qteProduit49":"6", "prixProduit49":"2150", "totalProduit49":"12900", "qteGeneral":"10", "totalGeneral":"18900", "idClient":"10", "nom":"hafsi", "prenom":"karim", "email":"", "adresse":"", "telephone":"" }
+
+*/ ?>
+
+
+<?php $id_client = $_SESSION['id_client'];
+$sql = "SELECT  * FROM commande WHERE id_client LIKE '$id_client' AND etat_comd NOT LIKE 'valider'";
+
+//$sqlpointdevent = "SELECT  * FROM commande WHERE etat_comd LIKE 'pointdevente' AND id_point_vente LIKE '$id_point_vente'";
+
+?>
+
+
+    <?php 
+        if($pdo->query($sql)){
+           
+            
+
+            foreach  ($pdo->query($sql) as $commande) { ?>
  
+  <?php 
+  $facture = json_decode($commande['elements_produit'], true);
 
+  ?>  
+                    <tr>
+                        <td><?php echo $facture['idClient']; ?></td>
+                        <td><?php echo $facture['nom'].' '. $facture['prenom'];?></td>
+                        <td><?php echo $commande['date_comd']; ?></td>
+                        <td><?php echo $commande['etat_comd']; ?></td>
+                       
+                         <td>
+                         <?php // liste des produits ?>
+ 
+                         <?php $liste = $facture['listeid']; //recuperation de la liste des id des commande ?>
+                         <?php $listeProduitPannier = explode('/', $liste); 
+                               $y = count($listeProduitPannier); 
+                               for ($i=1; $i < $y-1; $i++)  
+                               {
+                               $idp = $listeProduitPannier[$i]; 
+                               echo '<p>'.$facture['titreProduit'.$idp].' ('.$facture['qteProduit'.$idp].')</p>';
+                               }
+                         ?>
+                         </td>
+                      
+                       
+                      
+                        <td>
+ 
+        <a  class="btn btn-success " href="imprime_facture.php?id=<?php echo $commande['id_comd']; ?>"><i class="far fa-eye"></i>&nbsp;voir/&nbsp;<i class="fas fa-print"></i>&nbsp;imprimer</a> 
 
+                        </td>
+                  
+                        
 
+                       
+                    </tr>
                     <div class="modal fade" id="m<?php echo $commande['id_client'] ;?>" tabindex="-1" role="dialog"
                 aria-labelledby="m<?php echo $commande['id_client'] ;?>" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -63,8 +113,8 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="commandes.php?id_client=<?php echo $commande['id_client'] ;?> " method="post">
-                                <h1 class="mb-5">voulez-vous supprimer la commande du client n°<?php echo $commande['id_client'] ;?> </h1>
+                            <form action="commandes.php?id_comd=<?php echo $commande['id_comd'] ;?>" method="post">
+                                <h1 class="mb-5">voulez-vous supprimer la commande du client n°<?php echo $commande['id_comd'] ;?> </h1>
                 <input type="hidden" name="action" value="suppCommande">
                               
                                 <input type="submit" name="supprimer" class="btn btn-block btn-danger"
@@ -78,9 +128,9 @@
             </div>
                    
               <?php 
-           // }
+            }
           
-           //  } ?>     
+             } ?>     
             </table>
 
       <!-- /.container-fluid -->

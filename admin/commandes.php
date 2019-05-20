@@ -1,32 +1,19 @@
 
 <?php include 'head.php'; 
+
+
  ?>
     <div id="content-wrapper">
 
       <div class="container-fluid">
 
-          <div class="row justify-content-center">
-              <div class="col-6 col-md-6 col-lg-6">
-                  <form class="card card-sm">
-                      <div class="card-body row no-gutters align-items-center">
-                         
-                          <!--end of col-->
-                          <div class="col">
-                              <input class="form-control form-control-borderless" type="search" placeholder="Rechercher une marque">
-                          </div>
-                          <!--end of col-->
-                          <div class="col-auto">
-                              <button class="btn  btn-success" type="submit">rechercher</button>
-                          </div>
-                          <!--end of col-->
-                      </div>
-                  </form>
-              </div>
-              <!--end of col-->
-          </div>
+        
 
         <!-- Page Content -->
-        <h1>Commandes</h1>
+        <h1>
+        <i class="fas fa-fw fa-1x mr-2 fa-cart-arrow-down"></i>
+
+        Commandes</h1>
         <hr>
 
 
@@ -71,7 +58,7 @@ aussi j ai les id des produits
 
 
 <?php 
-$sql = "SELECT  * FROM commande WHERE etat_comd LIKE 'en cours'";
+$sql = "SELECT  * FROM commande WHERE etat_comd LIKE 'en cours' ORDER BY id_comd DESC";
 
 //$sqlpointdevent = "SELECT  * FROM commande WHERE etat_comd LIKE 'pointdevente' AND id_point_vente LIKE '$id_point_vente'";
 
@@ -112,14 +99,14 @@ $sql = "SELECT  * FROM commande WHERE etat_comd LIKE 'en cours'";
                        
                       
                         <td>
-        <a  class="btn btn-success btn-block " href="un_point_de_ventes.php?idpointdevente=<?php echo $commande['id_point_vente']; ?>&idcommende=<?php echo $commande['id_comd']; ?>">transférer</a>
-        <a  class="btn btn-success btn-block " href="imprime_facture.php?id=<?php echo $commande['id_comd']; ?>">voir/imprimer</a> 
+        <a  class="btn btn-success  " href="un_point_de_ventes.php?idpointdevente=<?php echo $commande['id_point_vente']; ?>&idcommende=<?php echo $commande['id_comd']; ?>"><i class="fas fa-share-square"></i></a>
+        <a  class="btn btn-success  " href="imprime_facture.php?id=<?php echo $commande['id_comd']; ?>"><i class="fas fa-eye"></i>&nbsp;voir/&nbsp;<i class="fas fa-print"></i>&nbsp;imprimer</a> 
 
                         </td>
                         <td>
                            
         <button type="button" class="btn btn-danger" data-toggle="modal"
-                        data-target="#m<?php echo $commande['id_client'] ;?>">Supprimer</button>
+                        data-target="#m<?php echo $commande['id_client'] ;?>"><i class="fas fa-trash"></i></button>
                                             </td>
                         
 
@@ -136,8 +123,8 @@ $sql = "SELECT  * FROM commande WHERE etat_comd LIKE 'en cours'";
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="commandes.php?id_client=<?php echo $commande['id_client'] ;?> " method="post">
-                                <h1 class="mb-5">voulez-vous supprimer la commande du client n°<?php echo $commande['id_client'] ;?> </h1>
+                            <form action="commandes.php?id_comd=<?php echo $commande['id_comd'] ;?>" method="post">
+                                <h1 class="mb-5">voulez-vous supprimer la commande du client n°<?php echo $commande['id_comd'] ;?> </h1>
                 <input type="hidden" name="action" value="suppCommande">
                               
                                 <input type="submit" name="supprimer" class="btn btn-block btn-danger"

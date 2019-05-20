@@ -1,5 +1,6 @@
 <?php include 'head.php';
 
+
     if(isset($_POST['supprimer'])){
 
         // need to sanitize
@@ -24,38 +25,18 @@
 
 
     <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10 col-lg-8">
-                <form class="card card-sm">
-                    <div class="card-body row no-gutters align-items-center">
-
-                        <!--end of col-->
-                        <div class="col">
-                            <input class="form-control form-control-lg form-control-borderless" type="search"
-                                placeholder="Rechercher un client">
-                        </div>
-                        <!--end of col-->
-                        <div class="col-auto">
-                            <button class="btn btn-lg btn-success" type="submit">rechercher</button>
-                        </div>
-                        <!--end of col-->
-                    </div>
-                </form>
-            </div>
-            <!--end of col-->
-        </div>
-
+      
 
         <!-- Page Content -->
-        <h1>Admin</h1>
+        <h1> <i class="fas fa-fw fa-1x mr-2 fa-user"></i> Admin</h1>
         <hr>
 
         <?php
         $sql = "SELECT * FROM admin";
        
         ?>
-        <button type="button" class="btn btn-primary mb-3" data-toggle="modal"
-            data-target="#exampleModalScrollable">Ajouter un admin</button>
+        <button type="button" class="btn btn-danger mb-3" data-toggle="modal"
+            data-target="#exampleModalScrollable"><i class="far fa-plus-square"></i>&nbsp;Ajouter un admin</button>
 
       <table class="table table-striped custab">
             <thead>
@@ -64,7 +45,7 @@
                     <th>nom</th>
                     <th>email</th>
                     <th>role</th>
-                    <th>état admin</th>
+                    <th>etat</th>
 
                     <th class="text-center">Action</th>
                 </tr>
@@ -81,8 +62,9 @@
                 <td><?php echo $row['role_admin'] ;?></td>
                 <td><?php echo $row['etat_admin'] ;?></td>
 
+
                 <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
-                        data-target="#m<?php echo $row['id_admin'] ;?>">Supprimer</button></td>
+                        data-target="#m<?php echo $row['id_admin'] ;?>"><i class="fas fa-trash"></i></button></td>
             </tr>
 
             <div class="modal fade" id="m<?php echo $row['id_admin'] ;?>" tabindex="-1" role="dialog"

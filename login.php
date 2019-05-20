@@ -18,7 +18,11 @@
 
   <!-- Custom styles for this template-->
   <link href="admin/css/sb-admin.min.css" rel="stylesheet">
+  <script src="admin/vendor/jquery/jquery.min.js"></script>
+  
+  <script src="toast/toast.js"></script>
 
+<link rel="stylesheet" href="toast/toast.css">
 <style type="text/css">
 
 
@@ -28,8 +32,22 @@ background-color: red;
 
 
 </style>
+
 </head>
 
+<style>
+body{
+  background-image: url('images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.form-control:focus {
+  border-color: rgba(220, 53, 69, 1) ;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+}
+</style>
 
 
 
@@ -38,7 +56,7 @@ background-color: red;
 
   <div class="container">
     <div class="card card-login mx-auto mt-5">
-      <div class="card-header">Se connecter</div>
+      <div class="text-center card-header text-danger"><i class="fas fa-3x fa-user"></i></div>
       <div class="card-body">
         <form action="test_login.php" method="post">
           <div class="form-group">
@@ -53,11 +71,11 @@ background-color: red;
               <label for="inputPassword">Mot de passe</label>
             </div>
           </div>
-          <input type="submit" name="connecter" value="connecter" class="btn btn-primary btn-block">
+          <input type="submit" name="connecter" value="connecter" class="btn btn-danger btn-block">
           
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="register.php">s'inscrire</a>
+          <a class="d-block small mt-3" href="register.php" style="color: black;">s'inscrire</a>
         </div>
         <div class="<?php if(isset($_SESSION['erreurs']) && !empty($_SESSION['erreurs'])){echo 'alert alert-danger mt-4';} ?>" role="alert">
       <?php 
@@ -72,9 +90,42 @@ background-color: red;
       </div>
     </div>
   </div>
+  
+<script>
+
+<?php 
+//var_dump($_SESSION);
+//$_SESSION['registerok'] = 'test';
+if(isset(  $_SESSION['registerok']) &&   !empty($_SESSION['registerok'])){
+  echo " toastr.options = {
+   'closeButton': false,
+   'debug': false,
+   'newestOnTop': false,
+   'progressBar': false,
+   'positionClass':'toast-top-right',
+   'preventDuplicates': false,
+   'onclick': null,
+   'showDuration':'1000',
+   'hideDuration':'100',
+   'timeOut':'2000',
+   'extendedTimeOut':'100',
+   'showEasing':'swing',
+   'hideEasing':'linear',
+   'showMethod':'fadeIn',
+   'hideMethod':'fadeOut'
+  }
+  toastr.success('{$_SESSION['registerok']}');
+  ";
+
+  unset($_SESSION['registerok']);
+  session_destroy();
+}
+
+?>
+
+</script>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="admin/vendor/jquery/jquery.min.js"></script>
   <script src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->

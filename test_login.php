@@ -29,6 +29,8 @@ if($_POST['connecter']){
         $_SESSION['email_client'] = $trouv['email_client'];
         $_SESSION[' adresse_client']= $trouv['adresse_client'];
         $_SESSION['tel_client'] = $trouv['tel_client'];
+
+        $_SESSION['toast'] = 'Bienvenue '. $_SESSION['nom_client'] . ' '. $_SESSION['prenom_client'];
         header('location: index.php');
        
 

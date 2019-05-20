@@ -17,12 +17,13 @@
     />
     <link rel="stylesheet" href="slick/slick.css" />
     <link rel="stylesheet" href="slick/slick-theme.css" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous"
-    />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+
+<script src="admin/vendor/jquery/jquery.js"></script>
+    <script src="toast/toast.js"></script>
+
+   <link rel="stylesheet" href="toast/toast.css">
     <title>DMC</title>
   </head>
 
@@ -125,7 +126,7 @@
 }
 /*footer*/
 .col_white_amrc { color:#FFF;}
-footer { width:100%; min-height:250px; padding:10px 0px 25px 0px ;}
+footer { width:100%; min-height:200px; padding:10px 0px 25px 0px ;}
 .pt2 { padding-top:40px ; margin-bottom:20px ;}
 footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
 .mb10 { padding-bottom:15px ;}
@@ -146,7 +147,7 @@ footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
 	list-style-type:none;
 	padding:0px;
 	display:table;
-	margin-top: 10px;
+
 	margin-right: auto;
 	margin-bottom: 10px;
 	margin-left: auto;
@@ -178,6 +179,7 @@ footer p { font-size:13px; color:#CCC; padding-bottom:0px; margin-bottom:8px;}
   background-image: url('images/installation.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  height: 200px;
 }
 #alphaServices{
   background:rgba(255, 0, 0, 0.719);
@@ -214,6 +216,14 @@ color: black !important;
     border-radius: 3px;
     float: right;
   }
+
+.row{
+  marging-left: 0 !important;
+  marging-right: 0 !important;
+
+}
+
+
   input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     /* display: none; <- Crashes Chrome on hover */
@@ -225,6 +235,14 @@ input[type=number] {
     -moz-appearance:textfield; /* Firefox */
 }
 
+<?php for ($i=1; $i < 6; $i++) { ?>
+
+   #vote<?php echo $i; ?> {color:#000; }
+
+<?php } ?>
+
+
+
   </style>
  
 
@@ -234,6 +252,24 @@ input[type=number] {
       var quantite   = document.getElementById(qteid).value; 
       var envoi   = "fonctionSite.php?qteid="+qteid+"&quantite="+quantite;
       $.get(envoi);
+      toastr.options = {
+   'closeButton': false,
+   'debug': false,
+   'newestOnTop': false,
+   'progressBar': false,
+   'positionClass':'toast-bottom-right',
+   'preventDuplicates': false,
+   'onclick': null,
+   'showDuration':'2000',
+   'hideDuration':'100',
+   'timeOut':'2000',
+   'extendedTimeOut':'100',
+   'showEasing':'swing',
+   'hideEasing':'linear',
+   'showMethod':'fadeIn',
+   'hideMethod':'fadeOut'
+  }
+  toastr.success('produit ajouté!');
       //alert(envoi); 
     }
   </script>

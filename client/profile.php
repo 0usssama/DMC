@@ -5,6 +5,15 @@ if(!isset($_SESSION['id_client'])){
 header('location: ../index.php');
 }
  ?>
+ <style>
+ 
+.form-control:focus {
+  border-color: rgba(220, 53, 69, 1) ;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+}
+ </style>
     <div id="content-wrapper">
 
       <div class="container-fluid">
@@ -107,7 +116,12 @@ header('location: ../index.php');
           </div>
           <input type="hidden" name="action" value="updateClient">
 
-         <input type="submit" value="Modifier" class="btn btn-danger btn-block" name="inscrire">
+         
+          <button type="submit" value="Modifier" class="btn btn-danger btn-block" name="inscrire"> 
+
+          <i class="fas fa-wrench"></i>&nbsp;Modifier
+          </button>
+         
         </form>
     </div>
 

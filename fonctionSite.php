@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION['admin']='connecte';
+
 $user = 'root';
 
 if(PHP_OS == 'WINNT'){//working on different OS
@@ -24,7 +24,7 @@ include ('includes/config.php');
 
  
 if(isset($_POST['action'])){
-  if($_POST['action'] == 'validerDevis'){
+  if($_POST['action'] == 'validerLeDevis'){
 
    //creation du fichier jason
     $facture = '{';
@@ -81,21 +81,28 @@ if(isset($_POST['action'])){
     $qte_p_comd = $qtetotalProd;
     $id_client = $_SESSION['id_client'];
     $elements_produit = $facture;
-  
-  
+    $id_point_vente = $_POST['pointdevente'];
+    $etat = 'en cours';
+    $date_comd = date('Y-m-d');
   
     $sql = "INSERT INTO commande( 
             id_client,
-            elements_produit
+            elements_produit,
+            id_point_vente,
+            etat_comd
             ) VALUES (
             :id_client,
-            :elements_produit
+            :elements_produit,
+            :id_point_vente,
+            :etat_comd
            )";
                                           
 $stmt = $bdd->prepare($sql);
                                               
 $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
 $stmt->bindParam(':elements_produit', $elements_produit, PDO::PARAM_STR);
+$stmt->bindParam(':id_point_vente', $id_point_vente, PDO::PARAM_INT);
+$stmt->bindParam(':etat_comd', $etat);
                                       
 $stmt->execute(); 
 
@@ -104,6 +111,27 @@ $sql = "SELECT  * FROM commande WHERE  elements_produit LIKE '%$jsonclient%' ORD
 if($pdo->query($sql)){
  foreach  ($pdo->query($sql) as $commande) { $id_comd = $commande['id_comd'];
  header('Location: client/imprime_facture.php?id='.$id_comd);
+
+
+
+        $nom_client = $_SESSION['nom_client'];
+        $prenom_client = $_SESSION['prenom_client'];
+        $id_client = $_SESSION['id_client'];
+        $prenom_client = $_SESSION['prenom_client'];
+        $email_client = $_SESSION['email_client'];
+        $adresse_client = $_SESSION['adresse_client'];
+        $tel_client = $_SESSION['tel_client'];
+
+       session_unset();
+
+        $_SESSION['nom_client'] = $nom_client;
+        $_SESSION['prenom_client'] = $prenom_client;
+        $_SESSION['id_client'] = $id_client;
+        $_SESSION['prenom_client'] = $prenom_client;
+        $_SESSION['email_client'] = $email_client;
+        $_SESSION['adresse_client'] = $adresse_client;
+        $_SESSION['tel_client'] = $tel_client;
+
  exit();
  }
  }
@@ -303,21 +331,21 @@ foreach  ($bdd->query($sql) as $row) {
 
    }
 
-
+}
 
 
 if(isset($_GET['action'])){ 
   if($_GET['action'] == 'vote'){ 
+  $id_prod= $_GET['id_prod']; 
 
 $vote = $_GET['vote']; 
 
 if ($vote == 1){$vote1 = 1;}else{$vote1=0; $nbr_etoils_ev = $vote1;}
-if ($vote == 2){$vote1 = 2;}else{$vote2=0; $nbr_etoils_ev = $vote2;}
-if ($vote == 3){$vote1 = 3;}else{$vote3=0; $nbr_etoils_ev = $vote3;}
-if ($vote == 4){$vote1 = 4;}else{$vote4=0; $nbr_etoils_ev = $vote4;}
-if ($vote == 5){$vote1 = 5;}else{$vote5=0; $nbr_etoils_ev = $vote5;}
+if ($vote == 2){$vote2 = 1;}else{$vote2=0; $nbr_etoils_ev = $vote2;}
+if ($vote == 3){$vote3 = 1;}else{$vote3=0; $nbr_etoils_ev = $vote3;}
+if ($vote == 4){$vote4 = 1;}else{$vote4=0; $nbr_etoils_ev = $vote4;}
+if ($vote == 5){$vote5 = 1;}else{$vote5=0; $nbr_etoils_ev = $vote5;}
 
-$id_prod= $_GET['id_prod']; 
 $id_client = $_SESSION['id_client'];
 $date_ev = date('m/d/Y h:i:s', time());
 
@@ -326,17 +354,17 @@ $date_ev = date('m/d/Y h:i:s', time());
             if($bdd->query($sql)){
             foreach  ($bdd->query($sql) as $row) {
 
-             $vote = $row['vote1'] + $vote1 ;
-             $vote = $row['vote2'] + $vote2 ;
-             $vote = $row['vote3'] + $vote3 ;
-             $vote = $row['vote4'] + $vote4 ;
-             $vote = $row['vote5'] + $vote5 ;
+             $vote1 = $row['vote1'] + $vote1 ;
+             $vote2 = $row['vote2'] + $vote2 ;
+             $vote3 = $row['vote3'] + $vote3 ;
+             $vote4 = $row['vote4'] + $vote4 ;
+             $vote5 = $row['vote5'] + $vote5 ;
 
               }
             } 
 
-
-            $sql = "UPDATE produit SET vote1 =: vote1 ,vote2 =: vote2,vote3 =: vote3,vote4 =: vote4,vote5 =: vote5 
+     global $bdd;
+            $sql = "UPDATE produit SET vote1 =:vote1 , vote2 =:vote2, vote3 =:vote3, vote4 =:vote4, vote5 =:vote5 
             WHERE id_prod = :id_prod";
             $stmt = $bdd->prepare($sql);                                  
 
@@ -352,11 +380,9 @@ $date_ev = date('m/d/Y h:i:s', time());
 
  
 $sql = "INSERT INTO evaluer(
-            date_ev,
             nbr_etoils_ev,
             id_prod,
             id_client) VALUES (
-            :date_ev,
             :nbr_etoils_ev,
             :id_prod,
             :id_client
@@ -364,22 +390,21 @@ $sql = "INSERT INTO evaluer(
                                           
 $stmt = $bdd->prepare($sql);
                         
-            $stmt->bindParam(':date_ev', $date_ev, PDO::PARAM_STR);
-            $stmt->bindParam(':nbr_etoils_ev', $nbr_etoils_ev, PDO::PARAM_STR);
+            $stmt->bindParam(':nbr_etoils_ev', $vote, PDO::PARAM_STR);
             $stmt->bindParam(':id_prod', $id_prod, PDO::PARAM_INT);
             $stmt->bindParam(':id_client', $id_client, PDO::PARAM_INT);
 
 $stmt->execute();
 
-}
+
 
     }
 
 
 }
 
-
-
+if(isset($_GET['connect'])){if($_GET['connect']=='0'){session_destroy();}}
+ 
 //$_SESSION['listeIdProduit'] = /idproduit101/idproduit5/idproduit120/idproduit15/;
 
 // $_SESSION['qteProduit15'] = 10;

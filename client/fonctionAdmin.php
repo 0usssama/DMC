@@ -425,6 +425,7 @@ $inserted = $statement->execute();
 //verifier si on a des résultats (true or false)
 if($inserted){
 echo ' Youpiiiiiii<br>';
+
 header('location: ../login.php');
 }else{
 echo 'ohhhh :(' . "<br>" . print_r($statement->errorInfo());

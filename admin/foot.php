@@ -1,4 +1,5 @@
 
+
  
     </div>
     <!-- /.content-wrapper -->
@@ -24,12 +25,11 @@
         <div class="modal-body">Sélectionner déconnecter si vous êtes sûre :)</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-          <a class="btn btn-primary" href="login.html">se déconnecter</a>
+          <a class="btn btn-primary" href="index.php?connect=0">se déconnecter</a>
         </div>
       </div>
     </div>
   </div>
-
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -43,5 +43,5 @@
 
 </script>
 </body>
-
+<?php  unset($_SESSION['toast']); ?>
 </html>

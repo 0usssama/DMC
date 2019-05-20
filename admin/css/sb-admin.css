@@ -2799,9 +2799,9 @@ fieldset:disabled a.btn {
   border-color: #bd2130;
 }
 
-.btn-danger:focus,.btn-danger.focus {
+.btn-danger:focus, .btn-danger.focus {
   -webkit-box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
-  box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);/**hna gest jedha*/
+  box-shadow: 0 0 0 0.2rem rgba(225, 83, 97, 0.5);
 }
 
 .btn-danger.disabled, .btn-danger:disabled {
@@ -3292,8 +3292,6 @@ input[type="button"].btn-block {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0.25rem;
-  
-
 }
 
 .dropdown-menu-right {
@@ -3351,7 +3349,10 @@ input[type="button"].btn-block {
 @media (min-width: 992px) {
   .dropdown-menu-lg-left {
     right: auto;
-    left: drop
+    left: 0;
+  }
+}
+
 @media (min-width: 1200px) {
   .dropdown-menu-xl-left {
     right: auto;
@@ -3369,7 +3370,8 @@ input[type="button"].btn-block {
 .dropup .dropdown-toggle::after {
   display: inline-block;
   margin-left: 0.255em;
-  vertical-align: 0.drop: "";
+  vertical-align: 0.255em;
+  content: "";
   border-top: 0;
   border-right: 0.3em solid transparent;
   border-bottom: 0.3em solid;
@@ -3573,7 +3575,8 @@ input[type="button"].btn-block {
 
 .btn-group > .btn:not(:first-child),
 .btn-group > .btn-group:not(:first-child) > .btn {
-  border-top-left-radius: drop-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .dropdown-toggle-split {
@@ -4462,7 +4465,8 @@ input[type="button"].btn-block {
   padding-top: 0.3125rem;
   padding-bottom: 0.3125rem;
   margin-right: 1rem;
-  font-size: 1.drop-height: inherit;
+  font-size: 1.25rem;
+  line-height: inherit;
   white-space: nowrap;
 }
 
@@ -4564,7 +4568,8 @@ input[type="button"].btn-block {
   .navbar-expand-sm .navbar-nav .dropdown-menu {
     position: absolute;
   }
-  .navbar-expand-sm .navbar-nav .nav-drop-right: 0.5rem;
+  .navbar-expand-sm .navbar-nav .nav-link {
+    padding-right: 0.5rem;
     padding-left: 0.5rem;
   }
   .navbar-expand-sm > .container,
@@ -4636,7 +4641,10 @@ input[type="button"].btn-block {
   .navbar-expand-lg > .container,
   .navbar-expand-lg > .container-fluid {
     padding-right: 0;
-    padding-left: drop
+    padding-left: 0;
+  }
+}
+
 @media (min-width: 992px) {
   .navbar-expand-lg {
     -webkit-box-orient: horizontal;
@@ -4681,7 +4689,10 @@ input[type="button"].btn-block {
   .navbar-expand-xl > .container,
   .navbar-expand-xl > .container-fluid {
     padding-right: 0;
-    padding-left: drop
+    padding-left: 0;
+  }
+}
+
 @media (min-width: 1200px) {
   .navbar-expand-xl {
     -webkit-box-orient: horizontal;
@@ -4727,7 +4738,7 @@ input[type="button"].btn-block {
   -webkit-box-direction: normal;
   -ms-flex-flow: row nowrap;
   flex-flow: row nowrap;
-  -drop-box-pack: start;
+  -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
 }
@@ -4775,7 +4786,7 @@ input[type="button"].btn-block {
 .navbar-light .navbar-brand {
   color: rgba(0, 0, 0, 0.9);
 }
-drop
+
 .navbar-light .navbar-brand:hover, .navbar-light .navbar-brand:focus {
   color: rgba(0, 0, 0, 0.9);
 }
@@ -4821,7 +4832,9 @@ drop
 }
 
 .navbar-dark .navbar-brand {
-  color: #drop
+  color: #fff;
+}
+
 .navbar-dark .navbar-brand:hover, .navbar-dark .navbar-brand:focus {
   color: #fff;
 }
@@ -10574,14 +10587,16 @@ body {
     font-size: 0.65rem;
     display: block;
   }
-  .sidebar.toggled .nav-item .dropdown-drop: absolute !important;
+  .sidebar.toggled .nav-item .dropdown-menu {
+    position: absolute !important;
     -webkit-transform: none !important;
     transform: none !important;
     left: calc(90px + 0.5rem) !important;
     margin: 0;
   }
   .sidebar.toggled .nav-item .dropdown-menu.dropup {
-    bottom: drop: auto !important;
+    bottom: 0;
+    top: auto !important;
   }
   .sidebar.toggled .nav-item.dropdown .dropdown-toggle::after {
     display: none;
@@ -10625,7 +10640,7 @@ body {
   --input-padding-y: 0.75rem;
 }
 
-.drop-login {
+.card-login {
   max-width: 25rem;
 }
 
@@ -10649,14 +10664,14 @@ body {
   left: 0;
   display: block;
   width: 100%;
-  drop-bottom: 0;
+  margin-bottom: 0;
   /* Override default `<label>` margin */
   line-height: 1.5;
   color: #495057;
   border: 1px solid transparent;
   border-radius: 0.25rem;
   -webkit-transition: all 0.1s ease-in-out;
-  drop: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .form-label-group input::-webkit-input-placeholder {
@@ -10719,3 +10734,5 @@ body.sidebar-toggled footer.sticky-footer {
     width: calc(100% - 90px);
   }
 }
+
+.pourprint {display: none !important}

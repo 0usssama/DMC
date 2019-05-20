@@ -1,43 +1,8 @@
 
 <?php include 'includes/config.php'; ?>
 <?php include 'fonctionSite.php'; ?>
- <?php 
+
  
-
-    if(isset($_POST['valider'])){
-        $produitDevis = $_SESSION['produitDevis'];
-        //1 [id prduit=> qnt]
-        var_dump($produitDevis);
-        if(!empty($produitDevis) && isset($produitDevis)){
-            $date = date('Y-m-d');
-           // var_dump($produitDevis);
-
-           foreach ($produitDevis as $id_produit => $quantite) {
-            $sql = '';
-            $sql = "INSERT INTO commande (date_comd, etat_comd, id_client) VALUES ";
-
-            $sql .= "(";
-            $sql .= "'" . $date ."'," ;
-            $sql .= "'en cours'," ;
-            $sql .= "'" .  $_SESSION['id_client'] ."'," ;
-            $sql .= ");"; 
-           // echo $sql . "<br>";
-
-          $resultat =  $pdo->query($sql);
-            if($resultat){
-               echo "it works" . "<br>";
-               $_SESSION['listeIdProduit'] = '';
-               unset($_SESSION['listeIdProduit']);
-               header('location: index.php');
-            }else{
-                echo "neh";
-            }
-
-
-           }
-        }
-    }
-?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -46,13 +11,30 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" href="css/Font-Awesome-master/Font-Awesome-master/css/all.css">
+<style type="text/css">
+ 
+  <?php 
+if(!isset($_SESSION['qteTotal'])){echo' #finir{display: none;}';}   
+if($_SESSION['qteTotal'] <= 1 ){echo' #finir{display: none;}';}   
+if($_SESSION['qteTotal'] > 0 ){echo' #finir{display: block;}';}    
+?>
+
+</style>
+<script type="text/javascript">
+  function affichefinir(){
+  document.getElementById("finir").style.display = "block";
+  }
+  function masquefinir(){
+  document.getElementById("finir").style.display = "none";
+  }  
+</script>
 </head>
 <body>
     
 
 <section class="jumbotron bg-danger text-light text-center">
-        <h1>Devis</h1>
+        <h1><i class="fas fa-cash-register"></i>Devis</h1>
 </section> 
 
 <div class="container mb-4">
@@ -232,14 +214,18 @@ $produitDevis = [];
                             />
                                </td>
                         </tr>
+
+<form method="post" action="devis.php">
+
+
                         <tr><td>Point de vente</td>
                         
-                        <td><select class="browser-default custom-select">
+                        <td><select name="pointdevente" class="browser-default custom-select">
 
   <?php $sql = "SELECT * FROM point_de_vente";
       if($bdd->query($sql)){
       foreach  ($bdd->query($sql) as $point_de_vente) {   ?>
-         <option value="<?php echo $point_de_vente[' id_point_vente']; ?>">
+         <option value="<?php echo $point_de_vente['id_point_vente']; ?>">
           <?php echo $point_de_vente['titre_point_vente']; ?>
          </option>
   <?php } }; ?> 
@@ -261,19 +247,19 @@ $produitDevis = [];
         <div class="col mb-2">
             <div class="row">
                 <div class="col-sm-12  col-md-6">
-                    <a href ="index.php" class="btn btn-lg btn-block btn-warning text-uppercase">Continuer le shopping</a>
+                    <a href ="index.php" class="btn btn-lg btn-block btn-warning text-uppercase"><i class="fas fa-cart-plus"></i>&nbsp;Continuer le shopping</a>
                 </div>
                 <div class="col-sm-12 col-md-6 text-right">
-                <form method="post" action="devis.php">
-                    <input type="hidden" name="action" value="validerDevis">
-                    <input type="submit" value="Finir le shopping" name="valider" class="btn btn-lg btn-block btn-success text-uppercase">
-                </form>
+                    <input type="hidden" name="action" value="validerLeDevis">
+                    
+                  
+                    <button type="submit" id="finir" name="valider" class="btn btn-lg btn-block btn-success text-uppercase">  <i class="fas fa-vote-yea"></i>&nbsp;Finir le shopping</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+ </form>
 <script type="text/javascript">
 function calcule (id){
 
@@ -311,6 +297,8 @@ function calcule (id){
    <?php } ?>
    document.getElementById('totalepannier').value = parseFloat(totalepannier);
    document.getElementById('totaleproduit').value = parseFloat(totaleproduit);
+   if(totaleproduit>0){affichefinir();}
+   if(totaleproduit<1){masquefinir();}
 
 }  
 </script>

@@ -8,28 +8,16 @@
 
       <div class="container-fluid">
           <div class="row justify-content-center">
-              <div class="col-12 col-md-10 col-lg-8">
-                  <form class="card card-sm">
-                      <div class="card-body row no-gutters align-items-center">
-                         
-                          <!--end of col-->
-                          <div class="col">
-                              <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Rechercher un client">
-                          </div>
-                          <!--end of col-->
-                          <div class="col-auto">
-                              <button class="btn btn-lg btn-success" type="submit">rechercher</button>
-                          </div>
-                          <!--end of col-->
-                      </div>
-                  </form>
-              </div>
+              
               <!--end of col-->
           </div>
        
 
         <!-- Page Content -->
-        <h1>Clients</h1>
+        <br><br>
+        <h1> 
+      <i class="fas fa-fw fa-1x mr-2 fa-users"></i>
+         Clients</h1>
         <hr>
         <?php
         $sql = "SELECT * FROM client";
@@ -60,7 +48,7 @@
                 <td><?php echo $row['catego_client'] ;?></td>
 
                 <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
-                        data-target="#m<?php echo $row['id_client'] ;?>">Supprimer</button></td>
+                        data-target="#m<?php echo $row['id_client'] ;?>"><i class="fas fa-trash"></i></button></td>
             </tr>
 
             <div class="modal fade" id="m<?php echo $row['id_client'] ;?>" tabindex="-1" role="dialog"

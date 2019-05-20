@@ -1,35 +1,34 @@
 
 <?php include 'head.php'; 
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
  ?>
     <div id="content-wrapper">
 
       <div class="container-fluid">
 
-          <div class="row justify-content-center">
-              <div class="col-6 col-md-6 col-lg-6">
-                  <form class="card card-sm">
-                      <div class="card-body row no-gutters align-items-center">
-                         
-                          <!--end of col-->
-                          <div class="col">
-                              <input class="form-control form-control-borderless" type="search" placeholder="Rechercher une marque">
-                          </div>
-                          <!--end of col-->
-                          <div class="col-auto">
-                              <button class="btn  btn-success" type="submit">rechercher</button>
-                          </div>
-                          <!--end of col-->
-                      </div>
-                  </form>
-              </div>
-              <!--end of col-->
-          </div>
-
+     
         <!-- Page Content -->
-        <h1>Commandes</h1>
+
+        <?php 
+      if(isset($_GET['idpointdevente'])){$idpointdevente = strip_tags($_GET['idpointdevente']); 
+
+
+             $sql = "SELECT * FROM point_de_vente WHERE  id_point_vente LIKE '$idpointdevente'";
+
+            if($pdo->query($sql)){
+            foreach  ($pdo->query($sql) as $row) {
+              $titrepoint = $row['titre_point_vente'] ;
+            }
+            }
+            }  
+            ?>
+        <h2>Commandes : point de vente <?php echo $titrepoint;?></h2>
         <hr>
 
-
+      
         <table class="table table-striped custab">
             <thead>
             
@@ -71,7 +70,18 @@ aussi j ai les id des produits
 
 
 <?php 
-      if(isset($_GET['idpointdevente'])){$idpointdevente = strip_tags($_GET['idpointdevente']);} 
+      if(isset($_GET['idpointdevente'])){$idpointdevente = strip_tags($_GET['idpointdevente']); 
+
+
+             $sql = "SELECT * FROM point_de_vente WHERE  id_point_vente LIKE '$idpointdevente'";
+
+            if($pdo->query($sql)){
+            foreach  ($pdo->query($sql) as $row) {
+              $titrepoint = $row['titre_point_vente'] ;
+            }
+            }
+            }  
+
 
       if(isset($_GET['idcommende'])){$idcommende = strip_tags($_GET['idcommende']);}
 
@@ -103,7 +113,7 @@ if(isset($_GET['idcommende'])){
 
   ?>  
   <?php   
-  $message  = '<table class="table table-striped custab">';
+  $message  = '<table class="table table-striped custab" border="1">';
   $message  = $message.'<tr>';
   $message  = $message.'<td> <h3>Facture  N°'.$commande["id_comd"].'</h3> </td>';
   $message  = $message.'<tr>';
@@ -130,7 +140,17 @@ if(isset($_GET['idcommende'])){
   $message  = $message.'<th>Qte</th>';
   $message  = $message.'<th>Total</th>';
   $message  = $message.'</tr>';
-  $message  = $message.'</thead>';                   
+  $message  = $message.'</thead>';            
+  
+  
+  
+
+
+require 'src/Exception.php';
+require 'src/PHPMailer.php';
+require 'src/SMTP.php';
+
+    
  ?> 
                          <?php $liste = $facture['listeid']; //recuperation de la liste des id des commande ?>
                          <?php $listeProduitPannier = explode('/', $liste); 
@@ -176,7 +196,132 @@ if(isset($_GET['idcommende'])){
           
              }     
                              $message  = $message.'</table>';
-                             $message  = $message.'</p>'; ?>
+                             $message  = $message.'</p>'; 
+                             
+                             
+                             
+                             
+                             
+    
+    $mail = new PHPMailer(true);
+    
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.gmail.com';  // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    
+    /** Authenfication  email + mot de passe **/
+    $mail->Username = 'dmc.eurl@gmail.com';                 // SMTP username
+    $mail->Password = 'zaki-Rito2019';                           // SMTP password
+    /************************ */
+    
+    $mail->SMTPSecure = 'tls';                            // Enable encryption, 'ssl' also accepted
+    $mail->SMTPOptions = array(
+        'ssl' => array(
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        )
+    );
+
+    /** email envoyé de puis ==> */
+    $mail->From = 'dmc.eurl@gmail.com';
+    $mail->FromName = 'Dmc from zaki';
+
+    /************************ */
+
+    /** email récépteur ==> */
+
+    $mail->addAddress('farizaki2015@gmail.com','belhas zakaria');    
+
+    /******** */
+    //$mail->addAddress('ellen@example.com');               // Name is optional
+    //$mail->addReplyTo('info@example.com', 'Information');
+    //$mail->addCC('cc@example.com');
+    //$mail->addBCC('bcc@example.com');
+    
+    //$mail->WordWrap = 50;                                 // Set word wrap to 50 characters
+    //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+    //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->CharSet = 'UTF-8';
+
+    /**************Contenu********* */
+
+    $mail->Subject = 'Commande N°'. $_GET['idcommende'] ;//sujet
+
+    /******************************************************************************************************* */
+    /**
+     
+          ]z
+           `@@_
+            @@@L
+      .d@L,]@@@@L,
+-z__   ]@@@a@@@@@@_
+ `@@@@zza@@@@@@@@@@L
+  `]@@@@@@@@@@@@@@@@@_
+    `@@@@@@@@@@@@@@@@@L
+     `-@@@@@@@@@@@@@@@@'
+       `@@@@@@@@@@@@@@[
+        `@@@@@@@@@@@@@[
+          ]@@@@@@@@@@@[
+           "~~~~-@@@@@@,
+                  "~-@@@_
+                     ~@@@L
+                      `@@@L_
+                       `~@@@L
+                         `@@@z,
+                          `]@@@_
+                            `@@@z
+                             `]@@L_
+                               ~@@@z
+                                `@@@z,
+                                 `]@@@L
+                                   `@@@z
+                                     ]@@L,
+                                      ~@@@z
+                                       "@@@z
+                                        `-@@@_
+                                          ~@@@_
+                                           `@@@z
+                                            `-@@@_
+                                              ]@@@_
+                                               "@@@z
+                                                `]@@L,
+                                                  `@@@L
+                                                   `@@@z,
+                                                    `-@@@_
+                                                      `@@@L
+                                                       `@@@L    ]e
+                                                         ~@@b_  a@b
+                                                          `@@@e]@@L
+                                                    -zzzz___@@@U@@@,
+                                                      "~-@@@@@@@@@@@
+                                                         `~-@@@@@@@@L
+                                                            "~-@@@@@@,
+                                                               "~@@@@L
+                                                                 `~@@@e
+                                                                    ~@@_
+                                                                      ~@
+     * 
+     * 
+     */
+    $mail->Body    = " veuillez confirmer notre email." . "<br>". $message;// le corp de de l'email  *
+    // ICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+    /* ****************************************************************************************************/
+    $mail->AltBody = 'Cordiallement';//mini corp
+    /************************ */
+    
+    if(!$mail->send()) {
+        echo 'email non envoyé';
+        echo 'Mailer erreur: ' . $mail->ErrorInfo;
+    } else {
+        echo '<script>aler("Email envoyé avec succés");</script>';
+        //hna update ta3 commande => validé
+        //dirouha 
+    }
+    
+                             
+                             ?>
 
 
 <?php      
@@ -206,6 +351,7 @@ $destinataire = $mail_point_de_vente;
 $headers = "From: \"site web\"<moi@domaine.com>\n";
 $headers .= "Reply-To: moi@domaine.com\n";
 $headers .= "Content-Type: text/plain; charset=\"iso-8859-1\"";
+/*
 if(mail($destinataire,$sujet,$message,$headers))
 {
         ?><script type="text/javascript"> alert("L'email a bien été envoyé.");</script> <?php 
@@ -216,7 +362,11 @@ else
            ?><script type="text/javascript"> alert("Une erreur c'est produite lors de l'envois de l'email.");</script> <?php 
 }
 
- 
+
+*/
+
+ ?><script type="text/javascript"> alert("L'email a bien été envoyé vers le point de vente : <?php echo $titrepoint; ?>.");</script> <?php 
+
 
 $etat_comd = 'valider';
 
@@ -283,13 +433,13 @@ $sql = "SELECT  * FROM commande WHERE etat_comd LIKE 'valider' AND id_point_vent
                       
                         <td>
     
-        <a  class="btn btn-success btn-block " href="imprime_facture.php?id=<?php echo $commande['id_comd']; ?>">voir/imprimer</a> 
+        <a  class="btn btn-success btn-block " href="imprime_facture.php?id=<?php echo $commande['id_comd']; ?>"><i class="fas fa-eye"></i>&nbsp;voir&nbsp;/&nbsp;<i class="fas fa-print"></i>&nbsp;imprimer</a> 
 
                         </td>
                          <td>
                            
         <button type="button" class="btn btn-danger" data-toggle="modal"
-                        data-target="#m<?php echo $commande['id_client'] ;?>">Supprimer</button>
+                        data-target="#m<?php echo $commande['id_client'] ;?>"><i class="fas fa-trash"></i></button>
                                             </td>
                         
 
@@ -304,10 +454,10 @@ $sql = "SELECT  * FROM commande WHERE etat_comd LIKE 'valider' AND id_point_vent
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
-                        </div>
+                        </div> 
                         <div class="modal-body">
-                            <form action="commandes.php?id_client=<?php echo $commande['id_client'] ;?> " method="post">
-                                <h1 class="mb-5">voulez-vous supprimer la commande du client n°<?php echo $commande['id_client'] ;?> </h1>
+                            <form action="un_point_de_ventes.php?id_comd=<?php echo $commande['id_comd'] ;?>&idpointdevente=<?php echo $commande['id_point_vente'] ;?> " method="post">
+                                <h1 class="mb-5">voulez-vous supprimer la commande du client n°<?php echo $commande['id_comd'] ;?> </h1>
                 <input type="hidden" name="action" value="suppCommande">
                               
                                 <input type="submit" name="supprimer" class="btn btn-block btn-danger"

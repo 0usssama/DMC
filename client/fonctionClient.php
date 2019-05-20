@@ -1,5 +1,7 @@
 <?php 
 session_start();
+
+
 $user = 'root';
 if(PHP_OS == 'WINNT'){//working on different OS
   $pass = '';//dynamically
@@ -15,7 +17,7 @@ if(isset($_GET['action'])){
 
 	if ($_GET['action'] == 'validerFacture') {
 		$id_comd = $_GET['id'];
-		$date_comd = date('m/d/Y h:i:s', time());
+		$date_comd = date('m/d/Y-h:i:s');
         $etat_comd = 'en cours'; /////en attendan le mailling
 
 		$sql = "UPDATE commande 
@@ -57,9 +59,11 @@ if(isset($_GET['action'])){
 $message = wordwrap($message, 70, "\r\n");
 
 // Envoi du mail
-mail('caffeinated@example.com', 'Mon Sujet', $message);
 
- 
+//mail('caffeinated@example.com', 'Mon Sujet', $message);
+
+ // Instantiation and passing `true` enables exceptions
+
 
 }
  
@@ -79,7 +83,14 @@ mail('caffeinated@example.com', 'Mon Sujet', $message);
         $execution->bindParam(':etat_comd', $etat_comd, PDO::PARAM_STR);      
         $execution->bindParam(':date_comd', $date_comd, PDO::PARAM_STR);
 
-        $execution->execute();
+       // $execution->execute();
+       if( $execution->execute()){
+         echo 'it works';
+
+       }else{
+echo 'ohhhh :(' . "<br>" . print_r($execution->errorInfo());
+
+       }
 	}
 
 

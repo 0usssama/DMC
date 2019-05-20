@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<?php session_start(); ?>
 <head>
 
   <meta charset="utf-8">
@@ -16,7 +16,7 @@
 
   <!-- Custom styles for this template-->
   <link href="admin/css/sb-admin.min.css" rel="stylesheet">
-
+  
 
 
 <style type="text/css">
@@ -36,13 +36,30 @@
 
 </head>
 
+<script>
+
+</script>
+
+<style>
+body{
+  background-image: url('images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.form-control:focus {
+  border-color: rgba(220, 53, 69, 1) ;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+}
+</style>
 <body class="bg-dark">
 
   <div class="container">
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Créer un compte</div>
       <div class="card-body">
-        <form method="post" action="admin/client.php" class="needs-validation">
+        <form method="post" action="admin/fonctionAdmin.php" class="needs-validation">
           <div class="form-group">
             <div class="form-row">
               <div class="col-md-6">
@@ -119,10 +136,26 @@
           </div>
           <input type="hidden" name="action" value="ajoutClient">
 
-         <input type="submit" value="s'inscrire" class="btn btn-primary btn-block" name="inscrire">
+         <input type="submit" value="s'inscrire" class="btn btn-danger btn-block" name="connecter">
+
+         <div class="<?php if(isset($_SESSION['erreurs']) && !empty($_SESSION['erreurs'])){echo 'alert alert-danger mt-2';} ?>" role="alert">
+    
+  
+  <?php 
+  if(isset($_SESSION['erreurs']) && !empty($_SESSION['erreurs'])){
+    echo '<ul>';
+    foreach ($_SESSION['erreurs'] as $erreur) {
+       echo '<li>' . $erreur . '</li>';
+
+    }
+    echo '</ul>';
+  
+  }
+  ?>
+          </div>
         </form>
         <div class="text-center">
-          <a class="d-block small mt-3" href="login.php">se connecter?</a>
+          <a class="d-block small mt-3" href="login.php" style="color: black">se connecter?</a>
         </div>
       </div>
     </div>
@@ -135,6 +168,10 @@
   <!-- Core plugin JavaScript-->
   <script src="admin/vendor/jquery-easing/jquery.easing.min.js"></script>
 
+<?php
+unset($_SESSION['erreurs']);
+
+?>
 </body>
 
 </html>

@@ -4,31 +4,23 @@
 
       <div class="container-fluid">
 
-          <div class="row justify-content-center">
-              <div class="col-12 col-md-10 col-lg-8">
-                  <form class="card card-sm">
-                      <div class="card-body row no-gutters align-items-center">
-                         
-                          <!--end of col-->
-                          <div class="col">
-                              <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Rechercher une famille">
-                          </div>
-                          <!--end of col-->
-                          <div class="col-auto">
-                              <button class="btn btn-lg btn-success" type="submit">rechercher</button>
-                          </div>
-                          <!--end of col-->
-                      </div>
-                  </form>
-              </div>
-              <!--end of col-->
-          </div>
-
+         
+<style>
+.form-control:focus {
+  border-color: rgba(220, 53, 69, 1) ;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(220, 53, 69, 0.6);
+}
+</style>
         <!-- Page Content -->
-        <h1>Point de vente</h1>
+        <h1>
+        <i class="fas fa-fw fa-1x mr-2 fa-map-marker"></i>
+        
+        Point de vente</h1>
         <hr>
 
-        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#exampleModalScrollable">Ajouter un point de vente</button>
+        <button type="button" class="btn btn-danger mb-3" data-toggle="modal" data-target="#exampleModalScrollable"><i class="far fa-plus-square"></i>&nbsp;Ajouter un point de vente</button>
           <div class="container">
             <div class="row d-flex justify-content-center">
               <div class="col-md-10">
@@ -67,7 +59,7 @@
                 <td><?php echo $row['etat_point_vente'] ;?></td>
 
                 <td class="text-center"><button type="button" class="btn btn-danger" data-toggle="modal"
-                        data-target="#m<?php echo $row['id_point_vente'] ;?>">Supprimer</button></td>
+                        data-target="#m<?php echo $row['id_point_vente'] ;?>"><i class="fas fa-trash"></i></button></td>
             </tr>
 
             <div class="modal fade" id="m<?php echo $row['id_point_vente'] ;?>" tabindex="-1" role="dialog"
@@ -81,7 +73,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="admin/point_de_ventes.php?id_point_vente=<?php echo $row['id_point_vente'] ;?> " method="post">
+                            <form action="point_de_ventes.php?id_point_vente=<?php echo $row['id_point_vente'] ;?> " method="post">
                                 <h1 class="mb-5">voulez-vous supprimer point de vente n°<?php echo $row['id_point_vente'] ;?> </h1>
                                 <input type="submit" name="supprimer" class="btn btn-block btn-danger"
                                     value="supprimer">
@@ -120,7 +112,7 @@
         </div>
         <div class="modal-body">
            
-            <form action="admin/point_de_ventes.php" method="post" enctype="multipart/form-data">
+            <form action="point_de_ventes.php" method="post" enctype="multipart/form-data">
                 
                  
                 <div class="form-group">
@@ -170,7 +162,7 @@
                
                   <input type="hidden" name="action" value="ajoutPointdevente">
                
-                <input type="submit" class="btn btn-primary btn-block" value="Ajouter" name="ajouter">
+                <input type="submit" class="btn btn-danger btn-block" value="Ajouter" name="ajouter">
               </form>
         </div>
               
