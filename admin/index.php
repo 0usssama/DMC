@@ -5,6 +5,7 @@ if(isset($_GET['connect'])){if($_GET['connect']=='0'){ session_destroy();}}
 
 ?>
 <head>
+<link rel="icon" type="image/png" href="../images/marque/DMC_2.png" />
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,7 +13,7 @@ if(isset($_GET['connect'])){if($_GET['connect']=='0'){ session_destroy();}}
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Login client </title>
+  <title>Login Admin </title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

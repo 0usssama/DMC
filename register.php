@@ -2,6 +2,7 @@
 <html lang="en">
 <?php session_start(); ?>
 <head>
+<link rel="icon" type="image/png" href="images/marque/DMC_2.png" />
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">

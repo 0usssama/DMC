@@ -32,6 +32,7 @@
                               <th>Nom point de vente</th>
                               <th>Présentation</th>
                               <th>Type </th>
+                              <th>email</th>
                               <th>Infos</th>
                               <th>état</th>
                               
@@ -55,6 +56,8 @@
                 <td><?php echo $row['titre_point_vente'] ;?></td>
                 <td><?php echo $row['presentation_point_vente'] ;?></td>
                 <td><?php echo $row['type_point_vente'] ;?></td>
+                <td><?php echo $row['mail_point_de_vente'] ;?></td>
+                  
                 <td><?php echo $row['info_point_vente'] ;?></td>
                 <td><?php echo $row['etat_point_vente'] ;?></td>
 
@@ -128,7 +131,12 @@
                       <label for="presentation_point_vente"> presentation	</label>
                     </div>
                   </div>
-
+                   <div class="form-group">
+                    <div class="form-label-group">
+                      <input type="mail" id="mail_point_de_vente" name="mail_point_de_vente" class="form-control" placeholder="email" required="required" autofocus="autofocus">
+                      <label for="mail_point_de_vente"> mail point de vente	</label>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <div class="form-label-group">
                       <select name="type_point_vente" id="type_point_vente" class="form-control">
@@ -139,6 +147,7 @@
                       </select>
                     </div>
                   </div>
+                
 
                   <div class="form-group">
                     <div class="form-label-group">

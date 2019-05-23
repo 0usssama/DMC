@@ -78,6 +78,7 @@ aussi j ai les id des produits
             if($pdo->query($sql)){
             foreach  ($pdo->query($sql) as $row) {
               $titrepoint = $row['titre_point_vente'] ;
+              $email_point_de_vente = $row['mail_point_de_vente'] ;
             }
             }
             }  
@@ -230,8 +231,8 @@ require 'src/SMTP.php';
     /************************ */
 
     /** email récépteur ==> */
-
-    $mail->addAddress('farizaki2015@gmail.com','belhas zakaria');    
+//echo $email_point_de_vente;
+    $mail->addAddress( $email_point_de_vente ,'belhas zakaria');    
 
     /******** */
     //$mail->addAddress('ellen@example.com');               // Name is optional

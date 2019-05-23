@@ -51,17 +51,17 @@ $sql = "SELECT  * FROM commande WHERE  elements_produit LIKE '%$jsonclient%' AND
                         </td>
                     <tr>
                         <td style="border-right: 2px solid #000">
-                          <p> EURL DMC </p>
-                          <p> Rue 11 Décembre BTN° 05 El Mouradia Alger </p>
-                          <p> Delais de livraison 20 jours </p>
-                          <p> Paiement à la livraison </p>
+                          <h6> EURL DMC </h6>
+                          <h6> Rue 11 Décembre BTN° 05 El Mouradia Alger </h6>
+                          <h6> Delais de livraison 20 jours </h6>
+                          <h6> Paiement à la livraison </h6>
 
                         </td>
                          <td>
-                          <p> A : <?php echo $facture['nom'].' '. $facture['prenom'];?></p>
-                          <p> <?php echo $facture['adresse']; ?></p>
-                          <p> <?php echo $facture['email']; ?></p>
-                          <p> <?php echo $facture['telephone']; ?></p>
+                          <h6> A : <?php echo $facture['nom'].' '. $facture['prenom'];?></h6>
+                          <h6> Adresse :  <?php echo $facture['adresse']; ?></h6>
+                          <h6> E-mail : <?php echo $facture['email']; ?></h6>
+                          <h6>  N°/tel :<?php echo $facture['telephone']; ?></h6>
                         </td> 
                     </tr>
  </table>
@@ -165,13 +165,13 @@ $sql = "SELECT  * FROM commande WHERE  elements_produit LIKE '%$jsonclient%' AND
 
     </div>
   <div class="pourprint">
-  	<table style="border: 0px #fff solid !important; vertical-align: top; padding-right: 20px">
+  	<table style="border: 0px #fff solid !important; vertical-align: top; padding-right: 30px">
 
                                                               <tr style="border: 0px #fff solid !important; vertical-align: top; padding-right: 20px">
 <td style="border: 0px #fff solid !important; vertical-align: top; padding-right: 20px">
 <pre style="border: 0px #fff solid !important; vertical-align: top; padding-right: 20px">
 Eurl. DMC
-www.dmc.net
+www.dmcondz.net
 Rue 11 Décembre BTN° 05 El Mouradia Alger
 </pre>
 
@@ -179,11 +179,11 @@ Rue 11 Décembre BTN° 05 El Mouradia Alger
 <td style="border: 0px #fff solid !important; vertical-align: top; padding-right: 20px">
 <pre style="border: 0px #fff solid !important; vertical-align: top; padding-right: 20px">                               	
 Contact
-KRIM Adel
+DMC Alger
 Téléphone : 0555-41-06-13 / 021-68-85-55
-Email: eurl.woujoud@gmail.com
+Email: eurl.dmcondz@gmail.com
 dmcondz@gmail.com
-www.woujoud.net
+www.dmcondz.net
 </pre>
 
 </td>

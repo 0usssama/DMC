@@ -1048,6 +1048,8 @@ $presentation_point_vente = strip_tags($_POST['presentation_point_vente']);
 $type_point_vente = strip_tags($_POST['type_point_vente']);
 $info_point_vente = strip_tags($_POST['info_point_vente']);
 $etat_point_vente = strip_tags($_POST['etat_point_vente']);
+$mail_point_de_vente = strip_tags($_POST['mail_point_de_vente']);
+
 $id_admin = 2;
  
  
@@ -1058,13 +1060,16 @@ $id_admin = 2;
             type_point_vente,
             info_point_vente,
             etat_point_vente,
-            id_admin) VALUES (
+            id_admin,
+            mail_point_de_vente
+            ) VALUES (
             :titre_point_vente,
             :presentation_point_vente,
             :type_point_vente,
             :info_point_vente,
             :etat_point_vente,
-            :id_admin)";
+            :id_admin,
+            :mail_point_de_vente)";
                                           
 $stmt = $bdd->prepare($sql);
                                               
@@ -1074,7 +1079,7 @@ $stmt->bindParam(':type_point_vente', $type_point_vente, PDO::PARAM_STR);
 $stmt->bindParam(':info_point_vente', $info_point_vente, PDO::PARAM_STR);
 $stmt->bindParam(':etat_point_vente', $etat_point_vente, PDO::PARAM_STR);
 $stmt->bindParam(':id_admin', $id_admin, PDO::PARAM_INT);   
-                                      
+$stmt->bindParam(':mail_point_de_vente', $mail_point_de_vente);                                         
  
 
 $inserted = $stmt->execute();

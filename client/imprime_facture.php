@@ -61,6 +61,7 @@ $sql = "SELECT  * FROM commande WHERE  elements_produit LIKE '%$jsonclient%' AND
                           <p> Rue 11 Décembre BTN° 05 El Mouradia Alger </p>
                           <p> Delais de livraison 20 jours </p>
                           <p> Paiement à la livraison </p>
+                          <p>date: <?php echo date('d-m-Y'); ?></p>
 
                         </td>
                          <td>
@@ -203,4 +204,5 @@ NIF : 002617080442436
                                </tr>
 </table> 
   </div> 
+  
   <?php include 'foot.php'; ?>

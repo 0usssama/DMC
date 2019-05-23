@@ -12,9 +12,10 @@
 
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" >
 
 <head>
+<link rel="icon" type="image/png" href="../images/marque/DMC_2.png" />
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +23,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin - Blank Page</title>
+  <title>Espace Admin</title>
 
   <!-- Custom fonts for this template-->
   <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -112,21 +113,21 @@
 
   </nav>
   <div id="wrapper">
-
 <!-- Sidebar -->
 <ul class="sidebar navbar-nav">
 <li class="nav-item">
 
+<br>
 
-<?php
-/*
-if( $_SESSION['id_admin'] == 1){
+
+
+/*if( $_SESSION['id_admin'] == 1){
 
   echo '';
-}*/
+}
+*/
 
-?>
-    <a class="nav-link" href="admin.php">
+  <a class="nav-link" href="admin.php">
   <i class="fas fa-fw fa-1x mr-2 fa-user"></i>
   <span>Admins</span>
 </a>
